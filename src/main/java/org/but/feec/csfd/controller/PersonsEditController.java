@@ -32,13 +32,15 @@ public class PersonsEditController {
     @FXML
     public TextField idTextField;
     @FXML
-    private TextField emailTextField;
-    @FXML
     private TextField firstNameTextField;
     @FXML
     private TextField lastNameTextField;
     @FXML
     private TextField nicknameTextField;
+    @FXML
+    private TextField emailTextField;
+    @FXML
+    private TextField addressTextField;
 
     private PersonService personService;
     private PersonRepository personRepository;
@@ -79,10 +81,11 @@ public class PersonsEditController {
         if (stage.getUserData() instanceof PersonBasicView) {
             PersonBasicView personBasicView = (PersonBasicView) stage.getUserData();
             idTextField.setText(String.valueOf(personBasicView.getId()));
-            emailTextField.setText(personBasicView.getEmail());
             firstNameTextField.setText(personBasicView.getGivenName());
             lastNameTextField.setText(personBasicView.getFamilyName());
             nicknameTextField.setText(personBasicView.getNickname());
+            emailTextField.setText(personBasicView.getEmail());
+            addressTextField.setText(String.valueOf(personBasicView.getAddress()));
         }
     }
 
@@ -90,17 +93,19 @@ public class PersonsEditController {
     public void handleEditPersonButton(ActionEvent event) {
         // can be written easier, its just for better explanation here on so many lines
         Long id = Long.valueOf(idTextField.getText());
-        String email = emailTextField.getText();
         String firstName = firstNameTextField.getText();
         String lastName = lastNameTextField.getText();
         String nickname = nicknameTextField.getText();
+        String email = emailTextField.getText();
+        String address = addressTextField.getText();
 
         PersonEditView personEditView = new PersonEditView();
         personEditView.setId(id);
-        personEditView.setEmail(email);
         personEditView.setFirstName(firstName);
         personEditView.setSurname(lastName);
         personEditView.setNickname(nickname);
+        personEditView.setEmail(email);
+        personEditView.setAddress(address);
 
         personService.editPerson(personEditView);
 

@@ -3,10 +3,11 @@ package org.but.feec.csfd.api;
 public class PersonEditView {
 
     private Long id;
-    private String email;
     private String firstName;
     private String nickname;
     private String surname;
+    private String email;
+    private String address;
 
     public Long getId() {
         return id;
@@ -48,13 +49,25 @@ public class PersonEditView {
         this.surname = surname;
     }
 
+    public String getAddress(){
+        return address;
+    }
+
+    public void setAddress(String address){
+        if(address == null || address == ""){
+            address = "NULL";
+        }
+        this.address = address;
+    }
+
     @Override
     public String toString() {
         return "PersonEditView{" +
-                "email='" + email + '\'' +
-                ", firstName='" + firstName + '\'' +
+                "firstName='" + firstName + '\'' +
                 ", nickname='" + nickname + '\'' +
                 ", surname='" + surname + '\'' +
+                ", email='" + email + '\'' +
+                ", address='" + address +
                 '}';
     }
 }

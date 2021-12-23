@@ -7,11 +7,12 @@ import javafx.beans.property.StringProperty;
 
 public class PersonBasicView {
     private LongProperty id = new SimpleLongProperty();
-    private StringProperty city = new SimpleStringProperty();
-    private StringProperty email = new SimpleStringProperty();
     private StringProperty givenName = new SimpleStringProperty();
     private StringProperty familyName = new SimpleStringProperty();
     private StringProperty nickname = new SimpleStringProperty();
+    private StringProperty city = new SimpleStringProperty();
+    private StringProperty email = new SimpleStringProperty();
+    private StringProperty address = new SimpleStringProperty();
 
     public Long getId() {
         return idProperty().get();
@@ -61,16 +62,16 @@ public class PersonBasicView {
         this.nicknameProperty().set(nickname);
     }
 
+    public String getAddress(){
+        return  addressProperty().get();
+    }
+
+    public void setAddress(String address){
+        this.addressProperty().set(address);
+    }
+
     public LongProperty idProperty() {
         return id;
-    }
-
-    public StringProperty cityProperty() {
-        return city;
-    }
-
-    public StringProperty emailProperty() {
-        return email;
     }
 
     public StringProperty givenNameProperty() {
@@ -83,6 +84,18 @@ public class PersonBasicView {
 
     public StringProperty nicknameProperty() {
         return nickname;
+    }
+
+    public StringProperty cityProperty() {
+        return city;
+    }
+
+    public StringProperty emailProperty() {
+        return email;
+    }
+
+    public StringProperty addressProperty() {
+        return address;
     }
 
 }
