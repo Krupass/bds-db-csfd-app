@@ -26,8 +26,6 @@ public class PersonCreateController {
 
     @FXML
     public Button newPersonCreatePerson;
-    @FXML
-    private TextField newPersonEmail;
 
     @FXML
     private TextField newPersonFirstName;
@@ -40,6 +38,12 @@ public class PersonCreateController {
 
     @FXML
     private TextField newPersonPwd;
+
+    @FXML
+    private TextField newPersonEmail;
+
+    @FXML
+    private TextField newPersonAddress;
 
     private PersonService personService;
     private PersonRepository personRepository;
@@ -65,18 +69,20 @@ public class PersonCreateController {
     @FXML
     void handleCreateNewPerson(ActionEvent event) {
         // can be written easier, its just for better explanation here on so many lines
-        String email = newPersonEmail.getText();
         String firstName = newPersonFirstName.getText();
         String lastName = newPersonLastName.getText();
         String nickname = newPersonNickname.getText();
         String password = newPersonPwd.getText();
+        String email = newPersonEmail.getText();
+        String address = newPersonAddress.getText();
 
         PersonCreateView personCreateView = new PersonCreateView();
-        personCreateView.setPwd(password.toCharArray());
-        personCreateView.setEmail(email);
         personCreateView.setFirstName(firstName);
         personCreateView.setSurname(lastName);
         personCreateView.setNickname(nickname);
+        personCreateView.setPwd(password.toCharArray());
+        personCreateView.setEmail(email);
+        personCreateView.setAddress(address);
 
         personService.createPerson(personCreateView);
 

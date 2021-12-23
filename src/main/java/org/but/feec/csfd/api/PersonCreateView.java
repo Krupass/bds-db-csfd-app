@@ -9,6 +9,7 @@ public class PersonCreateView {
     private String nickname;
     private String surname;
     private char[] pwd;
+    private String address;
 
     public String getEmail() {
         return email;
@@ -48,6 +49,17 @@ public class PersonCreateView {
 
     public void setPwd(char[] pwd) {
         this.pwd = pwd;
+    }
+
+    public String getAddress(){
+        return address;
+    }
+
+    public void setAddress(String address){
+        if(address == null || address == ""){
+            address = "NULL";
+        }
+        this.address = address;
     }
 
     @Override

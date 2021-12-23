@@ -73,24 +73,48 @@ public class PersonRepository {
     }
 
     public void createPerson(PersonCreateView personCreateView) {
-        String insertPersonSQL = "INSERT INTO public.user (id_user, first_name, surname, nick, email, password, user_created, id_address) VALUES (DEFAULT,?,?,?,?,?, CURRENT_TIMESTAMP, NULL)";
-        try (Connection connection = DataSourceConfig.getConnection();
-             // would be beneficial if I will return the created entity back
-             PreparedStatement preparedStatement = connection.prepareStatement(insertPersonSQL, Statement.RETURN_GENERATED_KEYS)) {
-            // set prepared statement variables
-            preparedStatement.setString(4, personCreateView.getEmail());
-            preparedStatement.setString(1, personCreateView.getFirstName());
-            preparedStatement.setString(3, personCreateView.getNickname());
-            preparedStatement.setString(5, String.valueOf(personCreateView.getPwd()));
-            preparedStatement.setString(2, personCreateView.getSurname());
+        if(personCreateView.getAddress() != "NULL"){
+            String insertPersonSQL = "INSERT INTO public.user (id_user, first_name, surname, nick, email, password, user_created, id_address) VALUES (DEFAULT,?,?,?,?,?, CURRENT_TIMESTAMP, ?)";
+            try (Connection connection = DataSourceConfig.getConnection();
+                 // would be beneficial if I will return the created entity back
+                 PreparedStatement preparedStatement = connection.prepareStatement(insertPersonSQL, Statement.RETURN_GENERATED_KEYS)) {
+                // set prepared statement variables
+                preparedStatement.setString(4, personCreateView.getEmail());
+                preparedStatement.setString(1, personCreateView.getFirstName());
+                preparedStatement.setString(3, personCreateView.getNickname());
+                preparedStatement.setString(5, String.valueOf(personCreateView.getPwd()));
+                preparedStatement.setString(2, personCreateView.getSurname());
+                preparedStatement.setInt(6, Integer.parseInt(personCreateView.getAddress()));
 
-            int affectedRows = preparedStatement.executeUpdate();
+                int affectedRows = preparedStatement.executeUpdate();
 
-            if (affectedRows == 0) {
-                throw new DataAccessException("Creating person failed, no rows affected.");
+                if (affectedRows == 0) {
+                    throw new DataAccessException("Creating person failed, no rows affected.");
+                }
+            } catch (SQLException e) {
+                throw new DataAccessException("Creating person failed operation on the database failed.");
             }
-        } catch (SQLException e) {
-            throw new DataAccessException("Creating person failed operation on the database failed.");
+        }
+        else{
+            String insertPersonSQL = "INSERT INTO public.user (id_user, first_name, surname, nick, email, password, user_created, id_address) VALUES (DEFAULT,?,?,?,?,?, CURRENT_TIMESTAMP, NULL)";
+            try (Connection connection = DataSourceConfig.getConnection();
+                 // would be beneficial if I will return the created entity back
+                 PreparedStatement preparedStatement = connection.prepareStatement(insertPersonSQL, Statement.RETURN_GENERATED_KEYS)) {
+                // set prepared statement variables
+                preparedStatement.setString(4, personCreateView.getEmail());
+                preparedStatement.setString(1, personCreateView.getFirstName());
+                preparedStatement.setString(3, personCreateView.getNickname());
+                preparedStatement.setString(5, String.valueOf(personCreateView.getPwd()));
+                preparedStatement.setString(2, personCreateView.getSurname());
+
+                int affectedRows = preparedStatement.executeUpdate();
+
+                if (affectedRows == 0) {
+                    throw new DataAccessException("Creating person failed, no rows affected.");
+                }
+            } catch (SQLException e) {
+                throw new DataAccessException("Creating person failed operation on the database failed.");
+            }
         }
     }
 
