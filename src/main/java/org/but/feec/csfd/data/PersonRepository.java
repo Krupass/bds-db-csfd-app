@@ -33,7 +33,7 @@ public class PersonRepository {
     public PersonDetailView findPersonDetailedView(Long personId) {
         try (Connection connection = DataSourceConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
-                     "SELECT id_user, email, first_name, surname, nick, city, house_number, street_name" +
+                     "SELECT id_user, first_name, surname, nick, email, city, street_name, house_number, user_created" +
                              " FROM public.user u" +
                              " LEFT JOIN address a ON u.id_address = a.id_address" +
                              " WHERE u.id_user = ? ORDER BY u.id_user")
@@ -232,13 +232,14 @@ public class PersonRepository {
     private PersonDetailView mapToPersonDetailView(ResultSet rs) throws SQLException {
         PersonDetailView personDetailView = new PersonDetailView();
         personDetailView.setId(rs.getLong("id_user"));
-        personDetailView.setEmail(rs.getString("email"));
         personDetailView.setGivenName(rs.getString("first_name"));
         personDetailView.setFamilyName(rs.getString("surname"));
         personDetailView.setNickname(rs.getString("nick"));
+        personDetailView.setEmail(rs.getString("email"));
         personDetailView.setCity(rs.getString("city"));
-        personDetailView.sethouseNumber(rs.getString("house_number"));
         personDetailView.setStreet(rs.getString("street_name"));
+        personDetailView.sethouseNumber(rs.getString("house_number"));
+        personDetailView.setCreated(rs.getString("user_created"));
         return personDetailView;
     }
 

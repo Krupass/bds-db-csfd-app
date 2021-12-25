@@ -26,7 +26,7 @@ public class App extends Application {
             loader = new FXMLLoader(getClass().getResource("App.fxml"));
             mainStage = loader.load();
 
-            primaryStage.setTitle("BDS CSFD Demo");
+            primaryStage.setTitle("BDS CSFD");
             Scene scene = new Scene(mainStage);
             setUserAgentStylesheet(STYLESHEET_MODENA);
             String myStyle = getClass().getResource("css/myStyle.css").toExternalForm();
