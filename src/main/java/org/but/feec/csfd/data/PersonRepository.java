@@ -2,6 +2,7 @@ package org.but.feec.csfd.data;
 
 import org.but.feec.csfd.api.*;
 import org.but.feec.csfd.config.DataSourceConfig;
+import org.but.feec.csfd.controller.PersonsDeleteController;
 import org.but.feec.csfd.exception.DataAccessException;
 
 import java.sql.*;
@@ -115,6 +116,44 @@ public class PersonRepository {
             } catch (SQLException e) {
                 throw new DataAccessException("Creating person failed operation on the database failed.");
             }
+        }
+    }
+
+    public void deletePerson(PersonDeleteView personsDeleteView){
+        String deletePersonSQL = "DELETE FROM public.user u WHERE u.id_user = ?";
+        String checkIfExists = "SELECT email FROM public.user u WHERE u.id_user = ? ORDER BY u.id_user";
+        try (Connection connection = DataSourceConfig.getConnection();
+             // would be beneficial if I will return the created entity back
+             PreparedStatement preparedStatement = connection.prepareStatement(deletePersonSQL, Statement.RETURN_GENERATED_KEYS)) {
+            // set prepared statement variables
+            preparedStatement.setLong(1, personsDeleteView.getId());
+
+            try {
+                // TODO set connection autocommit to false
+                /* HERE */
+                try (PreparedStatement ps = connection.prepareStatement(checkIfExists, Statement.RETURN_GENERATED_KEYS)) {
+                    ps.setLong(1, personsDeleteView.getId());
+                    ps.execute();
+                } catch (SQLException e) {
+                    throw new DataAccessException("This person for delete do not exists.");
+                }
+
+                int affectedRows = preparedStatement.executeUpdate();
+
+                if (affectedRows == 0) {
+                    throw new DataAccessException("Deleting person failed, no rows affected.");
+                }
+                // TODO commit the transaction (both queries were performed)
+                /* HERE */
+            } catch (SQLException e) {
+                // TODO rollback the transaction if something wrong occurs
+                /* HERE */
+            } finally {
+                // TODO set connection autocommit back to true
+                /* HERE */
+            }
+        } catch (SQLException e) {
+            throw new DataAccessException("Deleting person failed operation on the database failed.");
         }
     }
 

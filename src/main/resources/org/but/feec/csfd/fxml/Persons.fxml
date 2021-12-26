@@ -52,9 +52,9 @@
                               <TableColumn fx:id="personsId" minWidth="75.0" prefWidth="80.00000303983688" text="id" />
                               <TableColumn fx:id="personsGivenName" minWidth="75.0" prefWidth="170.0" text="given name" />
                               <TableColumn fx:id="personsFamilyName" minWidth="47.0" prefWidth="179.0" text="family name" />
-                              <TableColumn fx:id="personsNickname" minWidth="34.0" prefWidth="162.0" text="nickname" />
-                              <TableColumn fx:id="personsEmail" minWidth="46.0" prefWidth="172.0" text="email" />
-                              <TableColumn fx:id="personsCity" minWidth="75.0" prefWidth="165.0" text="city" />
+                              <TableColumn fx:id="personsNickname" minWidth="34.0" prefWidth="172.0" text="nickname" />
+                              <TableColumn fx:id="personsEmail" minWidth="46.0" prefWidth="190.0" text="email" />
+                              <TableColumn fx:id="personsCity" minWidth="75.0" prefWidth="157.0" text="city" />
                           </columns>
                         </TableView>
                         <Button fx:id="addPersonButton" layoutX="24.0" layoutY="491.0" mnemonicParsing="false" onAction="#handleAddPersonButton" text="Add user" />

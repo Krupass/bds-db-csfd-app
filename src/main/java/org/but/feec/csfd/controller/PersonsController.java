@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.but.feec.csfd.App;
 import org.but.feec.csfd.api.PersonBasicView;
+import org.but.feec.csfd.api.PersonDeleteView;
 import org.but.feec.csfd.api.PersonDetailView;
 import org.but.feec.csfd.data.PersonRepository;
 import org.but.feec.csfd.exception.ExceptionHandler;
@@ -81,6 +82,7 @@ public class PersonsController {
 
     private void initializeTableViewSelection() {
         MenuItem edit = new MenuItem("Edit user");
+        MenuItem delete = new MenuItem("Delete user");
         MenuItem detailedView = new MenuItem("Detailed user view");
         edit.setOnAction((ActionEvent event) -> {
             PersonBasicView personView = systemPersonsTableView.getSelectionModel().getSelectedItem();
@@ -103,6 +105,25 @@ public class PersonsController {
 
                 stage.show();
             } catch (IOException ex) {
+                ExceptionHandler.handleException(ex);
+            }
+        });
+
+        delete.setOnAction((ActionEvent event) -> {
+            PersonBasicView personView = systemPersonsTableView.getSelectionModel().getSelectedItem();
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+
+                PersonsDeleteController controller = new PersonsDeleteController();
+                controller.initialize(personView.getId());
+                fxmlLoader.setController(controller);
+
+                ObservableList<PersonBasicView> observablePersonsList = initializePersonsData();
+                systemPersonsTableView.setItems(observablePersonsList);
+                systemPersonsTableView.refresh();
+                systemPersonsTableView.sort();
+
+            } catch (Exception ex) {
                 ExceptionHandler.handleException(ex);
             }
         });
@@ -139,6 +160,7 @@ public class PersonsController {
 
         ContextMenu menu = new ContextMenu();
         menu.getItems().add(edit);
+        menu.getItems().add(delete);
         menu.getItems().addAll(detailedView);
         systemPersonsTableView.setContextMenu(menu);
     }
@@ -176,6 +198,7 @@ public class PersonsController {
 //            authConfirmDialog();
 
             stage.show();
+
         } catch (IOException ex) {
             ExceptionHandler.handleException(ex);
         }

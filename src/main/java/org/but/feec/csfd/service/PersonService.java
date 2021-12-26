@@ -5,6 +5,7 @@ import org.but.feec.csfd.api.PersonBasicView;
 import org.but.feec.csfd.api.PersonCreateView;
 import org.but.feec.csfd.api.PersonDetailView;
 import org.but.feec.csfd.api.PersonEditView;
+import org.but.feec.csfd.api.PersonDeleteView;
 import org.but.feec.csfd.data.PersonRepository;
 
 import java.util.List;
@@ -39,6 +40,10 @@ public class PersonService {
 
     public void editPerson(PersonEditView personEditView) {
         personRepository.editPerson(personEditView);
+    }
+
+    public void deletePerson(PersonDeleteView personDeleteView) {
+        personRepository.deletePerson(personDeleteView);
     }
 
     /**
