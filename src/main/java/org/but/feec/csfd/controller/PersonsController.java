@@ -80,8 +80,8 @@ public class PersonsController {
     }
 
     private void initializeTableViewSelection() {
-        MenuItem edit = new MenuItem("Edit person");
-        MenuItem detailedView = new MenuItem("Detailed person view");
+        MenuItem edit = new MenuItem("Edit user");
+        MenuItem detailedView = new MenuItem("Detailed user view");
         edit.setOnAction((ActionEvent event) -> {
             PersonBasicView personView = systemPersonsTableView.getSelectionModel().getSelectedItem();
             try {
@@ -89,7 +89,7 @@ public class PersonsController {
                 fxmlLoader.setLocation(App.class.getResource("fxml/PersonEdit.fxml"));
                 Stage stage = new Stage();
                 stage.setUserData(personView);
-                stage.setTitle("BDS CSFD Edit Person");
+                stage.setTitle("BDS CSFD Edit User");
 
                 PersonsEditController controller = new PersonsEditController();
                 controller.setStage(stage);
@@ -98,6 +98,8 @@ public class PersonsController {
                 Scene scene = new Scene(fxmlLoader.load(), 600, 500);
 
                 stage.setScene(scene);
+
+                stage.getIcons().add(new Image(App.class.getResourceAsStream("logo/clapperC.png")));
 
                 stage.show();
             } catch (IOException ex) {
@@ -116,7 +118,7 @@ public class PersonsController {
                 PersonDetailView personDetailView = personService.getPersonDetailView(personId);
 
                 stage.setUserData(personDetailView);
-                stage.setTitle("BDS CSFD Persons Detailed View");
+                stage.setTitle("BDS CSFD Users Detailed View");
 
                 PersonsDetailViewController controller = new PersonsDetailViewController();
                 controller.setStage(stage);
@@ -161,7 +163,7 @@ public class PersonsController {
             fxmlLoader.setLocation(App.class.getResource("fxml/PersonsCreate.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 600, 500);
             Stage stage = new Stage();
-            stage.setTitle("BDS CSFD Create Person");
+            stage.setTitle("BDS CSFD Create User");
             stage.setScene(scene);
 
 //            Stage stageOld = (Stage) signInButton.getScene().getWindow();

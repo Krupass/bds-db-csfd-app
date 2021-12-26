@@ -91,8 +91,8 @@ public class PersonCreateController {
 
     private void personCreatedConfirmationDialog() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Person Created Confirmation");
-        alert.setHeaderText("Your person was successfully created.");
+        alert.setTitle("User Created Confirmation");
+        alert.setHeaderText("Your user was successfully created.");
 
         Timeline idlestage = new Timeline(new KeyFrame(Duration.seconds(3), new EventHandler<ActionEvent>() {
             @Override

@@ -64,6 +64,6 @@
             <TextField fx:id="addressTextField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             </children>
         </GridPane>
-        <Button fx:id="editPersonButton" layoutX="501.0" layoutY="400.0" mnemonicParsing="false" onAction="#handleEditPersonButton" text="edit person" />
+        <Button fx:id="editPersonButton" layoutX="501.0" layoutY="400.0" mnemonicParsing="false" onAction="#handleEditPersonButton" text="edit user" />
     </children>
 </AnchorPane>

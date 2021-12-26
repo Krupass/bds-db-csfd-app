@@ -114,8 +114,8 @@ public class PersonsEditController {
 
     private void personEditedConfirmationDialog() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Person Edited Confirmation");
-        alert.setHeaderText("Your person was successfully edited.");
+        alert.setTitle("User Edited Confirmation");
+        alert.setHeaderText("Your user was successfully edited.");
 
         Timeline idlestage = new Timeline(new KeyFrame(Duration.seconds(3), new EventHandler<ActionEvent>() {
             @Override

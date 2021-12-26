@@ -32,7 +32,7 @@ public class App extends Application {
             String myStyle = getClass().getResource("css/myStyle.css").toExternalForm();
             scene.getStylesheets().add(myStyle);
 
-            primaryStage.getIcons().add(new Image(App.class.getResourceAsStream("logo/vut.jpg")));
+            primaryStage.getIcons().add(new Image(App.class.getResourceAsStream("logo/lockC.png")));
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (Exception ex) {
