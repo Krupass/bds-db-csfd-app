@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Stop;
 import javafx.stage.Stage;
 import org.but.feec.csfd.exception.ExceptionHandler;
 

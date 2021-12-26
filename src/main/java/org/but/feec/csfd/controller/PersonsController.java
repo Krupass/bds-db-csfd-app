@@ -99,7 +99,7 @@ public class PersonsController {
 
                 stage.setScene(scene);
 
-                stage.getIcons().add(new Image(App.class.getResourceAsStream("logo/clapperC.png")));
+                stage.getIcons().add(new Image(App.class.getResourceAsStream("logo/pp-h.png")));
 
                 stage.show();
             } catch (IOException ex) {
@@ -125,6 +125,8 @@ public class PersonsController {
                 fxmlLoader.setController(controller);
 
                 Scene scene = new Scene(fxmlLoader.load(), 600, 500);
+
+                stage.getIcons().add(new Image(App.class.getResourceAsStream("logo/pp-m.png")));
 
                 stage.setScene(scene);
 
@@ -164,6 +166,7 @@ public class PersonsController {
             Scene scene = new Scene(fxmlLoader.load(), 600, 500);
             Stage stage = new Stage();
             stage.setTitle("BDS CSFD Create User");
+            stage.getIcons().add(new Image(App.class.getResourceAsStream("logo/plus.png")));
             stage.setScene(scene);
 
 //            Stage stageOld = (Stage) signInButton.getScene().getWindow();
