@@ -46,14 +46,6 @@ public class PersonService {
         personRepository.deletePerson(personDeleteView);
     }
 
-    /**
-     * <p>
-     * Note: For implementation details see: https://github.com/patrickfav/bcrypt
-     * </p>
-     *
-     * @param password to be hashed
-     * @return hashed password
-     */
     private char[] hashPassword(char[] password) {
         return BCrypt.withDefaults().hashToChar(12, password);
     }

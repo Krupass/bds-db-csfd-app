@@ -1,4 +1,4 @@
-package org.but.feec.csfd.controller;
+package org.but.feec.csfd.controller.user;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,75 +14,71 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.but.feec.csfd.App;
-import org.but.feec.csfd.api.PersonBasicView;
-import org.but.feec.csfd.api.PersonDeleteView;
-import org.but.feec.csfd.api.PersonDetailView;
-import org.but.feec.csfd.data.PersonRepository;
+import org.but.feec.csfd.api.user.UserBasicView;
+import org.but.feec.csfd.api.user.UserDetailView;
+import org.but.feec.csfd.controller.user.UsersDeleteController;
+import org.but.feec.csfd.controller.user.UsersDetailViewController;
+import org.but.feec.csfd.controller.user.UsersEditController;
+import org.but.feec.csfd.data.UserRepository;
 import org.but.feec.csfd.exception.ExceptionHandler;
-import org.but.feec.csfd.service.PersonService;
+import org.but.feec.csfd.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 import java.util.List;
 
-public class PersonsController {
+public class UsersController {
 
-    private static final Logger logger = LoggerFactory.getLogger(PersonsController.class);
+    private static final Logger logger = LoggerFactory.getLogger(org.but.feec.csfd.controller.user.UsersController.class);
 
     @FXML
-    public Button addPersonButton;
+    public Button addUserButton;
     @FXML
     public Button refreshButton;
     @FXML
-    private TableColumn<PersonBasicView, Long> personsId;
+    private TableColumn<UserBasicView, Long> usersId;
     @FXML
-    private TableColumn<PersonBasicView, String> personsCity;
+    private TableColumn<UserBasicView, String> usersCity;
     @FXML
-    private TableColumn<PersonBasicView, String> personsEmail;
+    private TableColumn<UserBasicView, String> usersEmail;
     @FXML
-    private TableColumn<PersonBasicView, String> personsFamilyName;
+    private TableColumn<UserBasicView, String> usersFamilyName;
     @FXML
-    private TableColumn<PersonBasicView, String> personsGivenName;
+    private TableColumn<UserBasicView, String> usersGivenName;
     @FXML
-    private TableColumn<PersonBasicView, String> personsNickname;
+    private TableColumn<UserBasicView, String> usersNickname;
     @FXML
-    private TableView<PersonBasicView> systemPersonsTableView;
-//    @FXML
-//    public MenuItem exitMenuItem;
+    private TableView<UserBasicView> systemUsersTableView;
 
-    private PersonService personService;
-    private PersonRepository personRepository;
+    private UserService userService;
+    private UserRepository userRepository;
 
-    public PersonsController() {
+    public UsersController() {
     }
 
     @FXML
     private void initialize() {
-        personRepository = new PersonRepository();
-        personService = new PersonService(personRepository);
-//        GlyphsDude.setIcon(exitMenuItem, FontAwesomeIcon.CLOSE, "1em");
+        userRepository = new UserRepository();
+        userService = new UserService(userRepository);
 
-        personsId.setCellValueFactory(new PropertyValueFactory<PersonBasicView, Long>("id"));
-        personsCity.setCellValueFactory(new PropertyValueFactory<PersonBasicView, String>("city"));
-        personsEmail.setCellValueFactory(new PropertyValueFactory<PersonBasicView, String>("email"));
-        personsFamilyName.setCellValueFactory(new PropertyValueFactory<PersonBasicView, String>("familyName"));
-        personsGivenName.setCellValueFactory(new PropertyValueFactory<PersonBasicView, String>("givenName"));
-        personsNickname.setCellValueFactory(new PropertyValueFactory<PersonBasicView, String>("nickname"));
+        usersId.setCellValueFactory(new PropertyValueFactory<UserBasicView, Long>("id"));
+        usersCity.setCellValueFactory(new PropertyValueFactory<UserBasicView, String>("city"));
+        usersEmail.setCellValueFactory(new PropertyValueFactory<UserBasicView, String>("email"));
+        usersFamilyName.setCellValueFactory(new PropertyValueFactory<UserBasicView, String>("familyName"));
+        usersGivenName.setCellValueFactory(new PropertyValueFactory<UserBasicView, String>("givenName"));
+        usersNickname.setCellValueFactory(new PropertyValueFactory<UserBasicView, String>("nickname"));
 
 
-        ObservableList<PersonBasicView> observablePersonsList = initializePersonsData();
-        systemPersonsTableView.setItems(observablePersonsList);
+        ObservableList<UserBasicView> observableUsersList = initializeUsersData();
+        systemUsersTableView.setItems(observableUsersList);
 
-        systemPersonsTableView.getSortOrder().add(personsId);
+        systemUsersTableView.getSortOrder().add(usersId);
 
         initializeTableViewSelection();
         loadIcons();
 
-        logger.info("PersonsController initialized");
+        logger.info("UsersController initialized");
     }
 
     private void initializeTableViewSelection() {
@@ -90,15 +86,15 @@ public class PersonsController {
         MenuItem delete = new MenuItem("Delete user");
         MenuItem detailedView = new MenuItem("Detailed user view");
         edit.setOnAction((ActionEvent event) -> {
-            PersonBasicView personView = systemPersonsTableView.getSelectionModel().getSelectedItem();
+            UserBasicView userView = systemUsersTableView.getSelectionModel().getSelectedItem();
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(App.class.getResource("fxml/PersonEdit.fxml"));
+                fxmlLoader.setLocation(App.class.getResource("fxml/UserEdit.fxml"));
                 Stage stage = new Stage();
-                stage.setUserData(personView);
+                stage.setUserData(userView);
                 stage.setTitle("BDS CSFD Edit User");
 
-                PersonsEditController controller = new PersonsEditController();
+                UsersEditController controller = new UsersEditController();
                 controller.setStage(stage);
                 fxmlLoader.setController(controller);
 
@@ -115,18 +111,18 @@ public class PersonsController {
         });
 
         delete.setOnAction((ActionEvent event) -> {
-            PersonBasicView personView = systemPersonsTableView.getSelectionModel().getSelectedItem();
+            UserBasicView userView = systemUsersTableView.getSelectionModel().getSelectedItem();
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader();
 
-                PersonsDeleteController controller = new PersonsDeleteController();
-                controller.initialize(personView.getId());
+                UsersDeleteController controller = new UsersDeleteController();
+                controller.initialize(userView.getId());
                 fxmlLoader.setController(controller);
 
-                ObservableList<PersonBasicView> observablePersonsList = initializePersonsData();
-                systemPersonsTableView.setItems(observablePersonsList);
-                systemPersonsTableView.refresh();
-                systemPersonsTableView.sort();
+                ObservableList<UserBasicView> observableUsersList = initializeUsersData();
+                systemUsersTableView.setItems(observableUsersList);
+                systemUsersTableView.refresh();
+                systemUsersTableView.sort();
 
             } catch (Exception ex) {
                 ExceptionHandler.handleException(ex);
@@ -134,19 +130,19 @@ public class PersonsController {
         });
 
         detailedView.setOnAction((ActionEvent event) -> {
-            PersonBasicView personView = systemPersonsTableView.getSelectionModel().getSelectedItem();
+            UserBasicView userView = systemUsersTableView.getSelectionModel().getSelectedItem();
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(App.class.getResource("fxml/PersonsDetailView.fxml"));
+                fxmlLoader.setLocation(App.class.getResource("fxml/UsersDetailView.fxml"));
                 Stage stage = new Stage();
 
-                Long personId = personView.getId();
-                PersonDetailView personDetailView = personService.getPersonDetailView(personId);
+                Long userId = userView.getId();
+                UserDetailView userDetailView = userService.getUserDetailView(userId);
 
-                stage.setUserData(personDetailView);
+                stage.setUserData(userDetailView);
                 stage.setTitle("BDS CSFD Users Detailed View");
 
-                PersonsDetailViewController controller = new PersonsDetailViewController();
+                UsersDetailViewController controller = new UsersDetailViewController();
                 controller.setStage(stage);
                 fxmlLoader.setController(controller);
 
@@ -167,12 +163,12 @@ public class PersonsController {
         menu.getItems().add(edit);
         menu.getItems().add(delete);
         menu.getItems().addAll(detailedView);
-        systemPersonsTableView.setContextMenu(menu);
+        systemUsersTableView.setContextMenu(menu);
     }
 
-    private ObservableList<PersonBasicView> initializePersonsData() {
-        List<PersonBasicView> persons = personService.getPersonsBasicView();
-        return FXCollections.observableArrayList(persons);
+    private ObservableList<UserBasicView> initializeUsersData() {
+        List<UserBasicView> users = userService.getUsersBasicView();
+        return FXCollections.observableArrayList(users);
     }
 
     private void loadIcons() {
@@ -186,10 +182,10 @@ public class PersonsController {
         System.exit(0);
     }
 
-    public void handleAddPersonButton(ActionEvent actionEvent) {
+    public void handleAddUserButton(ActionEvent actionEvent) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(App.class.getResource("fxml/PersonsCreate.fxml"));
+            fxmlLoader.setLocation(App.class.getResource("fxml/UsersCreate.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 600, 500);
             Stage stage = new Stage();
             stage.setTitle("BDS CSFD Create User");
@@ -204,15 +200,15 @@ public class PersonsController {
     }
 
     public void handleRefreshButton(ActionEvent actionEvent) {
-        ObservableList<PersonBasicView> observablePersonsList = initializePersonsData();
-        systemPersonsTableView.setItems(observablePersonsList);
-        systemPersonsTableView.refresh();
-        systemPersonsTableView.sort();
+        ObservableList<UserBasicView> observableUsersList = initializeUsersData();
+        systemUsersTableView.setItems(observableUsersList);
+        systemUsersTableView.refresh();
+        systemUsersTableView.sort();
     }
 
-    public void handleUsersButton(ActionEvent actionEvent) throws IOException{
+    public void handlePersonsButton(ActionEvent actionEvent) throws IOException{
 
-        Parent tableViewParent = FXMLLoader.load(App.class.getResource("fxml/Users.fxml"));
+        Parent tableViewParent = FXMLLoader.load(App.class.getResource("fxml/Persons.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
 
         Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();

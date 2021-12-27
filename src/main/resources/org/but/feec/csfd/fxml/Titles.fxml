@@ -17,7 +17,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<VBox minHeight="625.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.but.feec.csfd.controller.PersonsController">
+<VBox minHeight="625.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.but.feec.csfd.controller.title.TitlesController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -40,27 +40,27 @@
           <content>
             <AnchorPane id="Content" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="-Infinity" prefHeight="517.0" prefWidth="943.0">
               <children>
-                <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="27.0" prefWidth="147.0" style="&#10;" text="Persons" textAlignment="CENTER" wrapText="false">
+                <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="27.0" prefWidth="147.0" style="&#10;" text="Titles" textAlignment="CENTER" wrapText="false">
                            <font>
                       <Font size="18.0" fx:id="x1" />
                            </font>
                            <textFill>
                       <Color red="0.624" green="0.624" blue="0.624" fx:id="x2" />
                            </textFill></Label>
-                        <TableView fx:id="systemPersonsTableView" layoutY="67.0" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="400.0" prefWidth="948.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-356.0">
+                        <TableView fx:id="systemUsersTableView" layoutY="67.0" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="400.0" prefWidth="948.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-356.0">
                           <columns>
-                              <TableColumn fx:id="personsId" minWidth="75.0" prefWidth="80.00000303983688" text="id" />
-                              <TableColumn fx:id="personsGivenName" minWidth="75.0" prefWidth="170.0" text="given name" />
-                              <TableColumn fx:id="personsFamilyName" minWidth="47.0" prefWidth="179.0" text="family name" />
-                              <TableColumn fx:id="personsNickname" minWidth="34.0" prefWidth="172.0" text="nickname" />
-                              <TableColumn fx:id="personsEmail" minWidth="46.0" prefWidth="190.0" text="email" />
-                              <TableColumn fx:id="personsCity" minWidth="75.0" prefWidth="157.0" text="city" />
+                              <TableColumn fx:id="usersId" minWidth="75.0" prefWidth="80.00000303983688" text="id" />
+                              <TableColumn fx:id="usersGivenName" minWidth="75.0" prefWidth="170.0" text="given name" />
+                              <TableColumn fx:id="usersFamilyName" minWidth="47.0" prefWidth="179.0" text="family name" />
+                              <TableColumn fx:id="usersNickname" minWidth="34.0" prefWidth="172.0" text="nickname" />
+                              <TableColumn fx:id="usersEmail" minWidth="46.0" prefWidth="190.0" text="email" />
+                              <TableColumn fx:id="usersCity" minWidth="75.0" prefWidth="157.0" text="city" />
                           </columns>
                         </TableView>
-                        <Button fx:id="addPersonButton" layoutX="24.0" layoutY="491.0" mnemonicParsing="false" onAction="#handleAddPersonButton" text="Add person" />
+                        <Button fx:id="addTitleButton" layoutX="24.0" layoutY="491.0" mnemonicParsing="false" onAction="#handleAddUserButton" text="Add title" />
                         <Button fx:id="refreshButton" layoutX="127.0" layoutY="491.0" mnemonicParsing="false" onAction="#handleRefreshButton" text="Refresh" />
-                        <Button fx:id="titlesButton" layoutX="784.0" layoutY="491.0" mnemonicParsing="false" onAction="#handleTitlesButton" prefHeight="25.0" prefWidth="145.0" text="Titles table" />
-                        <Button fx:id="usersButton" layoutX="631.0" layoutY="491.0" mnemonicParsing="false" onAction="#handleUsersButton" prefHeight="25.0" prefWidth="145.0" text="Users table" />
+                        <Button fx:id="usersButton" layoutX="784.0" layoutY="491.0" mnemonicParsing="false" onAction="#handleUsersButton" prefHeight="25.0" prefWidth="145.0" text="Users table" />
+                        <Button fx:id="personsButton" layoutX="631.0" layoutY="491.0" mnemonicParsing="false" onAction="#handlePersonsButton" prefHeight="25.0" prefWidth="145.0" text="Persons table" />
               </children>
             </AnchorPane>
           </content>
