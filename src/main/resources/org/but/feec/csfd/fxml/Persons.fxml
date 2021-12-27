@@ -57,10 +57,10 @@
                               <TableColumn fx:id="personsCity" minWidth="75.0" prefWidth="157.0" text="city" />
                           </columns>
                         </TableView>
-                        <Button fx:id="addPersonButton" layoutX="24.0" layoutY="491.0" mnemonicParsing="false" onAction="#handleAddPersonButton" text="Add person" />
-                        <Button fx:id="refreshButton" layoutX="127.0" layoutY="491.0" mnemonicParsing="false" onAction="#handleRefreshButton" text="Refresh" />
-                        <Button fx:id="titlesButton" layoutX="784.0" layoutY="491.0" mnemonicParsing="false" onAction="#handleTitlesButton" prefHeight="25.0" prefWidth="145.0" text="Titles table" />
-                        <Button fx:id="usersButton" layoutX="631.0" layoutY="491.0" mnemonicParsing="false" onAction="#handleUsersButton" prefHeight="25.0" prefWidth="145.0" text="Users table" />
+                        <Button fx:id="addPersonButton" layoutX="25.0" layoutY="490.0" mnemonicParsing="false" onAction="#handleAddPersonButton" text="Add person" />
+                        <Button fx:id="refreshButton" layoutX="125.0" layoutY="490.0" mnemonicParsing="false" onAction="#handleRefreshButton" text="Refresh" />
+                        <Button fx:id="titlesButton" layoutX="625.0" layoutY="490.0" mnemonicParsing="false" onAction="#handleTitlesButton" prefHeight="25.0" prefWidth="145.0" text="&lt;&lt; Titles table" />
+                        <Button fx:id="usersButton" layoutX="785.0" layoutY="490.0" mnemonicParsing="false" onAction="#handleUsersButton" prefHeight="25.0" prefWidth="145.0" text="Users table &gt;&gt;" />
               </children>
             </AnchorPane>
           </content>

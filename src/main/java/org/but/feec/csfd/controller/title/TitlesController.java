@@ -62,7 +62,7 @@ public class TitlesController {
         titleRepository = new TitleRepository();
         titleService = new TitleService(titleRepository);
 
-        titlesId.setCellValueFactory(new PropertyValueFactory<TitleBasicView, Long>("id"));
+        /*titlesId.setCellValueFactory(new PropertyValueFactory<TitleBasicView, Long>("id"));
         titlesCity.setCellValueFactory(new PropertyValueFactory<TitleBasicView, String>("city"));
         titlesEmail.setCellValueFactory(new PropertyValueFactory<TitleBasicView, String>("email"));
         titlesFamilyName.setCellValueFactory(new PropertyValueFactory<TitleBasicView, String>("familyName"));
@@ -73,7 +73,7 @@ public class TitlesController {
         ObservableList<TitleBasicView> observableTitlesList = initializeTitlesData();
         systemTitlesTableView.setItems(observableTitlesList);
 
-        systemTitlesTableView.getSortOrder().add(titlesId);
+        systemTitlesTableView.getSortOrder().add(titlesId);*/
 
         initializeTableViewSelection();
         loadIcons();
@@ -91,7 +91,7 @@ public class TitlesController {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(App.class.getResource("fxml/TitleEdit.fxml"));
                 Stage stage = new Stage();
-                stage.setTitleData(titleView);
+                stage.setUserData(titleView);
                 stage.setTitle("BDS CSFD Edit Title");
 
                 TitlesEditController controller = new TitlesEditController();
@@ -139,7 +139,7 @@ public class TitlesController {
                 Long titleId = titleView.getId();
                 TitleDetailView titleDetailView = titleService.getTitleDetailView(titleId);
 
-                stage.setTitleData(titleDetailView);
+                stage.setUserData(titleDetailView);
                 stage.setTitle("BDS CSFD Titles Detailed View");
 
                 TitlesDetailViewController controller = new TitlesDetailViewController();
@@ -159,11 +159,11 @@ public class TitlesController {
         });
 
 
-        ContextMenu menu = new ContextMenu();
+        /*ContextMenu menu = new ContextMenu();
         menu.getItems().add(edit);
         menu.getItems().add(delete);
         menu.getItems().addAll(detailedView);
-        systemTitlesTableView.setContextMenu(menu);
+        systemTitlesTableView.setContextMenu(menu);*/
     }
 
     private ObservableList<TitleBasicView> initializeTitlesData() {
