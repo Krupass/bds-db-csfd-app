@@ -9,9 +9,8 @@ public class PersonBasicView {
     private LongProperty id = new SimpleLongProperty();
     private StringProperty givenName = new SimpleStringProperty();
     private StringProperty familyName = new SimpleStringProperty();
-    private StringProperty nickname = new SimpleStringProperty();
+    private StringProperty birthday = new SimpleStringProperty();
     private StringProperty city = new SimpleStringProperty();
-    private StringProperty email = new SimpleStringProperty();
     private StringProperty address = new SimpleStringProperty();
 
     public Long getId() {
@@ -20,22 +19,6 @@ public class PersonBasicView {
 
     public void setId(Long id) {
         this.idProperty().setValue(id);
-    }
-
-    public String getCity() {
-        return cityProperty().get();
-    }
-
-    public void setCity(String city) {
-        this.cityProperty().setValue(city);
-    }
-
-    public String getEmail() {
-        return emailProperty().get();
-    }
-
-    public void setEmail(String email) {
-        this.emailProperty().setValue(email);
     }
 
     public String getGivenName() {
@@ -54,12 +37,20 @@ public class PersonBasicView {
         this.familyNameProperty().setValue(familyName);
     }
 
-    public String getNickname() {
-        return nicknameProperty().get();
+    public String getBirthday() {
+        return birthdayProperty().get();
     }
 
-    public void setNickname(String nickname) {
-        this.nicknameProperty().set(nickname);
+    public void setBirthday(String birthday) {
+        this.birthdayProperty().set(birthday);
+    }
+
+    public String getCity() {
+        return cityProperty().get();
+    }
+
+    public void setCity(String city) {
+        this.cityProperty().setValue(city);
     }
 
     public String getAddress(){
@@ -82,16 +73,12 @@ public class PersonBasicView {
         return familyName;
     }
 
-    public StringProperty nicknameProperty() {
-        return nickname;
+    public StringProperty birthdayProperty() {
+        return birthday;
     }
 
     public StringProperty cityProperty() {
         return city;
-    }
-
-    public StringProperty emailProperty() {
-        return email;
     }
 
     public StringProperty addressProperty() {

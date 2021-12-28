@@ -36,9 +36,7 @@ public class PersonsEditController {
     @FXML
     private TextField lastNameTextField;
     @FXML
-    private TextField nicknameTextField;
-    @FXML
-    private TextField emailTextField;
+    private TextField birthdayTextField;
     @FXML
     private TextField addressTextField;
 
@@ -61,10 +59,10 @@ public class PersonsEditController {
         validation = new ValidationSupport();
         validation.registerValidator(idTextField, Validator.createEmptyValidator("The id must not be empty."));
         idTextField.setEditable(false);
-        validation.registerValidator(emailTextField, Validator.createEmptyValidator("The email must not be empty."));
         validation.registerValidator(firstNameTextField, Validator.createEmptyValidator("The first name must not be empty."));
         validation.registerValidator(lastNameTextField, Validator.createEmptyValidator("The last name must not be empty."));
-        validation.registerValidator(nicknameTextField, Validator.createEmptyValidator("The nickname must not be empty."));
+        validation.registerValidator(birthdayTextField, Validator.createEmptyValidator("The birthday must not be empty."));
+        validation.registerValidator(addressTextField, Validator.createEmptyValidator("The address must not be empty."));
 
         editPersonButton.disableProperty().bind(validation.invalidProperty());
 
@@ -83,8 +81,7 @@ public class PersonsEditController {
             idTextField.setText(String.valueOf(personBasicView.getId()));
             firstNameTextField.setText(personBasicView.getGivenName());
             lastNameTextField.setText(personBasicView.getFamilyName());
-            nicknameTextField.setText(personBasicView.getNickname());
-            emailTextField.setText(personBasicView.getEmail());
+            birthdayTextField.setText(personBasicView.getBirthday());
             addressTextField.setText(String.valueOf(personBasicView.getAddress()));
         }
     }
@@ -95,16 +92,14 @@ public class PersonsEditController {
         Long id = Long.valueOf(idTextField.getText());
         String firstName = firstNameTextField.getText();
         String lastName = lastNameTextField.getText();
-        String nickname = nicknameTextField.getText();
-        String email = emailTextField.getText();
+        String birthday = birthdayTextField.getText();
         String address = addressTextField.getText();
 
         PersonEditView personEditView = new PersonEditView();
         personEditView.setId(id);
         personEditView.setFirstName(firstName);
         personEditView.setSurname(lastName);
-        personEditView.setNickname(nickname);
-        personEditView.setEmail(email);
+        personEditView.setBirthday(birthday);
         personEditView.setAddress(address);
 
         personService.editPerson(personEditView);
@@ -114,8 +109,8 @@ public class PersonsEditController {
 
     private void personEditedConfirmationDialog() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("User Edited Confirmation");
-        alert.setHeaderText("Your user was successfully edited.");
+        alert.setTitle("Person Edited Confirmation");
+        alert.setHeaderText("Your person was successfully edited.");
 
         Timeline idlestage = new Timeline(new KeyFrame(Duration.seconds(3), new EventHandler<ActionEvent>() {
             @Override

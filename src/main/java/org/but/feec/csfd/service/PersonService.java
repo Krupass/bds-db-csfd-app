@@ -30,11 +30,6 @@ public class PersonService {
     }
 
     public void createPerson(PersonCreateView personCreateView) {
-        // the following three lines can be written in one code line (only for more clear explanation it is written in three lines
-        char[] originalPassword = personCreateView.getPwd();
-        char[] hashedPassword = hashPassword(originalPassword);
-        personCreateView.setPwd(hashedPassword);
-
         personRepository.createPerson(personCreateView);
     }
 
@@ -44,10 +39,6 @@ public class PersonService {
 
     public void deletePerson(PersonDeleteView personDeleteView) {
         personRepository.deletePerson(personDeleteView);
-    }
-
-    private char[] hashPassword(char[] password) {
-        return BCrypt.withDefaults().hashToChar(12, password);
     }
 
 }

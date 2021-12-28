@@ -9,12 +9,10 @@ public class PersonDetailView {
     private LongProperty id = new SimpleLongProperty();
     private StringProperty givenName = new SimpleStringProperty();
     private StringProperty familyName = new SimpleStringProperty();
-    private StringProperty nickname = new SimpleStringProperty();
-    private StringProperty email = new SimpleStringProperty();
+    private StringProperty birthday = new SimpleStringProperty();
     private StringProperty city = new SimpleStringProperty();
     private StringProperty street = new SimpleStringProperty();
     private StringProperty houseNumber = new SimpleStringProperty();
-    private StringProperty created = new SimpleStringProperty();
 
     public Long getId() {
         return idProperty().get();
@@ -22,14 +20,6 @@ public class PersonDetailView {
 
     public void setId(Long id) {
         this.idProperty().setValue(id);
-    }
-
-    public String getEmail() {
-        return emailProperty().get();
-    }
-
-    public void setEmail(String email) {
-        this.emailProperty().setValue(email);
     }
 
     public String getGivenName() {
@@ -48,12 +38,12 @@ public class PersonDetailView {
         this.familyNameProperty().setValue(familyName);
     }
 
-    public String getNickname() {
-        return nicknameProperty().get();
+    public String getBirthday() {
+        return birthdayProperty().get();
     }
 
-    public void setNickname(String nickname) {
-        this.nicknameProperty().set(nickname);
+    public void setBirthday(String birthday) {
+        this.birthdayProperty().set(birthday);
     }
 
     public String getCity() {
@@ -80,14 +70,6 @@ public class PersonDetailView {
         this.streetProperty().setValue(street);
     }
 
-    public String getCreated() {
-        return createdProperty().get();
-    }
-
-    public void setCreated(String created) {
-        this.createdProperty().setValue(created);
-    }
-
     public LongProperty idProperty() {
         return id;
     }
@@ -100,12 +82,8 @@ public class PersonDetailView {
         return familyName;
     }
 
-    public StringProperty nicknameProperty() {
-        return nickname;
-    }
-
-    public StringProperty emailProperty() {
-        return email;
+    public StringProperty birthdayProperty() {
+        return birthday;
     }
 
     public StringProperty cityProperty() {
@@ -118,10 +96,6 @@ public class PersonDetailView {
 
     public StringProperty streetProperty() {
         return street;
-    }
-
-    public StringProperty createdProperty() {
-        return created;
     }
 
 

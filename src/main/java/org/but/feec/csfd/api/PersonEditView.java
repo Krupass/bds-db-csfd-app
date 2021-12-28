@@ -4,9 +4,8 @@ public class PersonEditView {
 
     private Long id;
     private String firstName;
-    private String nickname;
     private String surname;
-    private String email;
+    private String birthday;
     private String address;
 
     public Long getId() {
@@ -17,14 +16,6 @@ public class PersonEditView {
         this.id = id;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getFirstName() {
         return firstName;
     }
@@ -33,20 +24,20 @@ public class PersonEditView {
         this.firstName = firstName;
     }
 
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
     public String getSurname() {
         return surname;
     }
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
     }
 
     public String getAddress(){
@@ -64,9 +55,8 @@ public class PersonEditView {
     public String toString() {
         return "PersonEditView{" +
                 "firstName='" + firstName + '\'' +
-                ", nickname='" + nickname + '\'' +
                 ", surname='" + surname + '\'' +
-                ", email='" + email + '\'' +
+                ", birthday='" + birthday + '\'' +
                 ", address='" + address +
                 '}';
     }

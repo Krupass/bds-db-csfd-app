@@ -4,20 +4,10 @@ import java.util.Arrays;
 
 public class PersonCreateView {
 
-    private String email;
     private String firstName;
-    private String nickname;
     private String surname;
-    private char[] pwd;
+    private String birthday;
     private String address;
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -25,14 +15,6 @@ public class PersonCreateView {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
     }
 
     public String getSurname() {
@@ -43,12 +25,12 @@ public class PersonCreateView {
         this.surname = surname;
     }
 
-    public char[] getPwd() {
-        return pwd;
+    public String getBirthday() {
+        return birthday;
     }
 
-    public void setPwd(char[] pwd) {
-        this.pwd = pwd;
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
     }
 
     public String getAddress(){
@@ -65,11 +47,9 @@ public class PersonCreateView {
     @Override
     public String toString() {
         return "PersonCreateView{" +
-                "email='" + email + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", nickname='" + nickname + '\'' +
+                "firstName='" + firstName + '\'' +
                 ", surname='" + surname + '\'' +
-                ", pwd=" + Arrays.toString(pwd) +
+                ", nickname='" + birthday +
                 '}';
     }
 }

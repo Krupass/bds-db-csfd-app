@@ -40,15 +40,13 @@ public class PersonsController {
     @FXML
     private TableColumn<PersonBasicView, Long> personsId;
     @FXML
-    private TableColumn<PersonBasicView, String> personsCity;
-    @FXML
-    private TableColumn<PersonBasicView, String> personsEmail;
+    private TableColumn<PersonBasicView, String> personsGivenName;
     @FXML
     private TableColumn<PersonBasicView, String> personsFamilyName;
     @FXML
-    private TableColumn<PersonBasicView, String> personsGivenName;
+    private TableColumn<PersonBasicView, String> personsBirthday;
     @FXML
-    private TableColumn<PersonBasicView, String> personsNickname;
+    private TableColumn<PersonBasicView, String> personsCity;
     @FXML
     private TableView<PersonBasicView> systemPersonsTableView;
 //    @FXML
@@ -67,11 +65,10 @@ public class PersonsController {
 //        GlyphsDude.setIcon(exitMenuItem, FontAwesomeIcon.CLOSE, "1em");
 
         personsId.setCellValueFactory(new PropertyValueFactory<PersonBasicView, Long>("id"));
-        personsCity.setCellValueFactory(new PropertyValueFactory<PersonBasicView, String>("city"));
-        personsEmail.setCellValueFactory(new PropertyValueFactory<PersonBasicView, String>("email"));
-        personsFamilyName.setCellValueFactory(new PropertyValueFactory<PersonBasicView, String>("familyName"));
         personsGivenName.setCellValueFactory(new PropertyValueFactory<PersonBasicView, String>("givenName"));
-        personsNickname.setCellValueFactory(new PropertyValueFactory<PersonBasicView, String>("nickname"));
+        personsFamilyName.setCellValueFactory(new PropertyValueFactory<PersonBasicView, String>("familyName"));
+        personsBirthday.setCellValueFactory(new PropertyValueFactory<PersonBasicView, String>("birthday"));
+        personsCity.setCellValueFactory(new PropertyValueFactory<PersonBasicView, String>("city"));
 
 
         ObservableList<PersonBasicView> observablePersonsList = initializePersonsData();
@@ -86,9 +83,9 @@ public class PersonsController {
     }
 
     private void initializeTableViewSelection() {
-        MenuItem edit = new MenuItem("Edit user");
-        MenuItem delete = new MenuItem("Delete user");
-        MenuItem detailedView = new MenuItem("Detailed user view");
+        MenuItem edit = new MenuItem("Edit person");
+        MenuItem delete = new MenuItem("Delete person");
+        MenuItem detailedView = new MenuItem("Detailed person view");
         edit.setOnAction((ActionEvent event) -> {
             PersonBasicView personView = systemPersonsTableView.getSelectionModel().getSelectedItem();
             try {
@@ -96,7 +93,7 @@ public class PersonsController {
                 fxmlLoader.setLocation(App.class.getResource("fxml/PersonEdit.fxml"));
                 Stage stage = new Stage();
                 stage.setUserData(personView);
-                stage.setTitle("BDS CSFD Edit User");
+                stage.setTitle("BDS CSFD Edit Person");
 
                 PersonsEditController controller = new PersonsEditController();
                 controller.setStage(stage);
@@ -144,7 +141,7 @@ public class PersonsController {
                 PersonDetailView personDetailView = personService.getPersonDetailView(personId);
 
                 stage.setUserData(personDetailView);
-                stage.setTitle("BDS CSFD Users Detailed View");
+                stage.setTitle("BDS CSFD Persons Detailed View");
 
                 PersonsDetailViewController controller = new PersonsDetailViewController();
                 controller.setStage(stage);
@@ -192,7 +189,7 @@ public class PersonsController {
             fxmlLoader.setLocation(App.class.getResource("fxml/PersonsCreate.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 600, 500);
             Stage stage = new Stage();
-            stage.setTitle("BDS CSFD Create User");
+            stage.setTitle("BDS CSFD Create Person");
             stage.getIcons().add(new Image(App.class.getResourceAsStream("logo/plus.png")));
             stage.setScene(scene);
 

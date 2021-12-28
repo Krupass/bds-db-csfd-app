@@ -34,13 +34,7 @@ public class PersonCreateController {
     private TextField newPersonLastName;
 
     @FXML
-    private TextField newPersonNickname;
-
-    @FXML
-    private TextField newPersonPwd;
-
-    @FXML
-    private TextField newPersonEmail;
+    private TextField newPersonBirthday;
 
     @FXML
     private TextField newPersonAddress;
@@ -55,11 +49,10 @@ public class PersonCreateController {
         personService = new PersonService(personRepository);
 
         validation = new ValidationSupport();
-        validation.registerValidator(newPersonEmail, Validator.createEmptyValidator("The email must not be empty."));
         validation.registerValidator(newPersonFirstName, Validator.createEmptyValidator("The first name must not be empty."));
         validation.registerValidator(newPersonLastName, Validator.createEmptyValidator("The last name must not be empty."));
-        validation.registerValidator(newPersonNickname, Validator.createEmptyValidator("The nickname must not be empty."));
-        validation.registerValidator(newPersonPwd, Validator.createEmptyValidator("The password must not be empty."));
+        validation.registerValidator(newPersonBirthday, Validator.createEmptyValidator("The birthday must not be empty."));
+        validation.registerValidator(newPersonAddress, Validator.createEmptyValidator("The address must not be empty."));
 
         newPersonCreatePerson.disableProperty().bind(validation.invalidProperty());
 
@@ -71,17 +64,13 @@ public class PersonCreateController {
         // can be written easier, its just for better explanation here on so many lines
         String firstName = newPersonFirstName.getText();
         String lastName = newPersonLastName.getText();
-        String nickname = newPersonNickname.getText();
-        String password = newPersonPwd.getText();
-        String email = newPersonEmail.getText();
+        String birthday = newPersonBirthday.getText();
         String address = newPersonAddress.getText();
 
         PersonCreateView personCreateView = new PersonCreateView();
         personCreateView.setFirstName(firstName);
         personCreateView.setSurname(lastName);
-        personCreateView.setNickname(nickname);
-        personCreateView.setPwd(password.toCharArray());
-        personCreateView.setEmail(email);
+        personCreateView.setBirthday(birthday);
         personCreateView.setAddress(address);
 
         personService.createPerson(personCreateView);
@@ -91,8 +80,8 @@ public class PersonCreateController {
 
     private void personCreatedConfirmationDialog() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("User Created Confirmation");
-        alert.setHeaderText("Your user was successfully created.");
+        alert.setTitle("Person Created Confirmation");
+        alert.setHeaderText("Your person was successfully created.");
 
         Timeline idlestage = new Timeline(new KeyFrame(Duration.seconds(3), new EventHandler<ActionEvent>() {
             @Override

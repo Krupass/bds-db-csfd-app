@@ -21,10 +21,7 @@ public class PersonsDetailViewController {
     private TextField lastNameTextField;
 
     @FXML
-    private TextField nicknameTextField;
-
-    @FXML
-    private TextField emailTextField;
+    private TextField birthdayTextField;
 
     @FXML
     private TextField cityTextField;
@@ -34,9 +31,6 @@ public class PersonsDetailViewController {
 
     @FXML
     private TextField houseNumberTextField;
-
-    @FXML
-    private TextField createdTextField;
 
     // used to reference the stage and to get passed data through it
     public Stage stage;
@@ -50,12 +44,10 @@ public class PersonsDetailViewController {
         idTextField.setEditable(false);
         firstNameTextField.setEditable(false);
         lastNameTextField.setEditable(false);
-        nicknameTextField.setEditable(false);
-        emailTextField.setEditable(false);
+        birthdayTextField.setEditable(false);
         cityTextField.setEditable(false);
         streetTextField.setEditable(false);
         houseNumberTextField.setEditable(false);
-        createdTextField.setEditable(false);
 
         loadPersonsData();
 
@@ -69,12 +61,10 @@ public class PersonsDetailViewController {
             idTextField.setText(String.valueOf(personBasicView.getId()));
             firstNameTextField.setText(personBasicView.getGivenName());
             lastNameTextField.setText(personBasicView.getFamilyName());
-            nicknameTextField.setText(personBasicView.getNickname());
-            emailTextField.setText(personBasicView.getEmail());
+            birthdayTextField.setText(personBasicView.getBirthday());
             cityTextField.setText(personBasicView.getCity());
             streetTextField.setText(personBasicView.getStreet());
             houseNumberTextField.setText(personBasicView.gethouseNumber());
-            createdTextField.setText(personBasicView.getCreated());
         }
     }
 

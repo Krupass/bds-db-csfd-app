@@ -49,12 +49,11 @@
                            </textFill></Label>
                         <TableView fx:id="systemPersonsTableView" layoutY="67.0" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="400.0" prefWidth="948.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-356.0">
                           <columns>
-                              <TableColumn fx:id="personsId" minWidth="75.0" prefWidth="80.00000303983688" text="id" />
-                              <TableColumn fx:id="personsGivenName" minWidth="75.0" prefWidth="170.0" text="given name" />
-                              <TableColumn fx:id="personsFamilyName" minWidth="47.0" prefWidth="179.0" text="family name" />
-                              <TableColumn fx:id="personsNickname" minWidth="34.0" prefWidth="172.0" text="nickname" />
-                              <TableColumn fx:id="personsEmail" minWidth="46.0" prefWidth="190.0" text="email" />
-                              <TableColumn fx:id="personsCity" minWidth="75.0" prefWidth="157.0" text="city" />
+                              <TableColumn fx:id="personsId" minWidth="75.0" prefWidth="116.0" text="id" />
+                              <TableColumn fx:id="personsGivenName" minWidth="75.0" prefWidth="200.0" text="given name" />
+                              <TableColumn fx:id="personsFamilyName" minWidth="47.0" prefWidth="200.0" text="family name" />
+                              <TableColumn fx:id="personsBirthday" minWidth="34.0" prefWidth="171.0" text="birthday" />
+                              <TableColumn fx:id="personsCity" minWidth="75.0" prefWidth="267.0" text="city" />
                           </columns>
                         </TableView>
                         <Button fx:id="addPersonButton" layoutX="25.0" layoutY="490.0" mnemonicParsing="false" onAction="#handleAddPersonButton" text="Add person" />
