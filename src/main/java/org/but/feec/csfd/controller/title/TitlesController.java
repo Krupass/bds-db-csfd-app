@@ -39,15 +39,15 @@ public class TitlesController {
     @FXML
     private TableColumn<TitleBasicView, Long> titlesId;
     @FXML
-    private TableColumn<TitleBasicView, String> titlesCity;
+    private TableColumn<TitleBasicView, String> titlesName;
     @FXML
-    private TableColumn<TitleBasicView, String> titlesEmail;
+    private TableColumn<TitleBasicView, String> titlesType;
     @FXML
-    private TableColumn<TitleBasicView, String> titlesFamilyName;
+    private TableColumn<TitleBasicView, String> titlesYear;
     @FXML
-    private TableColumn<TitleBasicView, String> titlesGivenName;
+    private TableColumn<TitleBasicView, String> titlesLenght;
     @FXML
-    private TableColumn<TitleBasicView, String> titlesNickname;
+    private TableColumn<TitleBasicView, String> titlesCountry;
     @FXML
     private TableView<TitleBasicView> systemTitlesTableView;
 
@@ -62,18 +62,18 @@ public class TitlesController {
         titleRepository = new TitleRepository();
         titleService = new TitleService(titleRepository);
 
-        /*titlesId.setCellValueFactory(new PropertyValueFactory<TitleBasicView, Long>("id"));
-        titlesCity.setCellValueFactory(new PropertyValueFactory<TitleBasicView, String>("city"));
-        titlesEmail.setCellValueFactory(new PropertyValueFactory<TitleBasicView, String>("email"));
-        titlesFamilyName.setCellValueFactory(new PropertyValueFactory<TitleBasicView, String>("familyName"));
-        titlesGivenName.setCellValueFactory(new PropertyValueFactory<TitleBasicView, String>("givenName"));
-        titlesNickname.setCellValueFactory(new PropertyValueFactory<TitleBasicView, String>("nickname"));
+        titlesId.setCellValueFactory(new PropertyValueFactory<TitleBasicView, Long>("id"));
+        titlesName.setCellValueFactory(new PropertyValueFactory<TitleBasicView, String>("title"));
+        titlesType.setCellValueFactory(new PropertyValueFactory<TitleBasicView, String>("type"));
+        titlesYear.setCellValueFactory(new PropertyValueFactory<TitleBasicView, String>("year"));
+        titlesLenght.setCellValueFactory(new PropertyValueFactory<TitleBasicView, String>("lenght"));
+        titlesCountry.setCellValueFactory(new PropertyValueFactory<TitleBasicView, String>("country"));
 
 
         ObservableList<TitleBasicView> observableTitlesList = initializeTitlesData();
         systemTitlesTableView.setItems(observableTitlesList);
 
-        systemTitlesTableView.getSortOrder().add(titlesId);*/
+        systemTitlesTableView.getSortOrder().add(titlesId);
 
         initializeTableViewSelection();
         loadIcons();
@@ -159,11 +159,11 @@ public class TitlesController {
         });
 
 
-        /*ContextMenu menu = new ContextMenu();
+        ContextMenu menu = new ContextMenu();
         menu.getItems().add(edit);
         menu.getItems().add(delete);
         menu.getItems().addAll(detailedView);
-        systemTitlesTableView.setContextMenu(menu);*/
+        systemTitlesTableView.setContextMenu(menu);
     }
 
     private ObservableList<TitleBasicView> initializeTitlesData() {

@@ -47,14 +47,14 @@
                            <textFill>
                       <Color red="0.624" green="0.624" blue="0.624" fx:id="x2" />
                            </textFill></Label>
-                        <TableView fx:id="systemUsersTableView" layoutY="67.0" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="400.0" prefWidth="948.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-356.0">
+                        <TableView fx:id="systemTitlesTableView" layoutY="67.0" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="400.0" prefWidth="948.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-356.0">
                           <columns>
-                              <TableColumn fx:id="usersId" minWidth="75.0" prefWidth="80.00000303983688" text="id" />
-                              <TableColumn fx:id="usersGivenName" minWidth="75.0" prefWidth="170.0" text="given name" />
-                              <TableColumn fx:id="usersFamilyName" minWidth="47.0" prefWidth="179.0" text="family name" />
-                              <TableColumn fx:id="usersNickname" minWidth="34.0" prefWidth="172.0" text="nickname" />
-                              <TableColumn fx:id="usersEmail" minWidth="46.0" prefWidth="190.0" text="email" />
-                              <TableColumn fx:id="usersCity" minWidth="75.0" prefWidth="157.0" text="city" />
+                              <TableColumn fx:id="titlesId" minWidth="75.0" prefWidth="80.00000303983688" text="id" />
+                              <TableColumn fx:id="titlesName" minWidth="75.0" prefWidth="170.0" text="title" />
+                              <TableColumn fx:id="titlesType" minWidth="47.0" prefWidth="179.0" text="type" />
+                              <TableColumn fx:id="titlesYear" minWidth="34.0" prefWidth="172.0" text="year" />
+                              <TableColumn fx:id="titlesLenght" minWidth="46.0" prefWidth="190.0" text="lenght" />
+                              <TableColumn fx:id="titlesCountry" minWidth="75.0" prefWidth="157.0" text="country" />
                           </columns>
                         </TableView>
                         <Button fx:id="addTitleButton" layoutX="25.0" layoutY="490.0" mnemonicParsing="false" onAction="#handleAddTitleButton" text="Add title" />

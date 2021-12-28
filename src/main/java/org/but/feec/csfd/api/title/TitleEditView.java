@@ -3,11 +3,11 @@ package org.but.feec.csfd.api.title;
 public class TitleEditView {
 
     private Long id;
-    private String firstName;
-    private String nickname;
-    private String surname;
-    private String email;
-    private String address;
+    private String title;
+    private String type;
+    private String year;
+    private String lenght;
+    private String country;
 
     public Long getId() {
         return id;
@@ -17,57 +17,54 @@ public class TitleEditView {
         this.id = id;
     }
 
-    public String getEmail() {
-        return email;
+    public String getTitle(){
+        return title;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setTitle(String title){
+        this.title = title;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getType(){
+        return type;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setType(String type){
+        this.type = type;
     }
 
-    public String getNickname() {
-        return nickname;
+    public String getYear(){
+        return year;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setYear(String year){
+        this.year = year;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getLenght(){
+        return lenght;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setLenght(String lenght){
+        this.lenght = lenght;
     }
 
-    public String getAddress(){
-        return address;
+    public String getCountry(){
+        return country;
     }
 
-    public void setAddress(String address){
-        if(address == null || address == ""){
-            address = "NULL";
-        }
-        this.address = address;
+    public void setCountry(String country){
+        this.country = country;
     }
 
     @Override
     public String toString() {
         return "TitleEditView{" +
-                "firstName='" + firstName + '\'' +
-                ", nickname='" + nickname + '\'' +
-                ", surname='" + surname + '\'' +
-                ", email='" + email + '\'' +
-                ", address='" + address +
+                "title='" + title + '\'' +
+                ", type='" + type + '\'' +
+                ", year='" + year + '\'' +
+                ", lenght='" + lenght + '\'' +
+                ", country='" + country +
                 '}';
     }
 }

@@ -31,15 +31,15 @@ public class TitlesEditController {
     @FXML
     public TextField idTextField;
     @FXML
-    private TextField firstNameTextField;
+    private TextField titleTextField;
     @FXML
-    private TextField lastNameTextField;
+    private TextField typeTextField;
     @FXML
-    private TextField nicknameTextField;
+    private TextField yearTextField;
     @FXML
-    private TextField emailTextField;
+    private TextField lenghtTextField;
     @FXML
-    private TextField addressTextField;
+    private TextField countryTextField;
 
     private TitleService titleService;
     private TitleRepository titleRepository;
@@ -60,10 +60,11 @@ public class TitlesEditController {
         validation = new ValidationSupport();
         validation.registerValidator(idTextField, Validator.createEmptyValidator("The id must not be empty."));
         idTextField.setEditable(false);
-        validation.registerValidator(emailTextField, Validator.createEmptyValidator("The email must not be empty."));
-        validation.registerValidator(firstNameTextField, Validator.createEmptyValidator("The first name must not be empty."));
-        validation.registerValidator(lastNameTextField, Validator.createEmptyValidator("The last name must not be empty."));
-        validation.registerValidator(nicknameTextField, Validator.createEmptyValidator("The nickname must not be empty."));
+        validation.registerValidator(titleTextField, Validator.createEmptyValidator("The title must not be empty."));
+        validation.registerValidator(typeTextField, Validator.createEmptyValidator("The type must not be empty."));
+        validation.registerValidator(yearTextField, Validator.createEmptyValidator("The year must not be empty."));
+        validation.registerValidator(lenghtTextField, Validator.createEmptyValidator("The lenght must not be empty."));
+        validation.registerValidator(countryTextField, Validator.createEmptyValidator("The country must not be empty."));
 
         editTitleButton.disableProperty().bind(validation.invalidProperty());
 
@@ -80,11 +81,11 @@ public class TitlesEditController {
         if (stage.getUserData() instanceof TitleBasicView) {
             TitleBasicView titleBasicView = (TitleBasicView) stage.getUserData();
             idTextField.setText(String.valueOf(titleBasicView.getId()));
-            firstNameTextField.setText(titleBasicView.getGivenName());
-            lastNameTextField.setText(titleBasicView.getFamilyName());
-            nicknameTextField.setText(titleBasicView.getNickname());
-            emailTextField.setText(titleBasicView.getEmail());
-            addressTextField.setText(String.valueOf(titleBasicView.getAddress()));
+            titleTextField.setText(titleBasicView.getTitle());
+            typeTextField.setText(titleBasicView.getType());
+            yearTextField.setText(titleBasicView.getYear());
+            lenghtTextField.setText(titleBasicView.getLenght());
+            countryTextField.setText(titleBasicView.getCountry());
         }
     }
 
@@ -92,19 +93,19 @@ public class TitlesEditController {
     public void handleEditTitleButton(ActionEvent event) {
         // can be written easier, its just for better explanation here on so many lines
         Long id = Long.valueOf(idTextField.getText());
-        String firstName = firstNameTextField.getText();
-        String lastName = lastNameTextField.getText();
-        String nickname = nicknameTextField.getText();
-        String email = emailTextField.getText();
-        String address = addressTextField.getText();
+        String title = titleTextField.getText();
+        String type = typeTextField.getText();
+        String year = yearTextField.getText();
+        String lenght = lenghtTextField.getText();
+        String country = countryTextField.getText();
 
         TitleEditView titleEditView = new TitleEditView();
         titleEditView.setId(id);
-        titleEditView.setFirstName(firstName);
-        titleEditView.setSurname(lastName);
-        titleEditView.setNickname(nickname);
-        titleEditView.setEmail(email);
-        titleEditView.setAddress(address);
+        titleEditView.setTitle(title);
+        titleEditView.setType(type);
+        titleEditView.setYear(year);
+        titleEditView.setLenght(lenght);
+        titleEditView.setCountry(country);
 
         titleService.editTitle(titleEditView);
 

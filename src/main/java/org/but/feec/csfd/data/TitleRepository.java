@@ -57,9 +57,10 @@ public class TitleRepository {
     public List<TitleBasicView> getTitlesBasicView() {
         try (Connection connection = DataSourceConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
-                     "SELECT id_user, email, first_name, surname, nick, city, u.id_address" +
-                             " FROM public.user u" +
-                             " LEFT JOIN address a ON u.id_address = a.id_address ORDER BY u.id_user");
+                     "SELECT t.id_title, name, p.type_name, year, lenght, c.country_name" +
+                             " FROM titles t" +
+                             " LEFT JOIN type p ON t.id_type = p.id_type" +
+                             " LEFT JOIN country c ON t.id_country = c.id_country ORDER BY t.id_title");
              ResultSet resultSet = preparedStatement.executeQuery();) {
             List<TitleBasicView> titleBasicViews = new ArrayList<>();
             while (resultSet.next()) {
@@ -156,19 +157,19 @@ public class TitleRepository {
     }
 
     public void editTitle(TitleEditView titleEditView) {
-        if(titleEditView.getAddress() != "NULL"){
+        if(titleEditView.getTitle() != "NULL"){
             String insertTitleSQL = "UPDATE public.user u SET email = ?, first_name = ?, nick = ?, surname = ?, id_address = ? WHERE u.id_user = ?";
             String checkIfExists = "SELECT email FROM public.user u WHERE u.id_user = ? ORDER BY u.id_user";
             try (Connection connection = DataSourceConfig.getConnection();
                  // would be beneficial if I will return the created entity back
                  PreparedStatement preparedStatement = connection.prepareStatement(insertTitleSQL, Statement.RETURN_GENERATED_KEYS)) {
                 // set prepared statement variables
-                preparedStatement.setString(1, titleEditView.getEmail());
+                /*preparedStatement.setString(1, titleEditView.getEmail());
                 preparedStatement.setString(2, titleEditView.getFirstName());
                 preparedStatement.setString(3, titleEditView.getNickname());
                 preparedStatement.setString(4, titleEditView.getSurname());
                 preparedStatement.setInt(5, Integer.parseInt(titleEditView.getAddress()));
-                preparedStatement.setLong(6, titleEditView.getId());
+                preparedStatement.setLong(6, titleEditView.getId());*/
 
                 try {
                     // TODO set connection autocommit to false
@@ -205,11 +206,11 @@ public class TitleRepository {
                  // would be beneficial if I will return the created entity back
                  PreparedStatement preparedStatement = connection.prepareStatement(insertTitleSQL, Statement.RETURN_GENERATED_KEYS)) {
                 // set prepared statement variables
-                preparedStatement.setString(1, titleEditView.getEmail());
+                /*preparedStatement.setString(1, titleEditView.getEmail());
                 preparedStatement.setString(2, titleEditView.getFirstName());
                 preparedStatement.setString(3, titleEditView.getNickname());
                 preparedStatement.setString(4, titleEditView.getSurname());
-                preparedStatement.setLong(5, titleEditView.getId());
+                preparedStatement.setLong(5, titleEditView.getId());*/
 
                 try {
                     // TODO set connection autocommit to false
@@ -256,19 +257,18 @@ public class TitleRepository {
 
     private TitleBasicView mapToTitleBasicView(ResultSet rs) throws SQLException {
         TitleBasicView titleBasicView = new TitleBasicView();
-        titleBasicView.setId(rs.getLong("id_user"));
-        titleBasicView.setEmail(rs.getString("email"));
-        titleBasicView.setGivenName(rs.getString("first_name"));
-        titleBasicView.setFamilyName(rs.getString("surname"));
-        titleBasicView.setNickname(rs.getString("nick"));
-        titleBasicView.setAddress(rs.getString("id_address"));
-        titleBasicView.setCity(rs.getString("city"));
+        titleBasicView.setId(rs.getLong("id_title"));
+        titleBasicView.setTitle(rs.getString("name"));
+        titleBasicView.setType(rs.getString("type_name"));
+        titleBasicView.setYear(rs.getString("year"));
+        titleBasicView.setLenght(rs.getString("lenght"));
+        titleBasicView.setCountry(rs.getString("country_name"));
         return titleBasicView;
     }
 
     private TitleDetailView mapToTitleDetailView(ResultSet rs) throws SQLException {
         TitleDetailView titleDetailView = new TitleDetailView();
-        titleDetailView.setId(rs.getLong("id_user"));
+        titleDetailView.setId(rs.getLong("id_title"));
         titleDetailView.setGivenName(rs.getString("first_name"));
         titleDetailView.setFamilyName(rs.getString("surname"));
         titleDetailView.setNickname(rs.getString("nick"));

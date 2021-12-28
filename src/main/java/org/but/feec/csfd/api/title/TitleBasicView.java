@@ -7,12 +7,11 @@ import javafx.beans.property.StringProperty;
 
 public class TitleBasicView {
     private LongProperty id = new SimpleLongProperty();
-    private StringProperty givenName = new SimpleStringProperty();
-    private StringProperty familyName = new SimpleStringProperty();
-    private StringProperty nickname = new SimpleStringProperty();
-    private StringProperty city = new SimpleStringProperty();
-    private StringProperty email = new SimpleStringProperty();
-    private StringProperty address = new SimpleStringProperty();
+    private StringProperty title = new SimpleStringProperty();
+    private StringProperty type = new SimpleStringProperty();
+    private StringProperty year = new SimpleStringProperty();
+    private StringProperty lenght = new SimpleStringProperty();
+    private StringProperty country = new SimpleStringProperty();
 
     public Long getId() {
         return idProperty().get();
@@ -22,80 +21,68 @@ public class TitleBasicView {
         this.idProperty().setValue(id);
     }
 
-    public String getCity() {
-        return cityProperty().get();
+    public String getTitle(){
+        return titleProperty().get();
     }
 
-    public void setCity(String city) {
-        this.cityProperty().setValue(city);
+    public void setTitle(String title){
+        this.titleProperty().setValue(title);
     }
 
-    public String getEmail() {
-        return emailProperty().get();
+    public String getType(){
+        return typeProperty().get();
     }
 
-    public void setEmail(String email) {
-        this.emailProperty().setValue(email);
+    public void setType(String type){
+        this.typeProperty().setValue(type);
     }
 
-    public String getGivenName() {
-        return givenNameProperty().get();
+    public String getYear(){
+        return yearProperty().get();
     }
 
-    public void setGivenName(String givenName) {
-        this.givenNameProperty().setValue(givenName);
+    public void setYear(String year){
+        this.yearProperty().setValue(year);
     }
 
-    public String getFamilyName() {
-        return familyNameProperty().get();
+    public String getLenght(){
+        return lenghtProperty().get();
     }
 
-    public void setFamilyName(String familyName) {
-        this.familyNameProperty().setValue(familyName);
+    public void setLenght(String lenght){
+        this.lenghtProperty().setValue(lenght);
     }
 
-    public String getNickname() {
-        return nicknameProperty().get();
+    public String getCountry(){
+        return countryProperty().get();
     }
 
-    public void setNickname(String nickname) {
-        this.nicknameProperty().set(nickname);
-    }
-
-    public String getAddress(){
-        return  addressProperty().get();
-    }
-
-    public void setAddress(String address){
-        this.addressProperty().set(address);
+    public void setCountry(String country){
+        this.countryProperty().setValue(country);
     }
 
     public LongProperty idProperty() {
         return id;
     }
 
-    public StringProperty givenNameProperty() {
-        return givenName;
+    public StringProperty titleProperty() {
+        return title;
     }
 
-    public StringProperty familyNameProperty() {
-        return familyName;
+    public StringProperty typeProperty() {
+        return type;
     }
 
-    public StringProperty nicknameProperty() {
-        return nickname;
+    public StringProperty yearProperty() {
+        return year;
     }
 
-    public StringProperty cityProperty() {
-        return city;
+    public StringProperty lenghtProperty() {
+        return lenght;
     }
 
-    public StringProperty emailProperty() {
-        return email;
-    }
-
-    public StringProperty addressProperty() {
-        return address;
+    public StringProperty countryProperty() {
+        return country;
     }
 
 }
