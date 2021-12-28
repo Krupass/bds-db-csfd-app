@@ -31,11 +31,6 @@
                         <Insets left="5.0" />
                     </padding>
                 </Label>
-                <Label text="lenght" GridPane.rowIndex="4">
-                    <padding>
-                        <Insets left="5.0" />
-                    </padding>
-                </Label>
                 <Label text="title" GridPane.rowIndex="1">
                     <padding>
                         <Insets left="5.0" />
@@ -51,19 +46,24 @@
                         <Insets left="5.0" />
                     </padding>
                 </Label>
-                <TextField fx:id="idTextField" GridPane.columnIndex="1" />
-                <TextField fx:id="lenghtTextField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                <TextField fx:id="titleTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <TextField fx:id="typeTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <TextField fx:id="yearTextField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <Label text="lenght" GridPane.rowIndex="4">
+                    <padding>
+                        <Insets left="5.0" />
+                    </padding>
+                </Label>
             <Label text="country" GridPane.rowIndex="5">
                <padding>
                   <Insets left="5.0" />
                </padding>
             </Label>
+                <TextField fx:id="idTextField" GridPane.columnIndex="1" />
+                <TextField fx:id="titleTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextField fx:id="typeTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <TextField fx:id="yearTextField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <TextField fx:id="lenghtTextField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <TextField fx:id="countryTextField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             </children>
         </GridPane>
-        <Button fx:id="editTitleButton" layoutX="501.0" layoutY="400.0" mnemonicParsing="false" onAction="#handleEditUserButton" text="edit title" />
+        <Button fx:id="editTitleButton" layoutX="501.0" layoutY="400.0" mnemonicParsing="false" onAction="#handleEditTitleButton" text="edit title" />
     </children>
 </AnchorPane>

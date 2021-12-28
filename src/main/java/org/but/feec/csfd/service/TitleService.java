@@ -27,11 +27,6 @@ public class TitleService {
     }
 
     public void createTitle(TitleCreateView titleCreateView) {
-        // the following three lines can be written in one code line (only for more clear explanation it is written in three lines
-        char[] originalPassword = titleCreateView.getPwd();
-        char[] hashedPassword = hashPassword(originalPassword);
-        titleCreateView.setPwd(hashedPassword);
-
         titleRepository.createTitle(titleCreateView);
     }
 
@@ -41,10 +36,6 @@ public class TitleService {
 
     public void deleteTitle(TitleDeleteView titleDeleteView) {
         titleRepository.deleteTitle(titleDeleteView);
-    }
-
-    private char[] hashPassword(char[] password) {
-        return BCrypt.withDefaults().hashToChar(12, password);
     }
 
 }

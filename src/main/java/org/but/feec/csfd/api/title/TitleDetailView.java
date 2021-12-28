@@ -7,14 +7,13 @@ import javafx.beans.property.StringProperty;
 
 public class TitleDetailView {
     private LongProperty id = new SimpleLongProperty();
-    private StringProperty givenName = new SimpleStringProperty();
-    private StringProperty familyName = new SimpleStringProperty();
-    private StringProperty nickname = new SimpleStringProperty();
-    private StringProperty email = new SimpleStringProperty();
-    private StringProperty city = new SimpleStringProperty();
-    private StringProperty street = new SimpleStringProperty();
-    private StringProperty houseNumber = new SimpleStringProperty();
-    private StringProperty created = new SimpleStringProperty();
+    private StringProperty name = new SimpleStringProperty();
+    private StringProperty type = new SimpleStringProperty();
+    private StringProperty genre = new SimpleStringProperty();
+    private StringProperty country = new SimpleStringProperty();
+    private StringProperty year = new SimpleStringProperty();
+    private StringProperty lenght = new SimpleStringProperty();
+    private StringProperty description = new SimpleStringProperty();
 
     public Long getId() {
         return idProperty().get();
@@ -24,104 +23,92 @@ public class TitleDetailView {
         this.idProperty().setValue(id);
     }
 
-    public String getEmail() {
-        return emailProperty().get();
+    public String getName() {
+        return nameProperty().get();
     }
 
-    public void setEmail(String email) {
-        this.emailProperty().setValue(email);
+    public void setName(String name) {
+        this.nameProperty().setValue(name);
     }
 
-    public String getGivenName() {
-        return givenNameProperty().get();
+    public String getType() {
+        return typeProperty().get();
     }
 
-    public void setGivenName(String givenName) {
-        this.givenNameProperty().setValue(givenName);
+    public void setType(String type) {
+        this.typeProperty().setValue(type);
     }
 
-    public String getFamilyName() {
-        return familyNameProperty().get();
+    public String getGenre() {
+        return genreProperty().get();
     }
 
-    public void setFamilyName(String familyName) {
-        this.familyNameProperty().setValue(familyName);
+    public void setGenre(String genre) {
+        this.genreProperty().setValue(genre);
     }
 
-    public String getNickname() {
-        return nicknameProperty().get();
+    public String getCountry() {
+        return countryProperty().get();
     }
 
-    public void setNickname(String nickname) {
-        this.nicknameProperty().set(nickname);
+    public void setCountry(String country) {
+        this.countryProperty().setValue(country);
     }
 
-    public String getCity() {
-        return cityProperty().get();
+    public String getYear() {
+        return yearProperty().get();
     }
 
-    public void setCity(String city) {
-        this.cityProperty().setValue(city);
+    public void setYear(String year) {
+        this.yearProperty().setValue(year);
     }
 
-    public String gethouseNumber() {
-        return houseNumberProperty().get();
+    public String getLenght() {
+        return lenghtProperty().get();
     }
 
-    public void sethouseNumber(String houseNumber) {
-        this.houseNumberProperty().setValue(houseNumber);
+    public void setLenght(String lenght) {
+        this.lenghtProperty().setValue(lenght);
     }
 
-    public String getStreet() {
-        return streetProperty().get();
+    public String getDescription() {
+        return descriptionProperty().get();
     }
 
-    public void setStreet(String street) {
-        this.streetProperty().setValue(street);
-    }
-
-    public String getCreated() {
-        return createdProperty().get();
-    }
-
-    public void setCreated(String created) {
-        this.createdProperty().setValue(created);
+    public void setDescription(String description) {
+        this.descriptionProperty().setValue(description);
     }
 
     public LongProperty idProperty() {
         return id;
     }
 
-    public StringProperty givenNameProperty() {
-        return givenName;
+    public StringProperty nameProperty() {
+        return name;
     }
 
-    public StringProperty familyNameProperty() {
-        return familyName;
+    public StringProperty typeProperty() {
+        return type;
     }
 
-    public StringProperty nicknameProperty() {
-        return nickname;
+    public StringProperty genreProperty() {
+        return genre;
     }
 
-    public StringProperty emailProperty() {
-        return email;
+    public StringProperty countryProperty() {
+        return country;
     }
 
-    public StringProperty cityProperty() {
-        return city;
+    public StringProperty yearProperty() {
+        return year;
     }
 
-    public StringProperty houseNumberProperty() {
-        return houseNumber;
+    public StringProperty lenghtProperty() {
+        return lenght;
     }
 
-    public StringProperty streetProperty() {
-        return street;
-    }
-
-    public StringProperty createdProperty() {
-        return created;
+    public StringProperty descriptionProperty() {
+        return description;
     }
 
 

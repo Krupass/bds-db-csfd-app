@@ -4,72 +4,70 @@ import java.util.Arrays;
 
 public class TitleCreateView {
 
-    private String email;
-    private String firstName;
-    private String nickname;
-    private String surname;
-    private char[] pwd;
-    private String address;
+    private String name;
+    private String type;
+    private String country;
+    private String year;
+    private String lenght;
+    private String description;
 
-    public String getEmail() {
-        return email;
+    public String getName() {
+        return name;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getType() {
+        return type;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public String getNickname() {
-        return nickname;
+    public String getCountry() {
+        return country;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setCountry(String country) {
+        this.country = country;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getYear() {
+        return year;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setYear(String year) {
+        this.year = year;
     }
 
-    public char[] getPwd() {
-        return pwd;
+    public String getLenght() {
+        return lenght;
     }
 
-    public void setPwd(char[] pwd) {
-        this.pwd = pwd;
+    public void setLenght(String lenght) {
+        this.lenght = lenght;
     }
 
-    public String getAddress(){
-        return address;
+    public String getDescription() {
+        return description;
     }
 
-    public void setAddress(String address){
-        if(address == null || address == ""){
-            address = "NULL";
-        }
-        this.address = address;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
     public String toString() {
         return "TitleCreateView{" +
-                "email='" + email + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", nickname='" + nickname + '\'' +
-                ", surname='" + surname + '\'' +
-                ", pwd=" + Arrays.toString(pwd) +
+                "name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", country='" + country + '\'' +
+                ", year='" + year + '\'' +
+                ", lenght='" + lenght + '\'' +
+                ", description='" + description +
                 '}';
     }
 }

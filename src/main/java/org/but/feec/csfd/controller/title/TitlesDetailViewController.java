@@ -1,6 +1,7 @@
 package org.but.feec.csfd.controller.title;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.but.feec.csfd.api.title.TitleDetailView;
@@ -15,28 +16,25 @@ public class TitlesDetailViewController {
     private TextField idTextField;
 
     @FXML
-    private TextField firstNameTextField;
+    private TextField nameTextField;
 
     @FXML
-    private TextField lastNameTextField;
+    private TextField typeTextField;
 
     @FXML
-    private TextField nicknameTextField;
+    private TextField genreTextField;
 
     @FXML
-    private TextField emailTextField;
+    private TextField countryTextField;
 
     @FXML
-    private TextField cityTextField;
+    private TextField yearTextField;
 
     @FXML
-    private TextField streetTextField;
+    private TextField lenghtTextField;
 
     @FXML
-    private TextField houseNumberTextField;
-
-    @FXML
-    private TextField createdTextField;
+    private TextArea descriptionTextField;
 
     // used to reference the stage and to get passed data through it
     public Stage stage;
@@ -48,14 +46,13 @@ public class TitlesDetailViewController {
     @FXML
     public void initialize() {
         idTextField.setEditable(false);
-        firstNameTextField.setEditable(false);
-        lastNameTextField.setEditable(false);
-        nicknameTextField.setEditable(false);
-        emailTextField.setEditable(false);
-        cityTextField.setEditable(false);
-        streetTextField.setEditable(false);
-        houseNumberTextField.setEditable(false);
-        createdTextField.setEditable(false);
+        nameTextField.setEditable(false);
+        typeTextField.setEditable(false);
+        genreTextField.setEditable(false);
+        countryTextField.setEditable(false);
+        yearTextField.setEditable(false);
+        lenghtTextField.setEditable(false);
+        descriptionTextField.setEditable(false);
 
         loadTitlesData();
 
@@ -67,14 +64,13 @@ public class TitlesDetailViewController {
         if (stage.getUserData() instanceof TitleDetailView) {
             TitleDetailView titleBasicView = (TitleDetailView) stage.getUserData();
             idTextField.setText(String.valueOf(titleBasicView.getId()));
-            firstNameTextField.setText(titleBasicView.getGivenName());
-            lastNameTextField.setText(titleBasicView.getFamilyName());
-            nicknameTextField.setText(titleBasicView.getNickname());
-            emailTextField.setText(titleBasicView.getEmail());
-            cityTextField.setText(titleBasicView.getCity());
-            streetTextField.setText(titleBasicView.getStreet());
-            houseNumberTextField.setText(titleBasicView.gethouseNumber());
-            createdTextField.setText(titleBasicView.getCreated());
+            nameTextField.setText(titleBasicView.getName());
+            typeTextField.setText(titleBasicView.getType());
+            genreTextField.setText(titleBasicView.getGenre());
+            countryTextField.setText(titleBasicView.getCountry());
+            yearTextField.setText(titleBasicView.getYear());
+            lenghtTextField.setText(titleBasicView.getLenght());
+            descriptionTextField.setText(titleBasicView.getDescription());
         }
     }
 

@@ -32,10 +32,13 @@ public class TitleRepository {
     public TitleDetailView findTitleDetailedView(Long titleId) {
         try (Connection connection = DataSourceConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
-                     "SELECT id_user, first_name, surname, nick, email, city, street_name, house_number, user_created" +
-                             " FROM public.user u" +
-                             " LEFT JOIN address a ON u.id_address = a.id_address" +
-                             " WHERE u.id_user = ? ORDER BY u.id_user")
+                     "SELECT t.id_title, t.name, p.type_name, n.genre_name, c.country_name, t.year, t.lenght, t.description" +
+                             " FROM titles t" +
+                             " LEFT JOIN country c ON t.id_country = c.id_country" +
+                             " LEFT JOIN type p ON t.id_type = p.id_type" +
+                             " LEFT JOIN genre g ON t.id_title = g.id_title" +
+                             " JOIN genre_name n ON g.id_genre_name = n.id_genre_name" +
+                             " WHERE t.id_title = ? ORDER BY t.id_title")
         ) {
             preparedStatement.setLong(1, titleId);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -73,18 +76,17 @@ public class TitleRepository {
     }
 
     public void createTitle(TitleCreateView titleCreateView) {
-        if(titleCreateView.getAddress() != "NULL"){
-            String insertTitleSQL = "INSERT INTO public.user (id_user, first_name, surname, nick, email, password, user_created, id_address) VALUES (DEFAULT,?,?,?,?,?, CURRENT_TIMESTAMP, ?)";
+            String insertTitleSQL = "INSERT INTO titles (id_title, id_type, id_country, name, year, lenght, description) VALUES (DEFAULT,?,?,?,?,?,?)";
             try (Connection connection = DataSourceConfig.getConnection();
                  // would be beneficial if I will return the created entity back
                  PreparedStatement preparedStatement = connection.prepareStatement(insertTitleSQL, Statement.RETURN_GENERATED_KEYS)) {
                 // set prepared statement variables
-                preparedStatement.setString(4, titleCreateView.getEmail());
-                preparedStatement.setString(1, titleCreateView.getFirstName());
-                preparedStatement.setString(3, titleCreateView.getNickname());
-                preparedStatement.setString(5, String.valueOf(titleCreateView.getPwd()));
-                preparedStatement.setString(2, titleCreateView.getSurname());
-                preparedStatement.setInt(6, Integer.parseInt(titleCreateView.getAddress()));
+                preparedStatement.setString(1, titleCreateView.getType());
+                preparedStatement.setString(2, titleCreateView.getCountry());
+                preparedStatement.setString(3, titleCreateView.getName());
+                preparedStatement.setString(4, titleCreateView.getYear());
+                preparedStatement.setString(5, titleCreateView.getLenght());
+                preparedStatement.setString(6, titleCreateView.getDescription());
 
                 int affectedRows = preparedStatement.executeUpdate();
 
@@ -94,33 +96,11 @@ public class TitleRepository {
             } catch (SQLException e) {
                 throw new DataAccessException("Creating title failed operation on the database failed.");
             }
-        }
-        else{
-            String insertTitleSQL = "INSERT INTO public.user (id_user, first_name, surname, nick, email, password, user_created, id_address) VALUES (DEFAULT,?,?,?,?,?, CURRENT_TIMESTAMP, NULL)";
-            try (Connection connection = DataSourceConfig.getConnection();
-                 // would be beneficial if I will return the created entity back
-                 PreparedStatement preparedStatement = connection.prepareStatement(insertTitleSQL, Statement.RETURN_GENERATED_KEYS)) {
-                // set prepared statement variables
-                preparedStatement.setString(4, titleCreateView.getEmail());
-                preparedStatement.setString(1, titleCreateView.getFirstName());
-                preparedStatement.setString(3, titleCreateView.getNickname());
-                preparedStatement.setString(5, String.valueOf(titleCreateView.getPwd()));
-                preparedStatement.setString(2, titleCreateView.getSurname());
-
-                int affectedRows = preparedStatement.executeUpdate();
-
-                if (affectedRows == 0) {
-                    throw new DataAccessException("Creating title failed, no rows affected.");
-                }
-            } catch (SQLException e) {
-                throw new DataAccessException("Creating title failed operation on the database failed.");
-            }
-        }
     }
 
     public void deleteTitle(TitleDeleteView titlesDeleteView){
-        String deleteTitleSQL = "DELETE FROM public.user u WHERE u.id_user = ?";
-        String checkIfExists = "SELECT email FROM public.user u WHERE u.id_user = ? ORDER BY u.id_user";
+        String deleteTitleSQL = "DELETE FROM titles t WHERE t.id_title = ?";
+        String checkIfExists = "SELECT id_title FROM titles t WHERE t.id_title = ? ORDER BY t.id_title";
         try (Connection connection = DataSourceConfig.getConnection();
              // would be beneficial if I will return the created entity back
              PreparedStatement preparedStatement = connection.prepareStatement(deleteTitleSQL, Statement.RETURN_GENERATED_KEYS)) {
@@ -157,19 +137,18 @@ public class TitleRepository {
     }
 
     public void editTitle(TitleEditView titleEditView) {
-        if(titleEditView.getTitle() != "NULL"){
-            String insertTitleSQL = "UPDATE public.user u SET email = ?, first_name = ?, nick = ?, surname = ?, id_address = ? WHERE u.id_user = ?";
-            String checkIfExists = "SELECT email FROM public.user u WHERE u.id_user = ? ORDER BY u.id_user";
+            String insertTitleSQL = "UPDATE titles t SET name = ?, id_type = ?, year = ?, lenght = ?, id_country = ? WHERE t.id_title = ?";
+            String checkIfExists = "SELECT id_title FROM titles t WHERE t.id_title = ? ORDER BY t.id_title";
             try (Connection connection = DataSourceConfig.getConnection();
                  // would be beneficial if I will return the created entity back
                  PreparedStatement preparedStatement = connection.prepareStatement(insertTitleSQL, Statement.RETURN_GENERATED_KEYS)) {
                 // set prepared statement variables
-                /*preparedStatement.setString(1, titleEditView.getEmail());
-                preparedStatement.setString(2, titleEditView.getFirstName());
-                preparedStatement.setString(3, titleEditView.getNickname());
-                preparedStatement.setString(4, titleEditView.getSurname());
-                preparedStatement.setInt(5, Integer.parseInt(titleEditView.getAddress()));
-                preparedStatement.setLong(6, titleEditView.getId());*/
+                preparedStatement.setString(1, titleEditView.getTitle());
+                preparedStatement.setString(2, titleEditView.getType());
+                preparedStatement.setString(3, titleEditView.getYear());
+                preparedStatement.setString(4, titleEditView.getLenght());
+                preparedStatement.setString(5, titleEditView.getCountry());
+                preparedStatement.setLong(6, titleEditView.getId());
 
                 try {
                     // TODO set connection autocommit to false
@@ -198,48 +177,6 @@ public class TitleRepository {
             } catch (SQLException e) {
                 throw new DataAccessException("Creating title failed operation on the database failed.");
             }
-        }
-        else{
-            String insertTitleSQL = "UPDATE public.user u SET email = ?, first_name = ?, nick = ?, surname = ?, id_address = NULL WHERE u.id_user = ?";
-            String checkIfExists = "SELECT email FROM public.user u WHERE u.id_user = ? ORDER BY u.id_user";
-            try (Connection connection = DataSourceConfig.getConnection();
-                 // would be beneficial if I will return the created entity back
-                 PreparedStatement preparedStatement = connection.prepareStatement(insertTitleSQL, Statement.RETURN_GENERATED_KEYS)) {
-                // set prepared statement variables
-                /*preparedStatement.setString(1, titleEditView.getEmail());
-                preparedStatement.setString(2, titleEditView.getFirstName());
-                preparedStatement.setString(3, titleEditView.getNickname());
-                preparedStatement.setString(4, titleEditView.getSurname());
-                preparedStatement.setLong(5, titleEditView.getId());*/
-
-                try {
-                    // TODO set connection autocommit to false
-                    /* HERE */
-                    try (PreparedStatement ps = connection.prepareStatement(checkIfExists, Statement.RETURN_GENERATED_KEYS)) {
-                        ps.setLong(1, titleEditView.getId());
-                        ps.execute();
-                    } catch (SQLException e) {
-                        throw new DataAccessException("This title for edit do not exists.");
-                    }
-
-                    int affectedRows = preparedStatement.executeUpdate();
-
-                    if (affectedRows == 0) {
-                        throw new DataAccessException("Creating title failed, no rows affected.");
-                    }
-                    // TODO commit the transaction (both queries were performed)
-                    /* HERE */
-                } catch (SQLException e) {
-                    // TODO rollback the transaction if something wrong occurs
-                    /* HERE */
-                } finally {
-                    // TODO set connection autocommit back to true
-                    /* HERE */
-                }
-            } catch (SQLException e) {
-                throw new DataAccessException("Creating title failed operation on the database failed.");
-            }
-        }
     }
 
 
@@ -269,14 +206,13 @@ public class TitleRepository {
     private TitleDetailView mapToTitleDetailView(ResultSet rs) throws SQLException {
         TitleDetailView titleDetailView = new TitleDetailView();
         titleDetailView.setId(rs.getLong("id_title"));
-        titleDetailView.setGivenName(rs.getString("first_name"));
-        titleDetailView.setFamilyName(rs.getString("surname"));
-        titleDetailView.setNickname(rs.getString("nick"));
-        titleDetailView.setEmail(rs.getString("email"));
-        titleDetailView.setCity(rs.getString("city"));
-        titleDetailView.setStreet(rs.getString("street_name"));
-        titleDetailView.sethouseNumber(rs.getString("house_number"));
-        titleDetailView.setCreated(rs.getString("user_created"));
+        titleDetailView.setName(rs.getString("name"));
+        titleDetailView.setType(rs.getString("type_name"));
+        titleDetailView.setGenre(rs.getString("genre_name"));
+        titleDetailView.setCountry(rs.getString("country_name"));
+        titleDetailView.setYear(rs.getString("year"));
+        titleDetailView.setLenght(rs.getString("lenght"));
+        titleDetailView.setDescription(rs.getString("description"));
         return titleDetailView;
     }
 

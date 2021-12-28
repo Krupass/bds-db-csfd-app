@@ -28,22 +28,22 @@ public class TitleCreateController {
     public Button newTitleCreate;
 
     @FXML
-    private TextField newTitleFirstName;
+    private TextField newTitleName;
 
     @FXML
-    private TextField newTitleLastName;
+    private TextField newTitleType;
 
     @FXML
-    private TextField newTitleNickname;
+    private TextField newTitleCountry;
 
     @FXML
-    private TextField newTitlePwd;
+    private TextField newTitleYear;
 
     @FXML
-    private TextField newTitleEmail;
+    private TextField newTitleLenght;
 
     @FXML
-    private TextField newTitleAddress;
+    private TextField newTitleDescription;
 
     private TitleService titleService;
     private TitleRepository titleRepository;
@@ -55,11 +55,12 @@ public class TitleCreateController {
         titleService = new TitleService(titleRepository);
 
         validation = new ValidationSupport();
-        validation.registerValidator(newTitleEmail, Validator.createEmptyValidator("The email must not be empty."));
-        validation.registerValidator(newTitleFirstName, Validator.createEmptyValidator("The first name must not be empty."));
-        validation.registerValidator(newTitleLastName, Validator.createEmptyValidator("The last name must not be empty."));
-        validation.registerValidator(newTitleNickname, Validator.createEmptyValidator("The nickname must not be empty."));
-        validation.registerValidator(newTitlePwd, Validator.createEmptyValidator("The password must not be empty."));
+        validation.registerValidator(newTitleName, Validator.createEmptyValidator("The name must not be empty."));
+        validation.registerValidator(newTitleType, Validator.createEmptyValidator("The type must not be empty."));
+        validation.registerValidator(newTitleCountry, Validator.createEmptyValidator("The country must not be empty."));
+        validation.registerValidator(newTitleYear, Validator.createEmptyValidator("The year must not be empty."));
+        validation.registerValidator(newTitleLenght, Validator.createEmptyValidator("The lenght must not be empty."));
+        validation.registerValidator(newTitleDescription, Validator.createEmptyValidator("The description must not be empty."));
 
         newTitleCreate.disableProperty().bind(validation.invalidProperty());
 
@@ -69,20 +70,20 @@ public class TitleCreateController {
     @FXML
     void handleCreateNewTitle(ActionEvent event) {
         // can be written easier, its just for better explanation here on so many lines
-        String firstName = newTitleFirstName.getText();
-        String lastName = newTitleLastName.getText();
-        String nickname = newTitleNickname.getText();
-        String password = newTitlePwd.getText();
-        String email = newTitleEmail.getText();
-        String address = newTitleAddress.getText();
+        String name = newTitleName.getText();
+        String type = newTitleType.getText();
+        String country = newTitleCountry.getText();
+        String year = newTitleYear.getText();
+        String lenght = newTitleLenght.getText();
+        String description = newTitleDescription.getText();
 
         TitleCreateView titleCreateView = new TitleCreateView();
-        titleCreateView.setFirstName(firstName);
-        titleCreateView.setSurname(lastName);
-        titleCreateView.setNickname(nickname);
-        titleCreateView.setPwd(password.toCharArray());
-        titleCreateView.setEmail(email);
-        titleCreateView.setAddress(address);
+        titleCreateView.setName(name);
+        titleCreateView.setType(type);
+        titleCreateView.setCountry(country);
+        titleCreateView.setYear(year);
+        titleCreateView.setLenght(lenght);
+        titleCreateView.setDescription(description);
 
         titleService.createTitle(titleCreateView);
 
