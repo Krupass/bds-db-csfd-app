@@ -78,7 +78,7 @@ public class TitlesController {
         initializeTableViewSelection();
         loadIcons();
 
-        logger.info("TitlessController initialized");
+        logger.info("TitlesController initialized");
     }
 
     private void initializeTableViewSelection() {
@@ -209,6 +209,17 @@ public class TitlesController {
     public void handlePersonsButton(ActionEvent actionEvent) throws IOException{
 
         Parent tableViewParent = FXMLLoader.load(App.class.getResource("fxml/Persons.fxml"));
+        Scene tableViewScene = new Scene(tableViewParent);
+
+        Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+
+        window.setScene(tableViewScene);
+        window.show();
+    }
+
+    public void handleDummyButton(ActionEvent actionEvent) throws IOException{
+
+        Parent tableViewParent = FXMLLoader.load(App.class.getResource("fxml/DummyTable.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
 
         Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();

@@ -218,6 +218,17 @@ public class PersonsController {
         window.show();
     }
 
+    public void handleDummyButton(ActionEvent actionEvent) throws IOException{
+
+        Parent tableViewParent = FXMLLoader.load(App.class.getResource("fxml/DummyTable.fxml"));
+        Scene tableViewScene = new Scene(tableViewParent);
+
+        Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+
+        window.setScene(tableViewScene);
+        window.show();
+    }
+
     public void handleTitlesButton(ActionEvent actionEvent) throws IOException{
 
         Parent tableViewParent = FXMLLoader.load(App.class.getResource("fxml/Titles.fxml"));

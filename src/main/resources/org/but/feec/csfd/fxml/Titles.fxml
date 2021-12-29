@@ -60,7 +60,7 @@
                         <Button fx:id="addTitleButton" layoutX="25.0" layoutY="490.0" mnemonicParsing="false" onAction="#handleAddTitleButton" text="Add title" />
                         <Button fx:id="refreshButton" layoutX="125.0" layoutY="490.0" mnemonicParsing="false" onAction="#handleRefreshButton" text="Refresh" />
                         <Button fx:id="usersButton" layoutX="625.0" layoutY="490.0" mnemonicParsing="false" onAction="#handleUsersButton" prefHeight="25.0" prefWidth="145.0" text="&lt;&lt; Users table" />
-                        <Button fx:id="personsButton" layoutX="785.0" layoutY="490.0" mnemonicParsing="false" onAction="#handlePersonsButton" prefHeight="25.0" prefWidth="145.0" text="Persons table &gt;&gt;" />
+                        <Button fx:id="dummyButton" layoutX="785.0" layoutY="490.0" mnemonicParsing="false" onAction="#handleDummyButton" prefHeight="25.0" prefWidth="145.0" text="Dummy table &gt;&gt;" />
               </children>
             </AnchorPane>
           </content>
