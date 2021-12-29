@@ -4,10 +4,10 @@ public class UserEditView {
 
     private Long id;
     private String firstName;
-    private String nickname;
     private String surname;
+    private String nickname;
     private String email;
-    private String address;
+    private Long address;
 
     public Long getId() {
         return id;
@@ -49,13 +49,13 @@ public class UserEditView {
         this.surname = surname;
     }
 
-    public String getAddress(){
+    public Long getAddress(){
         return address;
     }
 
-    public void setAddress(String address){
-        if(address == null || address == ""){
-            address = "NULL";
+    public void setAddress(Long address){
+        if(address == null){
+            address = null;
         }
         this.address = address;
     }

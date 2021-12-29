@@ -1,13 +1,14 @@
 package org.but.feec.csfd.api;
 
 import java.util.Arrays;
+import java.util.Date;
 
 public class PersonCreateView {
 
     private String firstName;
     private String surname;
-    private String birthday;
-    private String address;
+    private java.sql.Date birthday;
+    private Long address;
 
     public String getFirstName() {
         return firstName;
@@ -25,21 +26,21 @@ public class PersonCreateView {
         this.surname = surname;
     }
 
-    public String getBirthday() {
+    public java.sql.Date getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(String birthday) {
+    public void setBirthday(java.sql.Date birthday) {
         this.birthday = birthday;
     }
 
-    public String getAddress(){
+    public Long getAddress(){
         return address;
     }
 
-    public void setAddress(String address){
-        if(address == null || address == ""){
-            address = "NULL";
+    public void setAddress(Long address){
+        if(address == null || address == Long.valueOf("")|| address == Long.valueOf("null")|| address == Long.valueOf("NULL")){
+            address = null;
         }
         this.address = address;
     }

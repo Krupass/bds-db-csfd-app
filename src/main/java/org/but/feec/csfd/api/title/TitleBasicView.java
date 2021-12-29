@@ -9,9 +9,12 @@ public class TitleBasicView {
     private LongProperty id = new SimpleLongProperty();
     private StringProperty title = new SimpleStringProperty();
     private StringProperty type = new SimpleStringProperty();
+    private StringProperty typeId = new SimpleStringProperty();
     private StringProperty year = new SimpleStringProperty();
     private StringProperty lenght = new SimpleStringProperty();
     private StringProperty country = new SimpleStringProperty();
+    private StringProperty countryId = new SimpleStringProperty();
+    private StringProperty description = new SimpleStringProperty();
 
     public Long getId() {
         return idProperty().get();
@@ -35,6 +38,14 @@ public class TitleBasicView {
 
     public void setType(String type){
         this.typeProperty().setValue(type);
+    }
+
+    public String getTypeId(){
+        return typeIdProperty().get();
+    }
+
+    public void setTypeId(String typeId){
+        this.typeIdProperty().setValue(typeId);
     }
 
     public String getYear(){
@@ -61,6 +72,22 @@ public class TitleBasicView {
         this.countryProperty().setValue(country);
     }
 
+    public String getCountryId(){
+        return countryIdProperty().get();
+    }
+
+    public void setCountryId(String countryId){
+        this.countryIdProperty().setValue(countryId);
+    }
+
+    public String getDescription(){
+        return descriptionProperty().get();
+    }
+
+    public void setDescription(String description){
+        this.descriptionProperty().setValue(description);
+    }
+
     public LongProperty idProperty() {
         return id;
     }
@@ -73,6 +100,10 @@ public class TitleBasicView {
         return type;
     }
 
+    public StringProperty typeIdProperty() {
+        return typeId;
+    }
+
     public StringProperty yearProperty() {
         return year;
     }
@@ -83,6 +114,14 @@ public class TitleBasicView {
 
     public StringProperty countryProperty() {
         return country;
+    }
+
+    public StringProperty countryIdProperty() {
+        return countryId;
+    }
+
+    public StringProperty descriptionProperty() {
+        return description;
     }
 
 }

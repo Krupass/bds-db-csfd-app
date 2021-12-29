@@ -73,18 +73,18 @@ public class UserRepository {
     }
 
     public void createUser(UserCreateView userCreateView) {
-        if(userCreateView.getAddress() != "NULL"){
+        if(userCreateView.getAddress() != null){
             String insertUserSQL = "INSERT INTO public.user (id_user, first_name, surname, nick, email, password, user_created, id_address) VALUES (DEFAULT,?,?,?,?,?, CURRENT_TIMESTAMP, ?)";
             try (Connection connection = DataSourceConfig.getConnection();
                  // would be beneficial if I will return the created entity back
                  PreparedStatement preparedStatement = connection.prepareStatement(insertUserSQL, Statement.RETURN_GENERATED_KEYS)) {
                 // set prepared statement variables
-                preparedStatement.setString(4, userCreateView.getEmail());
                 preparedStatement.setString(1, userCreateView.getFirstName());
-                preparedStatement.setString(3, userCreateView.getNickname());
-                preparedStatement.setString(5, String.valueOf(userCreateView.getPwd()));
                 preparedStatement.setString(2, userCreateView.getSurname());
-                preparedStatement.setInt(6, Integer.parseInt(userCreateView.getAddress()));
+                preparedStatement.setString(3, userCreateView.getNickname());
+                preparedStatement.setString(4, userCreateView.getEmail());
+                preparedStatement.setString(5, String.valueOf(userCreateView.getPwd()));
+                preparedStatement.setLong(6, userCreateView.getAddress());
 
                 int affectedRows = preparedStatement.executeUpdate();
 
@@ -101,11 +101,11 @@ public class UserRepository {
                  // would be beneficial if I will return the created entity back
                  PreparedStatement preparedStatement = connection.prepareStatement(insertUserSQL, Statement.RETURN_GENERATED_KEYS)) {
                 // set prepared statement variables
-                preparedStatement.setString(4, userCreateView.getEmail());
                 preparedStatement.setString(1, userCreateView.getFirstName());
-                preparedStatement.setString(3, userCreateView.getNickname());
-                preparedStatement.setString(5, String.valueOf(userCreateView.getPwd()));
                 preparedStatement.setString(2, userCreateView.getSurname());
+                preparedStatement.setString(3, userCreateView.getNickname());
+                preparedStatement.setString(4, userCreateView.getEmail());
+                preparedStatement.setString(5, String.valueOf(userCreateView.getPwd()));
 
                 int affectedRows = preparedStatement.executeUpdate();
 
@@ -157,7 +157,7 @@ public class UserRepository {
     }
 
     public void editUser(UserEditView userEditView) {
-        if(userEditView.getAddress() != "NULL"){
+        if(userEditView.getAddress() != null){
             String insertUserSQL = "UPDATE public.user u SET email = ?, first_name = ?, nick = ?, surname = ?, id_address = ? WHERE u.id_user = ?";
             String checkIfExists = "SELECT email FROM public.user u WHERE u.id_user = ? ORDER BY u.id_user";
             try (Connection connection = DataSourceConfig.getConnection();
@@ -168,7 +168,7 @@ public class UserRepository {
                 preparedStatement.setString(2, userEditView.getFirstName());
                 preparedStatement.setString(3, userEditView.getNickname());
                 preparedStatement.setString(4, userEditView.getSurname());
-                preparedStatement.setInt(5, Integer.parseInt(userEditView.getAddress()));
+                preparedStatement.setLong(5, userEditView.getAddress());
                 preparedStatement.setLong(6, userEditView.getId());
 
                 try {

@@ -62,15 +62,15 @@ public class TitlesDetailViewController {
     private void loadTitlesData() {
         Stage stage = this.stage;
         if (stage.getUserData() instanceof TitleDetailView) {
-            TitleDetailView titleBasicView = (TitleDetailView) stage.getUserData();
-            idTextField.setText(String.valueOf(titleBasicView.getId()));
-            nameTextField.setText(titleBasicView.getName());
-            typeTextField.setText(titleBasicView.getType());
-            genreTextField.setText(titleBasicView.getGenre());
-            countryTextField.setText(titleBasicView.getCountry());
-            yearTextField.setText(titleBasicView.getYear());
-            lenghtTextField.setText(titleBasicView.getLenght());
-            descriptionTextField.setText(titleBasicView.getDescription());
+            TitleDetailView personBasicView = (TitleDetailView) stage.getUserData();
+            idTextField.setText(String.valueOf(personBasicView.getId()));
+            nameTextField.setText(personBasicView.getName());
+            typeTextField.setText(personBasicView.getType());
+            genreTextField.setText(personBasicView.getGenre());
+            countryTextField.setText(personBasicView.getCountry());
+            yearTextField.setText(personBasicView.getYear());
+            lenghtTextField.setText(personBasicView.getLenght());
+            descriptionTextField.setText(personBasicView.getDescription());
         }
     }
 

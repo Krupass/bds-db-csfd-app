@@ -5,10 +5,10 @@ import java.util.Arrays;
 public class TitleCreateView {
 
     private String name;
-    private String type;
-    private String country;
-    private String year;
-    private String lenght;
+    private Long type;
+    private Long country;
+    private java.sql.Date year;
+    private Long lenght;
     private String description;
 
     public String getName() {
@@ -19,35 +19,35 @@ public class TitleCreateView {
         this.name = name;
     }
 
-    public String getType() {
+    public Long getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(Long type) {
         this.type = type;
     }
 
-    public String getCountry() {
+    public Long getCountry() {
         return country;
     }
 
-    public void setCountry(String country) {
+    public void setCountry(Long country) {
         this.country = country;
     }
 
-    public String getYear() {
+    public java.sql.Date getYear() {
         return year;
     }
 
-    public void setYear(String year) {
+    public void setYear(java.sql.Date year) {
         this.year = year;
     }
 
-    public String getLenght() {
+    public Long getLenght() {
         return lenght;
     }
 
-    public void setLenght(String lenght) {
+    public void setLenght(Long lenght) {
         this.lenght = lenght;
     }
 

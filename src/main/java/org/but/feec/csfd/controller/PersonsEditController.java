@@ -20,6 +20,7 @@ import org.controlsfx.validation.Validator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.sql.Date;
 import java.util.Optional;
 
 
@@ -92,8 +93,12 @@ public class PersonsEditController {
         Long id = Long.valueOf(idTextField.getText());
         String firstName = firstNameTextField.getText();
         String lastName = lastNameTextField.getText();
-        String birthday = birthdayTextField.getText();
-        String address = addressTextField.getText();
+        java.sql.Date birthday = Date.valueOf(birthdayTextField.getText());
+        Long address = Long.valueOf(addressTextField.getText());
+
+        System.out.println(id);
+        System.out.println(firstName);
+        System.out.println(birthday);
 
         PersonEditView personEditView = new PersonEditView();
         personEditView.setId(id);

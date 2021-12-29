@@ -4,10 +4,10 @@ public class TitleEditView {
 
     private Long id;
     private String title;
-    private String type;
-    private String year;
-    private String lenght;
-    private String country;
+    private Long type;
+    private java.sql.Date year;
+    private Long lenght;
+    private Long country;
 
     public Long getId() {
         return id;
@@ -25,35 +25,35 @@ public class TitleEditView {
         this.title = title;
     }
 
-    public String getType(){
+    public Long getType(){
         return type;
     }
 
-    public void setType(String type){
+    public void setType(Long type){
         this.type = type;
     }
 
-    public String getYear(){
+    public java.sql.Date getYear(){
         return year;
     }
 
-    public void setYear(String year){
+    public void setYear(java.sql.Date year){
         this.year = year;
     }
 
-    public String getLenght(){
+    public Long getLenght(){
         return lenght;
     }
 
-    public void setLenght(String lenght){
+    public void setLenght(Long lenght){
         this.lenght = lenght;
     }
 
-    public String getCountry(){
+    public Long getCountry(){
         return country;
     }
 
-    public void setCountry(String country){
+    public void setCountry(Long country){
         this.country = country;
     }
 

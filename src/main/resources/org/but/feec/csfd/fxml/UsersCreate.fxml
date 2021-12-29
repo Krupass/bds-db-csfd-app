@@ -9,60 +9,60 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="452.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.but.feec.csfd.controller.PersonCreateController">
-   <children>
-      <GridPane layoutX="22.0" layoutY="22.0" prefHeight="366.0" prefWidth="549.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="269.39996337890625" minWidth="10.0" prefWidth="100.5999755859375" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="449.4000244140625" minWidth="10.0" prefWidth="449.4000244140625" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+<AnchorPane prefHeight="525.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.but.feec.csfd.controller.user.UserCreateController">
+    <children>
+        <GridPane layoutX="22.0" layoutY="22.0" prefHeight="425.0" prefWidth="549.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="269.39996337890625" minWidth="10.0" prefWidth="100.5999755859375" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="449.4000244140625" minWidth="10.0" prefWidth="449.4000244140625" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Label text="first name">
-               <padding>
-                  <Insets left="5.0" />
-               </padding>
-            </Label>
-            <Label text="last name" GridPane.rowIndex="1">
-               <padding>
-                  <Insets left="5.0" />
-               </padding>
-            </Label>
-            <Label text="nickname" GridPane.rowIndex="2">
-               <padding>
-                  <Insets left="5.0" />
-               </padding>
-            </Label>
+            </rowConstraints>
+            <children>
+                <Label text="first name">
+                    <padding>
+                        <Insets left="5.0" />
+                    </padding>
+                </Label>
+                <Label text="surname" GridPane.rowIndex="1">
+                    <padding>
+                        <Insets left="5.0" />
+                    </padding>
+                </Label>
+                <Label text="nick" GridPane.rowIndex="2">
+                    <padding>
+                        <Insets left="5.0" />
+                    </padding>
+                </Label>
             <Label text="password" GridPane.rowIndex="3">
                <padding>
                   <Insets left="5.0" />
                </padding>
             </Label>
-            <Label text="email" GridPane.rowIndex="4">
-               <padding>
-                  <Insets left="5.0" />
-               </padding>
-            </Label>
+                <Label text="email" GridPane.rowIndex="4">
+                    <padding>
+                        <Insets left="5.0" />
+                    </padding>
+                </Label>
             <Label text="id_address" GridPane.rowIndex="5">
                <padding>
                   <Insets left="5.0" />
                </padding>
             </Label>
-            <TextField fx:id="newPersonFirstName" promptText="type new user first name" GridPane.columnIndex="1" />
-            <TextField fx:id="newPersonLastName" promptText="type new user last name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="newPersonNickname" promptText="type new user nickname" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="newPersonPwd" promptText="type new user password" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField fx:id="newPersonEmail" promptText="type new user email" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <TextField fx:id="newPersonAddress" promptText="type new user id_address" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-         </children>
-      </GridPane>
-      <Button fx:id="newPersonCreatePerson" layoutX="501.0" layoutY="400.0" mnemonicParsing="false" onAction="#handleCreateNewPerson" text="create" />
-   </children>
+                <TextField fx:id="newUserFirstName" promptText="type new user first name" GridPane.columnIndex="1" />
+                <TextField fx:id="newUserSurname" promptText="type new user surname" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextField fx:id="newUserNick" promptText="type new user nick" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="newUserPassword" promptText="type new user password" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <TextField fx:id="newUserEmail" promptText="type new user email" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="newUserAddress" promptText="type new user id_addres" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            </children>
+        </GridPane>
+        <Button fx:id="newUserCreateUser" layoutX="500.0" layoutY="450.0" mnemonicParsing="false" onAction="#handleCreateNewUser" text="create" />
+    </children>
 </AnchorPane>

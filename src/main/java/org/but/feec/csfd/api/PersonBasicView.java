@@ -5,6 +5,8 @@ import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import java.sql.Date;
+
 public class PersonBasicView {
     private LongProperty id = new SimpleLongProperty();
     private StringProperty givenName = new SimpleStringProperty();

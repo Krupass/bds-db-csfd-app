@@ -18,6 +18,9 @@ import org.controlsfx.validation.Validator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Optional;
 
 public class PersonCreateController {
@@ -60,12 +63,12 @@ public class PersonCreateController {
     }
 
     @FXML
-    void handleCreateNewPerson(ActionEvent event) {
+    void handleCreateNewPerson(ActionEvent event) throws ParseException {
         // can be written easier, its just for better explanation here on so many lines
         String firstName = newPersonFirstName.getText();
         String lastName = newPersonLastName.getText();
-        String birthday = newPersonBirthday.getText();
-        String address = newPersonAddress.getText();
+        java.sql.Date birthday = Date.valueOf(newPersonBirthday.getText());
+        Long address = Long.valueOf(newPersonAddress.getText());
 
         PersonCreateView personCreateView = new PersonCreateView();
         personCreateView.setFirstName(firstName);

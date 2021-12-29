@@ -5,8 +5,8 @@ public class PersonEditView {
     private Long id;
     private String firstName;
     private String surname;
-    private String birthday;
-    private String address;
+    private java.sql.Date birthday;
+    private Long address;
 
     public Long getId() {
         return id;
@@ -32,21 +32,21 @@ public class PersonEditView {
         this.surname = surname;
     }
 
-    public String getBirthday() {
+    public java.sql.Date getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(String birthday) {
+    public void setBirthday(java.sql.Date birthday) {
         this.birthday = birthday;
     }
 
-    public String getAddress(){
+    public Long getAddress(){
         return address;
     }
 
-    public void setAddress(String address){
-        if(address == null || address == ""){
-            address = "NULL";
+    public void setAddress(Long address){
+        if(address == null){
+            address = null;
         }
         this.address = address;
     }

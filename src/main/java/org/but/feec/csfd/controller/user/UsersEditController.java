@@ -96,7 +96,10 @@ public class UsersEditController {
         String lastName = lastNameTextField.getText();
         String nickname = nicknameTextField.getText();
         String email = emailTextField.getText();
-        String address = addressTextField.getText();
+        Long address = null;
+        if((addressTextField.getText().compareTo(Long.toString(Long.MIN_VALUE)) >= 0) && (addressTextField.getText().compareTo(Long.toString(Long.MAX_VALUE)) <= 0)){
+            address = Long.valueOf(addressTextField.getText());
+        }
 
         UserEditView userEditView = new UserEditView();
         userEditView.setId(id);

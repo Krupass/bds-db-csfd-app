@@ -60,7 +60,7 @@ public class TitleRepository {
     public List<TitleBasicView> getTitlesBasicView() {
         try (Connection connection = DataSourceConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
-                     "SELECT t.id_title, name, p.type_name, year, lenght, c.country_name" +
+                     "SELECT t.id_title, name, p.type_name, year, lenght, c.country_name, t.description, t.id_type, t.id_country" +
                              " FROM titles t" +
                              " LEFT JOIN type p ON t.id_type = p.id_type" +
                              " LEFT JOIN country c ON t.id_country = c.id_country ORDER BY t.id_title");
@@ -81,11 +81,11 @@ public class TitleRepository {
                  // would be beneficial if I will return the created entity back
                  PreparedStatement preparedStatement = connection.prepareStatement(insertTitleSQL, Statement.RETURN_GENERATED_KEYS)) {
                 // set prepared statement variables
-                preparedStatement.setString(1, titleCreateView.getType());
-                preparedStatement.setString(2, titleCreateView.getCountry());
+                preparedStatement.setLong(1, titleCreateView.getType());
+                preparedStatement.setLong(2, titleCreateView.getCountry());
                 preparedStatement.setString(3, titleCreateView.getName());
-                preparedStatement.setString(4, titleCreateView.getYear());
-                preparedStatement.setString(5, titleCreateView.getLenght());
+                preparedStatement.setDate(4, titleCreateView.getYear());
+                preparedStatement.setLong(5, titleCreateView.getLenght());
                 preparedStatement.setString(6, titleCreateView.getDescription());
 
                 int affectedRows = preparedStatement.executeUpdate();
@@ -144,10 +144,10 @@ public class TitleRepository {
                  PreparedStatement preparedStatement = connection.prepareStatement(insertTitleSQL, Statement.RETURN_GENERATED_KEYS)) {
                 // set prepared statement variables
                 preparedStatement.setString(1, titleEditView.getTitle());
-                preparedStatement.setString(2, titleEditView.getType());
-                preparedStatement.setString(3, titleEditView.getYear());
-                preparedStatement.setString(4, titleEditView.getLenght());
-                preparedStatement.setString(5, titleEditView.getCountry());
+                preparedStatement.setLong(2, titleEditView.getType());
+                preparedStatement.setDate(3, titleEditView.getYear());
+                preparedStatement.setLong(4, titleEditView.getLenght());
+                preparedStatement.setLong(5, titleEditView.getCountry());
                 preparedStatement.setLong(6, titleEditView.getId());
 
                 try {
@@ -197,9 +197,12 @@ public class TitleRepository {
         titleBasicView.setId(rs.getLong("id_title"));
         titleBasicView.setTitle(rs.getString("name"));
         titleBasicView.setType(rs.getString("type_name"));
+        titleBasicView.setTypeId(rs.getString("id_type"));
         titleBasicView.setYear(rs.getString("year"));
         titleBasicView.setLenght(rs.getString("lenght"));
         titleBasicView.setCountry(rs.getString("country_name"));
+        titleBasicView.setCountryId(rs.getString("id_country"));
+        titleBasicView.setDescription(rs.getString("description"));
         return titleBasicView;
     }
 

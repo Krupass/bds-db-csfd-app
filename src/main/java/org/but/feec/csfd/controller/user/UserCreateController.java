@@ -25,19 +25,19 @@ public class UserCreateController {
     private static final Logger logger = LoggerFactory.getLogger(org.but.feec.csfd.controller.user.UserCreateController.class);
 
     @FXML
-    public Button newUserCreate;
+    public Button newUserCreateUser;
 
     @FXML
     private TextField newUserFirstName;
 
     @FXML
-    private TextField newUserLastName;
+    private TextField newUserSurname;
 
     @FXML
-    private TextField newUserNickname;
+    private TextField newUserNick;
 
     @FXML
-    private TextField newUserPwd;
+    private TextField newUserPassword;
 
     @FXML
     private TextField newUserEmail;
@@ -55,13 +55,13 @@ public class UserCreateController {
         userService = new UserService(userRepository);
 
         validation = new ValidationSupport();
-        validation.registerValidator(newUserEmail, Validator.createEmptyValidator("The email must not be empty."));
         validation.registerValidator(newUserFirstName, Validator.createEmptyValidator("The first name must not be empty."));
-        validation.registerValidator(newUserLastName, Validator.createEmptyValidator("The last name must not be empty."));
-        validation.registerValidator(newUserNickname, Validator.createEmptyValidator("The nickname must not be empty."));
-        validation.registerValidator(newUserPwd, Validator.createEmptyValidator("The password must not be empty."));
+        validation.registerValidator(newUserSurname, Validator.createEmptyValidator("The surname must not be empty."));
+        validation.registerValidator(newUserNick, Validator.createEmptyValidator("The nickname must not be empty."));
+        validation.registerValidator(newUserPassword, Validator.createEmptyValidator("The password must not be empty."));
+        validation.registerValidator(newUserEmail, Validator.createEmptyValidator("The email must not be empty."));
 
-        newUserCreate.disableProperty().bind(validation.invalidProperty());
+        newUserCreateUser.disableProperty().bind(validation.invalidProperty());
 
         logger.info("UserCreateController initialized");
     }
@@ -70,16 +70,16 @@ public class UserCreateController {
     void handleCreateNewUser(ActionEvent event) {
         // can be written easier, its just for better explanation here on so many lines
         String firstName = newUserFirstName.getText();
-        String lastName = newUserLastName.getText();
-        String nickname = newUserNickname.getText();
-        String password = newUserPwd.getText();
+        String surname = newUserSurname.getText();
+        String nick = newUserNick.getText();
+        String password = newUserPassword.getText();
         String email = newUserEmail.getText();
-        String address = newUserAddress.getText();
+        Long address = Long.valueOf(newUserAddress.getText());
 
         UserCreateView userCreateView = new UserCreateView();
         userCreateView.setFirstName(firstName);
-        userCreateView.setSurname(lastName);
-        userCreateView.setNickname(nickname);
+        userCreateView.setSurname(surname);
+        userCreateView.setNickname(nick);
         userCreateView.setPwd(password.toCharArray());
         userCreateView.setEmail(email);
         userCreateView.setAddress(address);

@@ -20,6 +20,7 @@ import org.controlsfx.validation.Validator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.sql.Date;
 import java.util.Optional;
 
 public class TitlesEditController {
@@ -40,6 +41,8 @@ public class TitlesEditController {
     private TextField lenghtTextField;
     @FXML
     private TextField countryTextField;
+    @FXML
+    private TextField descriptionTextField;
 
     private TitleService titleService;
     private TitleRepository titleRepository;
@@ -65,6 +68,7 @@ public class TitlesEditController {
         validation.registerValidator(yearTextField, Validator.createEmptyValidator("The year must not be empty."));
         validation.registerValidator(lenghtTextField, Validator.createEmptyValidator("The lenght must not be empty."));
         validation.registerValidator(countryTextField, Validator.createEmptyValidator("The country must not be empty."));
+        validation.registerValidator(descriptionTextField, Validator.createEmptyValidator("The description must not be empty."));
 
         editTitleButton.disableProperty().bind(validation.invalidProperty());
 
@@ -82,10 +86,11 @@ public class TitlesEditController {
             TitleBasicView titleBasicView = (TitleBasicView) stage.getUserData();
             idTextField.setText(String.valueOf(titleBasicView.getId()));
             titleTextField.setText(titleBasicView.getTitle());
-            typeTextField.setText(titleBasicView.getType());
+            typeTextField.setText(String.valueOf(titleBasicView.getTypeId()));
             yearTextField.setText(titleBasicView.getYear());
-            lenghtTextField.setText(titleBasicView.getLenght());
-            countryTextField.setText(titleBasicView.getCountry());
+            lenghtTextField.setText(String.valueOf(titleBasicView.getLenght()));
+            countryTextField.setText(String.valueOf(titleBasicView.getCountryId()));
+            descriptionTextField.setText(titleBasicView.getDescription());
         }
     }
 
@@ -94,10 +99,10 @@ public class TitlesEditController {
         // can be written easier, its just for better explanation here on so many lines
         Long id = Long.valueOf(idTextField.getText());
         String title = titleTextField.getText();
-        String type = typeTextField.getText();
-        String year = yearTextField.getText();
-        String lenght = lenghtTextField.getText();
-        String country = countryTextField.getText();
+        Long type = Long.valueOf(typeTextField.getText());
+        java.sql.Date year = Date.valueOf(yearTextField.getText());
+        Long lenght = Long.valueOf(lenghtTextField.getText());
+        Long country = Long.valueOf(countryTextField.getText());
 
         TitleEditView titleEditView = new TitleEditView();
         titleEditView.setId(id);

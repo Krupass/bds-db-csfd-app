@@ -18,14 +18,15 @@ import org.controlsfx.validation.Validator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.sql.Date;
 import java.util.Optional;
 
 public class TitleCreateController {
 
-    private static final Logger logger = LoggerFactory.getLogger(org.but.feec.csfd.controller.title.TitleCreateController.class);
+    private static final Logger logger = LoggerFactory.getLogger(TitleCreateController.class);
 
     @FXML
-    public Button newTitleCreate;
+    public Button newTitleCreateTitle;
 
     @FXML
     private TextField newTitleName;
@@ -62,7 +63,7 @@ public class TitleCreateController {
         validation.registerValidator(newTitleLenght, Validator.createEmptyValidator("The lenght must not be empty."));
         validation.registerValidator(newTitleDescription, Validator.createEmptyValidator("The description must not be empty."));
 
-        newTitleCreate.disableProperty().bind(validation.invalidProperty());
+        newTitleCreateTitle.disableProperty().bind(validation.invalidProperty());
 
         logger.info("TitleCreateController initialized");
     }
@@ -71,10 +72,10 @@ public class TitleCreateController {
     void handleCreateNewTitle(ActionEvent event) {
         // can be written easier, its just for better explanation here on so many lines
         String name = newTitleName.getText();
-        String type = newTitleType.getText();
-        String country = newTitleCountry.getText();
-        String year = newTitleYear.getText();
-        String lenght = newTitleLenght.getText();
+        Long type = Long.valueOf(newTitleType.getText());
+        Long country = Long.valueOf(newTitleCountry.getText());
+        java.sql.Date year = Date.valueOf(newTitleYear.getText());
+        Long lenght = Long.valueOf(newTitleLenght.getText());
         String description = newTitleDescription.getText();
 
         TitleCreateView titleCreateView = new TitleCreateView();

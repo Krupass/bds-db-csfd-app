@@ -4,12 +4,12 @@ import java.util.Arrays;
 
 public class UserCreateView {
 
-    private String email;
     private String firstName;
-    private String nickname;
     private String surname;
+    private String nickname;
+    private String email;
     private char[] pwd;
-    private String address;
+    private Long address;
 
     public String getEmail() {
         return email;
@@ -51,13 +51,13 @@ public class UserCreateView {
         this.pwd = pwd;
     }
 
-    public String getAddress(){
+    public Long getAddress(){
         return address;
     }
 
-    public void setAddress(String address){
-        if(address == null || address == ""){
-            address = "NULL";
+    public void setAddress(Long address){
+        if(address == null || address == Long.valueOf("")|| address == Long.valueOf("null")|| address == Long.valueOf("NULL")){
+            address = null;
         }
         this.address = address;
     }

@@ -74,7 +74,7 @@ public class PersonRepository {
     }
 
     public void createPerson(PersonCreateView personCreateView) {
-        if(personCreateView.getAddress() != "NULL"){
+        if(personCreateView.getAddress() != null){
             String insertPersonSQL = "INSERT INTO person (id_person, first_name, surname, date_of_birth, id_address) VALUES (DEFAULT,?,?,?,?)";
             try (Connection connection = DataSourceConfig.getConnection();
                  // would be beneficial if I will return the created entity back
@@ -82,8 +82,8 @@ public class PersonRepository {
                 // set prepared statement variables
                 preparedStatement.setString(1, personCreateView.getFirstName());
                 preparedStatement.setString(2, personCreateView.getSurname());
-                preparedStatement.setDate(3, Date.valueOf(personCreateView.getBirthday()));
-                preparedStatement.setInt(4, Integer.parseInt(personCreateView.getAddress()));
+                preparedStatement.setDate(3, personCreateView.getBirthday());
+                preparedStatement.setLong(4, personCreateView.getAddress());
 
                 int affectedRows = preparedStatement.executeUpdate();
 
@@ -102,7 +102,7 @@ public class PersonRepository {
                 // set prepared statement variables
                 preparedStatement.setString(1, personCreateView.getFirstName());
                 preparedStatement.setString(2, personCreateView.getSurname());
-                preparedStatement.setString(3, personCreateView.getBirthday());
+                preparedStatement.setDate(3, personCreateView.getBirthday());
 
                 int affectedRows = preparedStatement.executeUpdate();
 
@@ -154,7 +154,7 @@ public class PersonRepository {
     }
 
     public void editPerson(PersonEditView personEditView) {
-            String insertPersonSQL = "UPDATE person p SET p.first_name = ?, p.surname = ?, p.date_of_birth = ?, p.id_address = ? WHERE p.id_person = ?";
+            String insertPersonSQL = "UPDATE person SET first_name = ?, surname = ?, date_of_birth = ?, id_address = ? WHERE id_person = ?";
             String checkIfExists = "SELECT id_person FROM person p WHERE p.id_person = ? ORDER BY p.id_person";
             try (Connection connection = DataSourceConfig.getConnection();
                  // would be beneficial if I will return the created entity back
@@ -162,8 +162,8 @@ public class PersonRepository {
                 // set prepared statement variables
                 preparedStatement.setString(1, personEditView.getFirstName());
                 preparedStatement.setString(2, personEditView.getSurname());
-                preparedStatement.setString(3, personEditView.getBirthday());
-                preparedStatement.setInt(4, Integer.parseInt(personEditView.getAddress()));
+                preparedStatement.setDate(3, personEditView.getBirthday());
+                preparedStatement.setLong(4, personEditView.getAddress());
                 preparedStatement.setLong(5, personEditView.getId());
 
                 try {
