@@ -29,12 +29,12 @@ public class DummyRepository {
 
     public void createString(DummyBasicView dummyBasicView) {
         String string = dummyBasicView.getString();
-        String insertQuerySQL = "INSERT INTO dummy_table (string) VALUES(" + string + ");";
+        String insertQuerySQL = "INSERT INTO dummy_table (string) VALUES('" + string + "');";
 
         try(Connection connection = DataSourceConfig.getConnection()){
             Statement statement = connection.createStatement();
 
-            ResultSet result = statement.executeQuery(insertQuerySQL);
+            statement.executeUpdate(insertQuerySQL);
 
         }catch (SQLException e){
             throw new DataAccessException("Strings create exception.", e);
