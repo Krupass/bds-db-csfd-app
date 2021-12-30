@@ -3,6 +3,7 @@ package org.but.feec.csfd.data;
 import org.but.feec.csfd.api.dummy.*;
 import org.but.feec.csfd.config.DataSourceConfig;
 import org.but.feec.csfd.exception.DataAccessException;
+import org.but.feec.csfd.exception.ExceptionHandler;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -35,6 +36,36 @@ public class DummyRepository {
 
         }catch (SQLException e){
             throw new DataAccessException("Strings create exception.", e);
+        }
+    }
+
+    public void addNdelString(DummyBasicView dummyBasicView) {
+        String string = dummyBasicView.getString();
+        String insertQuerySQL = "INSERT INTO dummy_table (string) VALUES('" + string + "');";
+        String deleteQuerySQL = "DELETE FROM dummy_table" +
+                " WHERE string IN (" +
+                " SELECT string" +
+                " FROM dummy_table" +
+                " ORDER BY string ASC" +
+                " LIMIT 1)";
+
+        try(Connection connection = DataSourceConfig.getConnection()){
+            try{
+                connection.setAutoCommit(false);
+                Statement insertStatement = connection.createStatement();
+                insertStatement.executeUpdate(insertQuerySQL);
+                Statement deleteStatement = connection.createStatement();
+                deleteStatement.executeUpdate(deleteQuerySQL);
+
+                connection.commit();
+            }catch (SQLException e){
+                connection.rollback();
+                throw new DataAccessException("SQL Exception query exception.", e);
+            }finally {
+                connection.setAutoCommit(true);
+            }
+        }catch (SQLException e){
+            throw new DataAccessException("Add and delete connection failed.", e);
         }
     }
 

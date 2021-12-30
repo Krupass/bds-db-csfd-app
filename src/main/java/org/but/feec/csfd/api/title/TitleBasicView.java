@@ -11,10 +11,12 @@ public class TitleBasicView {
     private StringProperty type = new SimpleStringProperty();
     private StringProperty typeId = new SimpleStringProperty();
     private StringProperty year = new SimpleStringProperty();
-    private StringProperty lenght = new SimpleStringProperty();
+    private LongProperty lenght = new SimpleLongProperty();
     private StringProperty country = new SimpleStringProperty();
     private StringProperty countryId = new SimpleStringProperty();
     private StringProperty description = new SimpleStringProperty();
+    private String find;
+    private String choice;
 
     public Long getId() {
         return idProperty().get();
@@ -56,11 +58,11 @@ public class TitleBasicView {
         this.yearProperty().setValue(year);
     }
 
-    public String getLenght(){
+    public Long getLenght(){
         return lenghtProperty().get();
     }
 
-    public void setLenght(String lenght){
+    public void setLenght(Long lenght){
         this.lenghtProperty().setValue(lenght);
     }
 
@@ -88,6 +90,22 @@ public class TitleBasicView {
         this.descriptionProperty().setValue(description);
     }
 
+    public String getFind(){
+        return find;
+    }
+
+    public void setFind(String find){
+        this.find = find;
+    }
+
+    public String getChoice(){
+        return choice;
+    }
+
+    public void setChoice(String choice){
+        this.choice = choice;
+    }
+
     public LongProperty idProperty() {
         return id;
     }
@@ -108,7 +126,7 @@ public class TitleBasicView {
         return year;
     }
 
-    public StringProperty lenghtProperty() {
+    public LongProperty lenghtProperty() {
         return lenght;
     }
 

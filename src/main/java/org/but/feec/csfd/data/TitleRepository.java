@@ -91,7 +91,7 @@ public class TitleRepository {
 
             try {
                 // TODO set connection autocommit to false
-                /* HERE */
+                connection.setAutoCommit(false);
                 try (PreparedStatement ps = connection.prepareStatement(checkIfExists, Statement.RETURN_GENERATED_KEYS)) {
                     ps.setLong(1, titlesDeleteView.getId());
                     ps.execute();
@@ -105,13 +105,13 @@ public class TitleRepository {
                     throw new DataAccessException("Deleting title failed, no rows affected.");
                 }
                 // TODO commit the transaction (both queries were performed)
-                /* HERE */
+                connection.commit();
             } catch (SQLException e) {
                 // TODO rollback the transaction if something wrong occurs
-                /* HERE */
+                connection.rollback();
             } finally {
                 // TODO set connection autocommit back to true
-                /* HERE */
+                connection.setAutoCommit(true);
             }
         } catch (SQLException e) {
             throw new DataAccessException("Deleting title failed operation on the database failed.");
@@ -134,7 +134,7 @@ public class TitleRepository {
 
                 try {
                     // TODO set connection autocommit to false
-                    /* HERE */
+                    connection.setAutoCommit(false);
                     try (PreparedStatement ps = connection.prepareStatement(checkIfExists, Statement.RETURN_GENERATED_KEYS)) {
                         ps.setLong(1, titleEditView.getId());
                         ps.execute();
@@ -148,17 +148,144 @@ public class TitleRepository {
                         throw new DataAccessException("Creating title failed, no rows affected.");
                     }
                     // TODO commit the transaction (both queries were performed)
-                    /* HERE */
+                    connection.commit();
                 } catch (SQLException e) {
                     // TODO rollback the transaction if something wrong occurs
-                    /* HERE */
+                    connection.rollback();
                 } finally {
                     // TODO set connection autocommit back to true
-                    /* HERE */
+                    connection.setAutoCommit(true);
                 }
             } catch (SQLException e) {
                 throw new DataAccessException("Creating title failed operation on the database failed.");
             }
+    }
+
+    public List<TitleBasicView> getTitleFindView(String find, String choice) {
+        try (Connection connection = DataSourceConfig.getConnection()){
+            PreparedStatement preparedStatement;
+            PreparedStatement createColumnStatement = connection.prepareStatement("ALTER TABLE titles ADD year year");
+            PreparedStatement deleteColumnStatement = connection.prepareStatement("");
+            if(choice == "id"){
+                preparedStatement = connection.prepareStatement(
+                        "SELECT t.id_title, name, p.type_name, year, lenght, c.country_name, t.description, t.id_type, t.id_country" +
+                                " FROM titles t" +
+                                " LEFT JOIN type p ON t.id_type = p.id_type" +
+                                " LEFT JOIN country c ON t.id_country = c.id_country" +
+                                " WHERE t.id_title = ?" +
+                                " ORDER BY t.id_title");
+
+                preparedStatement.setLong(1, Long.parseLong(find));
+            }
+            else if(choice == "title"){
+                preparedStatement = connection.prepareStatement(
+                        "SELECT t.id_title, name, p.type_name, year, lenght, c.country_name, t.description, t.id_type, t.id_country" +
+                                " FROM titles t" +
+                                " LEFT JOIN type p ON t.id_type = p.id_type" +
+                                " LEFT JOIN country c ON t.id_country = c.id_country" +
+                                " WHERE name" +
+                                " LIKE ?" +
+                                " ORDER BY t.id_title");
+
+                preparedStatement.setString(1, "%" + find + "%");
+            }
+            else if(choice == "type"){
+                preparedStatement = connection.prepareStatement(
+                        "SELECT t.id_title, name, p.type_name, year, lenght, c.country_name, t.description, t.id_type, t.id_country" +
+                                " FROM titles t" +
+                                " LEFT JOIN type p ON t.id_type = p.id_type" +
+                                " LEFT JOIN country c ON t.id_country = c.id_country" +
+                                " WHERE p.type_name" +
+                                " LIKE ?" +
+                                " ORDER BY t.id_title");
+
+                preparedStatement.setString(1, "%" + find + "%");
+            }
+            else if(choice == "year"){
+                preparedStatement = connection.prepareStatement(
+                        "SELECT t.id_title, name, p.type_name, year, lenght, c.country_name, t.description, t.id_type, t.id_country" +
+                                " FROM titles t" +
+                                " LEFT JOIN type p ON t.id_type = p.id_type" +
+                                " LEFT JOIN country c ON t.id_country = c.id_country" +
+                                " WHERE EXTRACT(YEAR FROM year) = ?" +
+                                " ORDER BY t.id_title");
+
+                preparedStatement.setInt(1, Integer.parseInt(find));
+            }
+            else if(choice == "lenght"){
+                preparedStatement = connection.prepareStatement(
+                        "SELECT t.id_title, name, p.type_name, year, lenght, c.country_name, t.description, t.id_type, t.id_country" +
+                                " FROM titles t" +
+                                " LEFT JOIN type p ON t.id_type = p.id_type" +
+                                " LEFT JOIN country c ON t.id_country = c.id_country" +
+                                " WHERE lenght = ?" +
+                                " ORDER BY t.id_title");
+
+                preparedStatement.setInt(1, Integer.parseInt(find));
+            }
+            else if(choice == "country"){
+                preparedStatement = connection.prepareStatement(
+                        "SELECT t.id_title, name, p.type_name, year, lenght, c.country_name, t.description, t.id_type, t.id_country" +
+                                " FROM titles t" +
+                                " LEFT JOIN type p ON t.id_type = p.id_type" +
+                                " LEFT JOIN country c ON t.id_country = c.id_country" +
+                                " WHERE c.country_name" +
+                                " LIKE ?" +
+                                " ORDER BY t.id_title");
+
+                preparedStatement.setString(1, "%" + find + "%");
+            }
+            else{
+                preparedStatement = connection.prepareStatement(
+                        "SELECT t.id_title, name, p.type_name, year, lenght, c.country_name, t.description, t.id_type, t.id_country" +
+                                " FROM titles t" +
+                                " LEFT JOIN type p ON t.id_type = p.id_type" +
+                                " LEFT JOIN country c ON t.id_country = c.id_country" +
+                                " ORDER BY t.id_title");
+
+            }
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<TitleBasicView> titleBasicViews = new ArrayList<>();
+            while (resultSet.next()) {
+                titleBasicViews.add(mapToTitleBasicView(resultSet));
+            }
+            return titleBasicViews;
+
+        } catch (SQLException e) {
+            throw new DataAccessException("Find title by ID with addresses failed.", e);
+        }
+    }
+
+    public void findTitle(TitleBasicView titleBasicView) {
+        String findTitleSQL = "UPDATE titles t SET name = ?, id_type = ?, year = ?, lenght = ?, id_country = ? WHERE t.id_title = ?";
+        try (Connection connection = DataSourceConfig.getConnection();
+             // would be beneficial if I will return the created entity back
+             PreparedStatement preparedStatement = connection.prepareStatement(findTitleSQL, Statement.RETURN_GENERATED_KEYS)) {
+            // set prepared statement variables
+            preparedStatement.setString(1, titleBasicView.getTitle());
+
+            try {
+                // TODO set connection autocommit to false
+                connection.setAutoCommit(false);
+
+                int affectedRows = preparedStatement.executeUpdate();
+
+                if (affectedRows == 0) {
+                    throw new DataAccessException("Creating title failed, no rows affected.");
+                }
+                // TODO commit the transaction (both queries were performed)
+                connection.commit();
+            } catch (SQLException e) {
+                // TODO rollback the transaction if something wrong occurs
+                connection.rollback();
+            } finally {
+                // TODO set connection autocommit back to true
+                connection.setAutoCommit(true);
+            }
+        } catch (SQLException e) {
+            throw new DataAccessException("Creating title failed operation on the database failed.");
+        }
     }
 
     private TitleBasicView mapToTitleBasicView(ResultSet rs) throws SQLException {
@@ -168,7 +295,7 @@ public class TitleRepository {
         titleBasicView.setType(rs.getString("type_name"));
         titleBasicView.setTypeId(rs.getString("id_type"));
         titleBasicView.setYear(rs.getString("year"));
-        titleBasicView.setLenght(rs.getString("lenght"));
+        titleBasicView.setLenght(rs.getLong("lenght"));
         titleBasicView.setCountry(rs.getString("country_name"));
         titleBasicView.setCountryId(rs.getString("id_country"));
         titleBasicView.setDescription(rs.getString("description"));

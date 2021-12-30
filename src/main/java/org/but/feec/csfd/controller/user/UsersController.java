@@ -37,6 +37,8 @@ public class UsersController {
     @FXML
     public Button refreshButton;
     @FXML
+    public Button findButton;
+    @FXML
     private TableColumn<UserBasicView, Long> usersId;
     @FXML
     private TableColumn<UserBasicView, String> usersCity;
@@ -204,6 +206,16 @@ public class UsersController {
         systemUsersTableView.setItems(observableUsersList);
         systemUsersTableView.refresh();
         systemUsersTableView.sort();
+    }
+
+    public void handleChoiceBox(ActionEvent actionEvent) throws IOException{
+
+
+    }
+
+    public void handleFindButton(ActionEvent actionEvent) throws IOException{
+
+
     }
 
     public void handlePersonsButton(ActionEvent actionEvent) throws IOException{

@@ -53,9 +53,10 @@
                               <TableColumn fx:id="stringContent" maxWidth="4000.0" minWidth="75.0" prefWidth="634.0" text="string content" />
                           </columns>
                         </TableView>
-                        <TextField fx:id="stringTextField" layoutX="233.0" layoutY="85.0" prefHeight="25.0" prefWidth="477.0" promptText="enter new string" />
-                        <Button fx:id="addStringButton" layoutX="731.0" layoutY="85.0" mnemonicParsing="false" onAction="#handleAddStringButton" text="Add string" />
-                        <Button fx:id="refreshButton" layoutX="814.0" layoutY="85.0" mnemonicParsing="false" onAction="#handleRefreshButton" text="Refresh" />
+                        <TextField fx:id="stringTextField" layoutX="173.0" layoutY="85.0" prefHeight="25.0" prefWidth="477.0" promptText="enter new string" />
+                        <Button fx:id="addStringButton" layoutX="657.0" layoutY="85.0" mnemonicParsing="false" onAction="#handleAddStringButton" text="Add string" />
+                        <Button fx:id="refreshButton" layoutX="735.0" layoutY="85.0" mnemonicParsing="false" onAction="#handleRefreshButton" text="Refresh" />
+                        <Button fx:id="addNdelButton" layoutX="798.0" layoutY="85.0" mnemonicParsing="false" onAction="#handleAddAndDeleteButton" prefHeight="25.0" prefWidth="140.0" text="Add and delete first" />
                         <Button fx:id="titlesButton" layoutX="630.0" layoutY="491.0" mnemonicParsing="false" onAction="#handleTitlesButton" prefHeight="25.0" prefWidth="145.0" text="&lt;&lt; Titles table" />
                         <Button fx:id="personsButton" layoutX="784.0" layoutY="491.0" mnemonicParsing="false" onAction="#handlePersonsButton" prefHeight="25.0" prefWidth="145.0" text="Persons table &gt;&gt;" />
               </children>

@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -10,6 +11,7 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -38,7 +40,7 @@
       <items>
         <ScrollPane prefHeight="-1.0" prefWidth="-1.0">
           <content>
-            <AnchorPane id="Content" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="-Infinity" prefHeight="517.0" prefWidth="943.0">
+            <AnchorPane id="Content" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="-Infinity" prefHeight="570.0" prefWidth="940.0">
               <children>
                 <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="27.0" prefWidth="147.0" style="&#10;" text="Titles" textAlignment="CENTER" wrapText="false">
                            <font>
@@ -47,7 +49,7 @@
                            <textFill>
                       <Color red="0.624" green="0.624" blue="0.624" fx:id="x2" />
                            </textFill></Label>
-                        <TableView fx:id="systemTitlesTableView" layoutY="67.0" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="400.0" prefWidth="948.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-356.0">
+                        <TableView fx:id="systemTitlesTableView" layoutY="100.0" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="425.0" prefWidth="1045.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-100.0" AnchorPane.topAnchor="120.0">
                           <columns>
                               <TableColumn fx:id="titlesId" minWidth="75.0" prefWidth="80.00000303983688" text="id" />
                               <TableColumn fx:id="titlesName" minWidth="75.0" prefWidth="170.0" text="title" />
@@ -57,10 +59,13 @@
                               <TableColumn fx:id="titlesCountry" minWidth="75.0" prefWidth="157.0" text="country" />
                           </columns>
                         </TableView>
-                        <Button fx:id="addTitleButton" layoutX="25.0" layoutY="490.0" mnemonicParsing="false" onAction="#handleAddTitleButton" text="Add title" />
-                        <Button fx:id="refreshButton" layoutX="125.0" layoutY="490.0" mnemonicParsing="false" onAction="#handleRefreshButton" text="Refresh" />
-                        <Button fx:id="usersButton" layoutX="625.0" layoutY="490.0" mnemonicParsing="false" onAction="#handleUsersButton" prefHeight="25.0" prefWidth="145.0" text="&lt;&lt; Users table" />
-                        <Button fx:id="dummyButton" layoutX="785.0" layoutY="490.0" mnemonicParsing="false" onAction="#handleDummyButton" prefHeight="25.0" prefWidth="145.0" text="Dummy table &gt;&gt;" />
+                        <Button fx:id="addTitleButton" layoutX="25.0" layoutY="540.0" mnemonicParsing="false" onAction="#handleAddTitleButton" text="Add title" />
+                        <Button fx:id="refreshButton" layoutX="125.0" layoutY="540.0" mnemonicParsing="false" onAction="#handleRefreshButton" text="Refresh" />
+                        <Button fx:id="usersButton" layoutX="625.0" layoutY="540.0" mnemonicParsing="false" onAction="#handleUsersButton" prefHeight="25.0" prefWidth="145.0" text="&lt;&lt; Users table" />
+                        <Button fx:id="dummyButton" layoutX="785.0" layoutY="540.0" mnemonicParsing="false" onAction="#handleDummyButton" prefHeight="25.0" prefWidth="145.0" text="Dummy table &gt;&gt;" />
+                        <TextField fx:id="FindTextField" layoutX="165.0" layoutY="66.0" prefWidth="440.0" promptText="enter value to find" />
+                        <ChoiceBox fx:id="choiceBox" layoutX="605.0" layoutY="66.0" onDragDetected="#handleChoiceBox" prefWidth="120.0" />
+                        <Button fx:id="findButton" layoutX="725.0" layoutY="66.0" mnemonicParsing="false" onAction="#handleFindButton" text="Find" />
               </children>
             </AnchorPane>
           </content>

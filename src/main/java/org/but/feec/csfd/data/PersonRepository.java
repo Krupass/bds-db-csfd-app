@@ -106,7 +106,7 @@ public class PersonRepository {
 
             try {
                 // TODO set connection autocommit to false
-                /* HERE */
+                connection.setAutoCommit(false);
                 try (PreparedStatement ps = connection.prepareStatement(checkIfExists, Statement.RETURN_GENERATED_KEYS)) {
                     ps.setLong(1, personsDeleteView.getId());
                     ps.execute();
@@ -120,13 +120,13 @@ public class PersonRepository {
                     throw new DataAccessException("Deleting person failed, no rows affected.");
                 }
                 // TODO commit the transaction (both queries were performed)
-                /* HERE */
+                connection.commit();
             } catch (SQLException e) {
                 // TODO rollback the transaction if something wrong occurs
-                /* HERE */
+                connection.rollback();
             } finally {
                 // TODO set connection autocommit back to true
-                /* HERE */
+                connection.setAutoCommit(true);
             }
         } catch (SQLException e) {
             throw new DataAccessException("Deleting person failed operation on the database failed.");
@@ -148,7 +148,7 @@ public class PersonRepository {
 
                 try {
                     // TODO set connection autocommit to false
-                    /* HERE */
+                    connection.setAutoCommit(false);
                     try (PreparedStatement ps = connection.prepareStatement(checkIfExists, Statement.RETURN_GENERATED_KEYS)) {
                         ps.setLong(1, personEditView.getId());
                         ps.execute();
@@ -162,13 +162,13 @@ public class PersonRepository {
                         throw new DataAccessException("Creating person failed, no rows affected.");
                     }
                     // TODO commit the transaction (both queries were performed)
-                    /* HERE */
+                    connection.commit();
                 } catch (SQLException e) {
                     // TODO rollback the transaction if something wrong occurs
-                    /* HERE */
+                    connection.rollback();
                 } finally {
                     // TODO set connection autocommit back to true
-                    /* HERE */
+                    connection.setAutoCommit(true);
                 }
             } catch (SQLException e) {
                 throw new DataAccessException("Creating person failed operation on the database failed.");

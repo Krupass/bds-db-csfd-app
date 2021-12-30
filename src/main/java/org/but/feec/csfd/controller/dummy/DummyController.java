@@ -38,6 +38,8 @@ public class DummyController {
     @FXML
     public Button addStringButton;
     @FXML
+    public Button addNdelButton;
+    @FXML
     public Button refreshButton;
     @FXML
     private TextField stringTextField;
@@ -102,6 +104,45 @@ public class DummyController {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("String Created Confirmation");
             alert.setHeaderText("Your string was successfully created.");
+
+            Timeline idlestage = new Timeline(new KeyFrame(Duration.seconds(3), new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    alert.setResult(ButtonType.CANCEL);
+                    alert.hide();
+                }
+            }));
+            idlestage.setCycleCount(1);
+            idlestage.play();
+            Optional<ButtonType> result = alert.showAndWait();
+
+
+            systemDummyTableView.refresh();
+
+        } catch (Exception ex) {
+            ExceptionHandler.handleException(ex);
+        }
+    }
+
+    public void handleAddAndDeleteButton(ActionEvent actionEvent){
+        try {
+
+            ValidationSupport validation;
+            validation = new ValidationSupport();
+            validation.registerValidator(stringTextField, Validator.createEmptyValidator("The string not be empty."));
+
+            addNdelButton.disableProperty().bind(validation.invalidProperty());
+
+            String string = stringTextField.getText();
+
+            DummyBasicView dummyBasicView = new DummyBasicView();
+            dummyBasicView.setString(string);
+
+            dummyService.addNdelString(dummyBasicView);
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("String Created Confirmation And Fist String Deleted");
+            alert.setHeaderText("Your string was successfully created and first string was deleted.");
 
             Timeline idlestage = new Timeline(new KeyFrame(Duration.seconds(3), new EventHandler<ActionEvent>() {
                 @Override

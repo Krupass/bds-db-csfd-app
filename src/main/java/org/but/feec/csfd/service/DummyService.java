@@ -21,4 +21,8 @@ public class DummyService {
         dummyRepository.createString(dummyBasicView);
     }
 
+    public void addNdelString(DummyBasicView dummyBasicView) {
+        dummyRepository.addNdelString(dummyBasicView);
+    }
+
 }

@@ -129,7 +129,7 @@ public class UserRepository {
 
             try {
                 // TODO set connection autocommit to false
-                /* HERE */
+                connection.setAutoCommit(false);
                 try (PreparedStatement ps = connection.prepareStatement(checkIfExists, Statement.RETURN_GENERATED_KEYS)) {
                     ps.setLong(1, usersDeleteView.getId());
                     ps.execute();
@@ -143,13 +143,13 @@ public class UserRepository {
                     throw new DataAccessException("Deleting user failed, no rows affected.");
                 }
                 // TODO commit the transaction (both queries were performed)
-                /* HERE */
+                connection.commit();
             } catch (SQLException e) {
                 // TODO rollback the transaction if something wrong occurs
-                /* HERE */
+                connection.rollback();
             } finally {
                 // TODO set connection autocommit back to true
-                /* HERE */
+                connection.setAutoCommit(true);
             }
         } catch (SQLException e) {
             throw new DataAccessException("Deleting user failed operation on the database failed.");
@@ -173,7 +173,7 @@ public class UserRepository {
 
                 try {
                     // TODO set connection autocommit to false
-                    /* HERE */
+                    connection.setAutoCommit(false);
                     try (PreparedStatement ps = connection.prepareStatement(checkIfExists, Statement.RETURN_GENERATED_KEYS)) {
                         ps.setLong(1, userEditView.getId());
                         ps.execute();
@@ -187,13 +187,13 @@ public class UserRepository {
                         throw new DataAccessException("Creating user failed, no rows affected.");
                     }
                     // TODO commit the transaction (both queries were performed)
-                    /* HERE */
+                    connection.commit();
                 } catch (SQLException e) {
                     // TODO rollback the transaction if something wrong occurs
-                    /* HERE */
+                    connection.rollback();
                 } finally {
                     // TODO set connection autocommit back to true
-                    /* HERE */
+                    connection.setAutoCommit(true);
                 }
             } catch (SQLException e) {
                 throw new DataAccessException("Creating user failed operation on the database failed.");
@@ -214,7 +214,7 @@ public class UserRepository {
 
                 try {
                     // TODO set connection autocommit to false
-                    /* HERE */
+                    connection.setAutoCommit(false);
                     try (PreparedStatement ps = connection.prepareStatement(checkIfExists, Statement.RETURN_GENERATED_KEYS)) {
                         ps.setLong(1, userEditView.getId());
                         ps.execute();
@@ -228,13 +228,13 @@ public class UserRepository {
                         throw new DataAccessException("Creating user failed, no rows affected.");
                     }
                     // TODO commit the transaction (both queries were performed)
-                    /* HERE */
+                    connection.commit();
                 } catch (SQLException e) {
                     // TODO rollback the transaction if something wrong occurs
-                    /* HERE */
+                    connection.rollback();
                 } finally {
                     // TODO set connection autocommit back to true
-                    /* HERE */
+                    connection.setAutoCommit(true);
                 }
             } catch (SQLException e) {
                 throw new DataAccessException("Creating user failed operation on the database failed.");

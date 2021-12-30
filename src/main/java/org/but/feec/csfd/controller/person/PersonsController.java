@@ -34,6 +34,8 @@ public class PersonsController {
     @FXML
     public Button refreshButton;
     @FXML
+    public Button findButton;
+    @FXML
     private TableColumn<PersonBasicView, Long> personsId;
     @FXML
     private TableColumn<PersonBasicView, String> personsGivenName;
@@ -203,6 +205,16 @@ public class PersonsController {
         systemPersonsTableView.sort();
     }
 
+    public void handleChoiceBox(ActionEvent actionEvent) throws IOException{
+
+
+    }
+
+    public void handleFindButton(ActionEvent actionEvent) throws IOException{
+
+
+    }
+
     public void handleUsersButton(ActionEvent actionEvent) throws IOException{
 
         Parent tableViewParent = FXMLLoader.load(App.class.getResource("fxml/Users.fxml"));
@@ -217,17 +229,6 @@ public class PersonsController {
     public void handleDummyButton(ActionEvent actionEvent) throws IOException{
 
         Parent tableViewParent = FXMLLoader.load(App.class.getResource("fxml/DummyTable.fxml"));
-        Scene tableViewScene = new Scene(tableViewParent);
-
-        Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-
-        window.setScene(tableViewScene);
-        window.show();
-    }
-
-    public void handleTitlesButton(ActionEvent actionEvent) throws IOException{
-
-        Parent tableViewParent = FXMLLoader.load(App.class.getResource("fxml/Titles.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
 
         Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();

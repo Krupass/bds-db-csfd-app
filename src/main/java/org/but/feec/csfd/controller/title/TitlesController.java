@@ -15,6 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.but.feec.csfd.App;
 import org.but.feec.csfd.api.title.TitleBasicView;
+import org.but.feec.csfd.api.title.TitleCreateView;
 import org.but.feec.csfd.api.title.TitleDetailView;
 import org.but.feec.csfd.controller.title.TitlesDeleteController;
 import org.but.feec.csfd.controller.title.TitlesDetailViewController;
@@ -22,10 +23,13 @@ import org.but.feec.csfd.controller.title.TitlesEditController;
 import org.but.feec.csfd.data.TitleRepository;
 import org.but.feec.csfd.exception.ExceptionHandler;
 import org.but.feec.csfd.service.TitleService;
+import org.controlsfx.validation.ValidationSupport;
+import org.controlsfx.validation.Validator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 
 public class TitlesController {
@@ -36,6 +40,8 @@ public class TitlesController {
     public Button addTitleButton;
     @FXML
     public Button refreshButton;
+    @FXML
+    public Button findButton;
     @FXML
     private TableColumn<TitleBasicView, Long> titlesId;
     @FXML
@@ -50,9 +56,15 @@ public class TitlesController {
     private TableColumn<TitleBasicView, String> titlesCountry;
     @FXML
     private TableView<TitleBasicView> systemTitlesTableView;
+    @FXML
+    private TextField FindTextField;
+    @FXML
+    private ChoiceBox<String> choiceBox;
 
+    private String[] columns = {"id", "title", "type", "year", "lenght", "country"};
     private TitleService titleService;
     private TitleRepository titleRepository;
+    private ValidationSupport validation;
 
     public TitlesController() {
     }
@@ -61,6 +73,7 @@ public class TitlesController {
     private void initialize() {
         titleRepository = new TitleRepository();
         titleService = new TitleService(titleRepository);
+        validation = new ValidationSupport();
 
         titlesId.setCellValueFactory(new PropertyValueFactory<TitleBasicView, Long>("id"));
         titlesName.setCellValueFactory(new PropertyValueFactory<TitleBasicView, String>("title"));
@@ -69,6 +82,10 @@ public class TitlesController {
         titlesLenght.setCellValueFactory(new PropertyValueFactory<TitleBasicView, String>("lenght"));
         titlesCountry.setCellValueFactory(new PropertyValueFactory<TitleBasicView, String>("country"));
 
+        validation.registerValidator(FindTextField, Validator.createEmptyValidator("The value must not be empty."));
+
+        findButton.disableProperty().bind(validation.invalidProperty());
+
 
         ObservableList<TitleBasicView> observableTitlesList = initializeTitlesData();
         systemTitlesTableView.setItems(observableTitlesList);
@@ -76,9 +93,14 @@ public class TitlesController {
         systemTitlesTableView.getSortOrder().add(titlesId);
 
         initializeTableViewSelection();
+        initializeChoiceBox();
         loadIcons();
 
         logger.info("TitlesController initialized");
+    }
+
+    private void initializeChoiceBox(){
+        choiceBox.getItems().addAll(columns);
     }
 
     private void initializeTableViewSelection() {
@@ -171,6 +193,11 @@ public class TitlesController {
         return FXCollections.observableArrayList(titles);
     }
 
+    private ObservableList<TitleBasicView> initializeTitlesFindData(String find, String choice) {
+        List<TitleBasicView> titles = titleService.getTitlesFindView(find, choice);
+        return FXCollections.observableArrayList(titles);
+    }
+
     private void loadIcons() {
         Image vutLogoImage = new Image(App.class.getResourceAsStream("logo/vut-logo-eng.png"));
         ImageView vutLogo = new ImageView(vutLogoImage);
@@ -206,15 +233,29 @@ public class TitlesController {
         systemTitlesTableView.sort();
     }
 
-    public void handlePersonsButton(ActionEvent actionEvent) throws IOException{
+    public void handleChoiceBox(ActionEvent actionEvent) throws IOException{
 
-        Parent tableViewParent = FXMLLoader.load(App.class.getResource("fxml/Persons.fxml"));
-        Scene tableViewScene = new Scene(tableViewParent);
 
-        Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+    }
 
-        window.setScene(tableViewScene);
-        window.show();
+    public void handleFindButton(ActionEvent actionEvent) throws IOException{
+        String find = FindTextField.getText();
+
+        TitleBasicView titleBasicView = new TitleBasicView();
+        titleBasicView.setFind(find);
+        titleBasicView.setChoice(choiceBox.getValue());
+
+        titleService.findTitle(titleBasicView);
+
+        String choice = titleBasicView.getChoice();
+        String value = titleBasicView.getFind();
+
+
+        ObservableList<TitleBasicView> observableTitlesList = initializeTitlesFindData(value, choice);
+        systemTitlesTableView.setItems(observableTitlesList);
+        systemTitlesTableView.refresh();
+        systemTitlesTableView.sort();
+
     }
 
     public void handleDummyButton(ActionEvent actionEvent) throws IOException{
