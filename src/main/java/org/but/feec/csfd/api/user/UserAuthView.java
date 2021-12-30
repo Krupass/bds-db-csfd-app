@@ -1,15 +1,15 @@
 package org.but.feec.csfd.api.user;
 
 public class UserAuthView {
-    private String email;
+    private String nickname;
     private String password;
 
-    public String getEmail() {
-        return email;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public String getPassword() {
@@ -23,7 +23,7 @@ public class UserAuthView {
     @Override
     public String toString() {
         return "UserAuthView{" +
-                "email='" + email + '\'' +
+                "username='" + nickname + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }

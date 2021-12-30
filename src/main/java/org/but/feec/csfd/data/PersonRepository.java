@@ -1,8 +1,7 @@
 package org.but.feec.csfd.data;
 
-import org.but.feec.csfd.api.*;
+import org.but.feec.csfd.api.person.*;
 import org.but.feec.csfd.config.DataSourceConfig;
-import org.but.feec.csfd.controller.PersonsDeleteController;
 import org.but.feec.csfd.exception.DataAccessException;
 
 import java.sql.*;

@@ -45,10 +45,6 @@
                         <Insets left="5.0" />
                     </padding>
                 </Label>
-                <TextField fx:id="newTitleName" promptText="type new title name" GridPane.columnIndex="1" />
-                <TextField fx:id="newTitleType" promptText="type new title type" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <TextField fx:id="newTitleCountry" promptText="type new title country" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <TextField fx:id="newTitleYear" promptText="type new title year" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label text="lenght" GridPane.rowIndex="4">
                <padding>
                   <Insets left="5.0" />
@@ -59,6 +55,10 @@
                   <Insets left="5.0" />
                </padding>
             </Label>
+                <TextField fx:id="newTitleName" promptText="type new title name" GridPane.columnIndex="1" />
+                <TextField fx:id="newTitleType" promptText="type new title id_type" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextField fx:id="newTitleCountry" promptText="type new title id_country" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <TextField fx:id="newTitleYear" promptText="type new title year in format YYYY-MM-DD" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <TextField fx:id="newTitleLenght" promptText="type new title lenght" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <TextField fx:id="newTitleDescription" promptText="type new title description" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             </children>

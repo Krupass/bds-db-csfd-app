@@ -1,4 +1,4 @@
-package org.but.feec.csfd.api;
+package org.but.feec.csfd.api.person;
 
 public class PersonAuthView {
     private String email;

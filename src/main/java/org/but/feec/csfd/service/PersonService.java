@@ -1,11 +1,10 @@
 package org.but.feec.csfd.service;
 
-import at.favre.lib.crypto.bcrypt.BCrypt;
-import org.but.feec.csfd.api.PersonBasicView;
-import org.but.feec.csfd.api.PersonCreateView;
-import org.but.feec.csfd.api.PersonDetailView;
-import org.but.feec.csfd.api.PersonEditView;
-import org.but.feec.csfd.api.PersonDeleteView;
+import org.but.feec.csfd.api.person.PersonBasicView;
+import org.but.feec.csfd.api.person.PersonCreateView;
+import org.but.feec.csfd.api.person.PersonDetailView;
+import org.but.feec.csfd.api.person.PersonEditView;
+import org.but.feec.csfd.api.person.PersonDeleteView;
 import org.but.feec.csfd.data.PersonRepository;
 
 import java.util.List;

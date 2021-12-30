@@ -56,7 +56,7 @@ public class UserCreateView {
     }
 
     public void setAddress(Long address){
-        if(address == null || address == Long.valueOf("")|| address == Long.valueOf("null")|| address == Long.valueOf("NULL")){
+        if(address == null){
             address = null;
         }
         this.address = address;

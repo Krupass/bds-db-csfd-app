@@ -1,4 +1,4 @@
-package org.but.feec.csfd.api;
+package org.but.feec.csfd.api.person;
 
 import javafx.beans.property.LongProperty;
 import javafx.beans.property.SimpleLongProperty;

@@ -1,4 +1,4 @@
-package org.but.feec.csfd.controller;
+package org.but.feec.csfd.controller.person;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,19 +14,15 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.but.feec.csfd.App;
-import org.but.feec.csfd.api.PersonBasicView;
-import org.but.feec.csfd.api.PersonDeleteView;
-import org.but.feec.csfd.api.PersonDetailView;
+import org.but.feec.csfd.api.person.PersonBasicView;
+import org.but.feec.csfd.api.person.PersonDetailView;
 import org.but.feec.csfd.data.PersonRepository;
 import org.but.feec.csfd.exception.ExceptionHandler;
 import org.but.feec.csfd.service.PersonService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 import java.util.List;
 
 public class PersonsController {

@@ -115,6 +115,8 @@ public class DummyController {
             Optional<ButtonType> result = alert.showAndWait();
 
 
+            systemDummyTableView.refresh();
+
         } catch (Exception ex) {
             ExceptionHandler.handleException(ex);
         }

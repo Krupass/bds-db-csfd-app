@@ -1,6 +1,6 @@
 package org.but.feec.csfd.data;
 
-import org.but.feec.csfd.api.*;
+//import org.but.feec.csfd.api.*;
 import org.but.feec.csfd.api.user.*;
 import org.but.feec.csfd.config.DataSourceConfig;
 import org.but.feec.csfd.exception.DataAccessException;
@@ -11,14 +11,14 @@ import java.util.List;
 
 public class UserRepository {
 
-    public UserAuthView findUserByEmail(String email) {
+    public UserAuthView findUserByNick(String nickname) {
         try (Connection connection = DataSourceConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
-                     "SELECT email, password" +
+                     "SELECT nick, password" +
                              " FROM public.user u" +
-                             " WHERE u.email = ? ORDER BY u.id_user")
+                             " WHERE u.nick = ? ORDER BY u.id_user")
         ) {
-            preparedStatement.setString(1, email);
+            preparedStatement.setString(1, nickname);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     return mapToUserAuth(resultSet);
@@ -250,7 +250,7 @@ public class UserRepository {
      */
     private UserAuthView mapToUserAuth(ResultSet rs) throws SQLException {
         UserAuthView user = new UserAuthView();
-        user.setEmail(rs.getString("email"));
+        user.setNickname(rs.getString("nick"));
         user.setPassword(rs.getString("password"));
         return user;
     }

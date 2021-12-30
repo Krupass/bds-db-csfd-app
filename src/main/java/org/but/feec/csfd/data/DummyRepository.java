@@ -11,12 +11,10 @@ import java.util.List;
 public class DummyRepository {
 
     public List<DummyBasicView> getDummyBasicView() {
+        String selectQuerySQL = "SELECT string FROM dummy_table ORDER BY string;";
         try (Connection connection = DataSourceConfig.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(
-                     "SELECT string" +
-                             " FROM dummy_table" +
-                             " ORDER BY string");
-             ResultSet resultSet = preparedStatement.executeQuery();) {
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(selectQuerySQL);) {
             List<DummyBasicView> dummyBasicViews = new ArrayList<>();
             while (resultSet.next()) {
                 dummyBasicViews.add(mapToDummyBasicView(resultSet));
@@ -33,7 +31,6 @@ public class DummyRepository {
 
         try(Connection connection = DataSourceConfig.getConnection()){
             Statement statement = connection.createStatement();
-
             statement.executeUpdate(insertQuerySQL);
 
         }catch (SQLException e){

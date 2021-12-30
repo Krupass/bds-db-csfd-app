@@ -70,6 +70,11 @@
                   <Insets left="5.0" />
                </padding>
             </Label>
+            <Label text="user created" GridPane.rowIndex="8">
+               <padding>
+                  <Insets left="5.0" />
+               </padding>
+            </Label>
                 <TextField fx:id="idTextField" GridPane.columnIndex="1" />
                 <TextField fx:id="firstNameTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 <TextField fx:id="lastNameTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -78,11 +83,6 @@
             <TextField fx:id="cityTextField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <TextField fx:id="streetTextField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             <TextField fx:id="houseNumberTextField" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-            <Label text="user created" GridPane.rowIndex="8">
-               <padding>
-                  <Insets left="5.0" />
-               </padding>
-            </Label>
             <TextField fx:id="createdTextField" GridPane.columnIndex="1" GridPane.rowIndex="8" />
             </children>
         </GridPane>

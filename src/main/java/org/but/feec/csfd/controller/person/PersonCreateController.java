@@ -1,4 +1,4 @@
-package org.but.feec.csfd.controller;
+package org.but.feec.csfd.controller.person;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -10,7 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.util.Duration;
-import org.but.feec.csfd.api.PersonCreateView;
+import org.but.feec.csfd.api.person.PersonCreateView;
 import org.but.feec.csfd.data.PersonRepository;
 import org.but.feec.csfd.service.PersonService;
 import org.controlsfx.validation.ValidationSupport;
@@ -20,7 +20,6 @@ import org.slf4j.LoggerFactory;
 
 import java.sql.Date;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Optional;
 
 public class PersonCreateController {

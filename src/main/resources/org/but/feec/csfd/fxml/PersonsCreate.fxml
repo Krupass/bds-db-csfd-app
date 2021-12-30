@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="393.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.but.feec.csfd.controller.PersonCreateController">
+<AnchorPane prefHeight="393.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.but.feec.csfd.controller.person.PersonCreateController">
    <children>
       <GridPane layoutX="22.0" layoutY="22.0" prefHeight="302.0" prefWidth="549.0">
         <columnConstraints>
@@ -45,7 +45,7 @@
             </Label>
             <TextField fx:id="newPersonFirstName" promptText="type new person first name" GridPane.columnIndex="1" />
             <TextField fx:id="newPersonLastName" promptText="type new person last name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="newPersonBirthday" promptText="type new person birthday" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="newPersonBirthday" promptText="type new person birthday in format YYYY-MM-DD" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="newPersonAddress" promptText="type new person id_address" GridPane.columnIndex="1" GridPane.rowIndex="3" />
          </children>
       </GridPane>

@@ -1,4 +1,4 @@
-package org.but.feec.csfd.controller;
+package org.but.feec.csfd.controller.person;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -11,8 +11,8 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import org.but.feec.csfd.api.PersonBasicView;
-import org.but.feec.csfd.api.PersonEditView;
+import org.but.feec.csfd.api.person.PersonBasicView;
+import org.but.feec.csfd.api.person.PersonEditView;
 import org.but.feec.csfd.data.PersonRepository;
 import org.but.feec.csfd.service.PersonService;
 import org.controlsfx.validation.ValidationSupport;

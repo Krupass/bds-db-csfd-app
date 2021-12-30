@@ -45,16 +45,16 @@
                         <Insets left="5.0" />
                     </padding>
                 </Label>
-                <TextField fx:id="idTextField" GridPane.columnIndex="1" />
-                <TextField fx:id="firstNameTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <TextField fx:id="lastNameTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <TextField fx:id="birthdayTextField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label text="id_address" GridPane.rowIndex="4">
                <padding>
                   <Insets left="5.0" />
                </padding>
             </Label>
-            <TextField fx:id="addressTextField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <TextField fx:id="idTextField" GridPane.columnIndex="1" />
+                <TextField fx:id="firstNameTextField" promptText="enter persons new first name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextField fx:id="lastNameTextField" promptText="enter persons new last name" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <TextField fx:id="birthdayTextField" promptText="enter persons new birthday in format YYYY-MM-DD" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="addressTextField" promptText="enter persons new id_address" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             </children>
         </GridPane>
         <Button fx:id="editPersonButton" layoutX="501.0" layoutY="400.0" mnemonicParsing="false" onAction="#handleEditPersonButton" text="edit user" />

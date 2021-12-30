@@ -31,11 +31,6 @@
                         <Insets left="5.0" />
                     </padding>
                 </Label>
-                <Label text="email" GridPane.rowIndex="4">
-                    <padding>
-                        <Insets left="5.0" />
-                    </padding>
-                </Label>
                 <Label text="first name" GridPane.rowIndex="1">
                     <padding>
                         <Insets left="5.0" />
@@ -51,17 +46,22 @@
                         <Insets left="5.0" />
                     </padding>
                 </Label>
-                <TextField fx:id="idTextField" GridPane.columnIndex="1" />
-                <TextField fx:id="emailTextField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                <TextField fx:id="firstNameTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <TextField fx:id="lastNameTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <TextField fx:id="nicknameTextField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <Label text="email" GridPane.rowIndex="4">
+                    <padding>
+                        <Insets left="5.0" />
+                    </padding>
+                </Label>
             <Label text="id_address" GridPane.rowIndex="5">
                <padding>
                   <Insets left="5.0" />
                </padding>
             </Label>
-            <TextField fx:id="addressTextField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                <TextField fx:id="idTextField" GridPane.columnIndex="1" />
+                <TextField fx:id="firstNameTextField" promptText="type users new first name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextField fx:id="lastNameTextField" promptText="type users new last name" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <TextField fx:id="nicknameTextField" promptText="type users new nickname" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <TextField fx:id="emailTextField" promptText="type users new email" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="addressTextField" promptText="type users new id_address" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             </children>
         </GridPane>
         <Button fx:id="editUserButton" layoutX="501.0" layoutY="400.0" mnemonicParsing="false" onAction="#handleEditUserButton" text="edit user" />

@@ -74,7 +74,10 @@ public class UserCreateController {
         String nick = newUserNick.getText();
         String password = newUserPassword.getText();
         String email = newUserEmail.getText();
-        Long address = Long.valueOf(newUserAddress.getText());
+        Long address = null;
+        if((newUserAddress.getText().compareTo(Long.toString(Long.MIN_VALUE)) >= 0) && (newUserAddress.getText().compareTo(Long.toString(Long.MAX_VALUE)) <= 0)){
+            address = Long.valueOf(newUserAddress.getText());
+        }
 
         UserCreateView userCreateView = new UserCreateView();
         userCreateView.setFirstName(firstName);

@@ -16,7 +16,7 @@ import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.but.feec.csfd.App;
-import org.but.feec.csfd.data.PersonRepository;
+import org.but.feec.csfd.data.UserRepository;
 import org.but.feec.csfd.exception.DataAccessException;
 import org.but.feec.csfd.exception.ExceptionHandler;
 import org.but.feec.csfd.exception.ResourceNotFoundException;
@@ -46,7 +46,7 @@ public class LoginController {
     @FXML
     private PasswordField passwordTextField;
 
-    private PersonRepository personRepository;
+    private UserRepository userRepository;
     private AuthService authService;
 
     private ValidationSupport validation;
@@ -85,8 +85,8 @@ public class LoginController {
     }
 
     private void initializeServices() {
-        personRepository = new PersonRepository();
-        authService = new AuthService(personRepository);
+        userRepository = new UserRepository();
+        authService = new AuthService(userRepository);
     }
 
     private void initializeLogos() {
@@ -109,7 +109,7 @@ public class LoginController {
         try {
             boolean authenticated = authService.authenticate(username, password);
             if (authenticated) {
-                showPersonsView();
+                showUsersView();
             } else {
                 showInvalidPaswordDialog();
             }
@@ -118,7 +118,7 @@ public class LoginController {
         }
     }
 
-    private void showPersonsView() {
+    private void showUsersView() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(App.class.getResource("fxml/Persons.fxml"));

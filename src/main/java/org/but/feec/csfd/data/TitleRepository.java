@@ -10,35 +10,17 @@ import java.util.List;
 
 public class TitleRepository {
 
-    public TitleAuthView findTitleByEmail(String email) {
-        try (Connection connection = DataSourceConfig.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(
-                     "SELECT email, password" +
-                             " FROM public.user u" +
-                             " WHERE u.email = ? ORDER BY u.id_user")
-        ) {
-            preparedStatement.setString(1, email);
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
-                    return mapToTitleAuth(resultSet);
-                }
-            }
-        } catch (SQLException e) {
-            throw new DataAccessException("Find title by ID with addresses failed.", e);
-        }
-        return null;
-    }
-
     public TitleDetailView findTitleDetailedView(Long titleId) {
         try (Connection connection = DataSourceConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
-                     "SELECT t.id_title, t.name, p.type_name, n.genre_name, c.country_name, t.year, t.lenght, t.description" +
+                     "SELECT t.id_title, name, p.type_name, n.genre_name, c.country_name, year, lenght, t.description" +
                              " FROM titles t" +
                              " LEFT JOIN country c ON t.id_country = c.id_country" +
                              " LEFT JOIN type p ON t.id_type = p.id_type" +
                              " LEFT JOIN genre g ON t.id_title = g.id_title" +
                              " JOIN genre_name n ON g.id_genre_name = n.id_genre_name" +
-                             " WHERE t.id_title = ? ORDER BY t.id_title")
+                             " WHERE t.id_title = ?" +
+                             " ORDER BY t.id_title")
         ) {
             preparedStatement.setLong(1, titleId);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -177,19 +159,6 @@ public class TitleRepository {
             } catch (SQLException e) {
                 throw new DataAccessException("Creating title failed operation on the database failed.");
             }
-    }
-
-
-    /**
-     * <p>
-     * Note: In practice reflection or other mapping frameworks can be used (e.g., MapStruct)
-     * </p>
-     */
-    private TitleAuthView mapToTitleAuth(ResultSet rs) throws SQLException {
-        TitleAuthView title = new TitleAuthView();
-        title.setEmail(rs.getString("email"));
-        title.setPassword(rs.getString("password"));
-        return title;
     }
 
     private TitleBasicView mapToTitleBasicView(ResultSet rs) throws SQLException {

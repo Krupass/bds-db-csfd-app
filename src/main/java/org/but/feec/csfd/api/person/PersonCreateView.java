@@ -1,20 +1,14 @@
-package org.but.feec.csfd.api;
+package org.but.feec.csfd.api.person;
 
-public class PersonEditView {
+import java.util.Arrays;
+import java.util.Date;
 
-    private Long id;
+public class PersonCreateView {
+
     private String firstName;
     private String surname;
     private java.sql.Date birthday;
     private Long address;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -53,11 +47,10 @@ public class PersonEditView {
 
     @Override
     public String toString() {
-        return "PersonEditView{" +
+        return "PersonCreateView{" +
                 "firstName='" + firstName + '\'' +
                 ", surname='" + surname + '\'' +
-                ", birthday='" + birthday + '\'' +
-                ", address='" + address +
+                ", nickname='" + birthday +
                 '}';
     }
 }

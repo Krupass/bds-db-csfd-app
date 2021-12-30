@@ -1,9 +1,9 @@
-package org.but.feec.csfd.controller;
+package org.but.feec.csfd.controller.person;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import org.but.feec.csfd.api.PersonDetailView;
+import org.but.feec.csfd.api.person.PersonDetailView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

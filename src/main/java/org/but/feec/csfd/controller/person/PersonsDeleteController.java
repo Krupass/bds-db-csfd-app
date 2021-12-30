@@ -1,4 +1,4 @@
-package org.but.feec.csfd.controller;
+package org.but.feec.csfd.controller.person;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -7,7 +7,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.util.Duration;
-import org.but.feec.csfd.api.PersonDeleteView;
+import org.but.feec.csfd.api.person.PersonDeleteView;
 import org.but.feec.csfd.data.PersonRepository;
 import org.but.feec.csfd.service.PersonService;
 import org.slf4j.Logger;
