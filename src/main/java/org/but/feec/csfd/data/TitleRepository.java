@@ -34,11 +34,6 @@ public class TitleRepository {
         return null;
     }
 
-    /**
-     * What will happen if we do not use LEFT JOIN? What titles will be returned? Ask your self and repeat JOIN from the presentations
-     *
-     * @return list of titles
-     */
     public List<TitleBasicView> getTitlesBasicView() {
         try (Connection connection = DataSourceConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
@@ -90,7 +85,6 @@ public class TitleRepository {
             preparedStatement.setLong(1, titlesDeleteView.getId());
 
             try {
-                // TODO set connection autocommit to false
                 connection.setAutoCommit(false);
                 try (PreparedStatement ps = connection.prepareStatement(checkIfExists, Statement.RETURN_GENERATED_KEYS)) {
                     ps.setLong(1, titlesDeleteView.getId());
@@ -104,13 +98,10 @@ public class TitleRepository {
                 if (affectedRows == 0) {
                     throw new DataAccessException("Deleting title failed, no rows affected.");
                 }
-                // TODO commit the transaction (both queries were performed)
                 connection.commit();
             } catch (SQLException e) {
-                // TODO rollback the transaction if something wrong occurs
                 connection.rollback();
             } finally {
-                // TODO set connection autocommit back to true
                 connection.setAutoCommit(true);
             }
         } catch (SQLException e) {
@@ -133,7 +124,6 @@ public class TitleRepository {
                 preparedStatement.setLong(6, titleEditView.getId());
 
                 try {
-                    // TODO set connection autocommit to false
                     connection.setAutoCommit(false);
                     try (PreparedStatement ps = connection.prepareStatement(checkIfExists, Statement.RETURN_GENERATED_KEYS)) {
                         ps.setLong(1, titleEditView.getId());
@@ -147,13 +137,10 @@ public class TitleRepository {
                     if (affectedRows == 0) {
                         throw new DataAccessException("Creating title failed, no rows affected.");
                     }
-                    // TODO commit the transaction (both queries were performed)
                     connection.commit();
                 } catch (SQLException e) {
-                    // TODO rollback the transaction if something wrong occurs
                     connection.rollback();
                 } finally {
-                    // TODO set connection autocommit back to true
                     connection.setAutoCommit(true);
                 }
             } catch (SQLException e) {

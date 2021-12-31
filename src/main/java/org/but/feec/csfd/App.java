@@ -9,9 +9,6 @@ import javafx.scene.paint.Stop;
 import javafx.stage.Stage;
 import org.but.feec.csfd.exception.ExceptionHandler;
 
-/**
- * @author Pavel Šeda
- */
 public class App extends Application {
 
     private FXMLLoader loader;

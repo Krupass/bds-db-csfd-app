@@ -1,6 +1,5 @@
 package org.but.feec.csfd.data;
 
-//import org.but.feec.csfd.api.*;
 import org.but.feec.csfd.api.title.TitleBasicView;
 import org.but.feec.csfd.api.user.*;
 import org.but.feec.csfd.config.DataSourceConfig;
@@ -51,11 +50,6 @@ public class UserRepository {
         return null;
     }
 
-    /**
-     * What will happen if we do not use LEFT JOIN? What users will be returned? Ask your self and repeat JOIN from the presentations
-     *
-     * @return list of users
-     */
     public List<UserBasicView> getUsersBasicView() {
         try (Connection connection = DataSourceConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
@@ -129,7 +123,6 @@ public class UserRepository {
             preparedStatement.setLong(1, usersDeleteView.getId());
 
             try {
-                // TODO set connection autocommit to false
                 connection.setAutoCommit(false);
                 try (PreparedStatement ps = connection.prepareStatement(checkIfExists, Statement.RETURN_GENERATED_KEYS)) {
                     ps.setLong(1, usersDeleteView.getId());
@@ -143,13 +136,10 @@ public class UserRepository {
                 if (affectedRows == 0) {
                     throw new DataAccessException("Deleting user failed, no rows affected.");
                 }
-                // TODO commit the transaction (both queries were performed)
                 connection.commit();
             } catch (SQLException e) {
-                // TODO rollback the transaction if something wrong occurs
                 connection.rollback();
             } finally {
-                // TODO set connection autocommit back to true
                 connection.setAutoCommit(true);
             }
         } catch (SQLException e) {
@@ -173,7 +163,6 @@ public class UserRepository {
                 preparedStatement.setLong(6, userEditView.getId());
 
                 try {
-                    // TODO set connection autocommit to false
                     connection.setAutoCommit(false);
                     try (PreparedStatement ps = connection.prepareStatement(checkIfExists, Statement.RETURN_GENERATED_KEYS)) {
                         ps.setLong(1, userEditView.getId());
@@ -187,13 +176,10 @@ public class UserRepository {
                     if (affectedRows == 0) {
                         throw new DataAccessException("Creating user failed, no rows affected.");
                     }
-                    // TODO commit the transaction (both queries were performed)
                     connection.commit();
                 } catch (SQLException e) {
-                    // TODO rollback the transaction if something wrong occurs
                     connection.rollback();
                 } finally {
-                    // TODO set connection autocommit back to true
                     connection.setAutoCommit(true);
                 }
             } catch (SQLException e) {
@@ -214,7 +200,6 @@ public class UserRepository {
                 preparedStatement.setLong(5, userEditView.getId());
 
                 try {
-                    // TODO set connection autocommit to false
                     connection.setAutoCommit(false);
                     try (PreparedStatement ps = connection.prepareStatement(checkIfExists, Statement.RETURN_GENERATED_KEYS)) {
                         ps.setLong(1, userEditView.getId());
@@ -228,13 +213,10 @@ public class UserRepository {
                     if (affectedRows == 0) {
                         throw new DataAccessException("Creating user failed, no rows affected.");
                     }
-                    // TODO commit the transaction (both queries were performed)
                     connection.commit();
                 } catch (SQLException e) {
-                    // TODO rollback the transaction if something wrong occurs
                     connection.rollback();
                 } finally {
-                    // TODO set connection autocommit back to true
                     connection.setAutoCommit(true);
                 }
             } catch (SQLException e) {

@@ -77,9 +77,6 @@ public class TitlesEditController {
         logger.info("TitlesEditController initialized");
     }
 
-    /**
-     * Load passed data from Titles controller. Check this tutorial explaining how to pass the data between controllers: https://dev.to/devtony101/javafx-3-ways-of-passing-information-between-scenes-1bm8
-     */
     private void loadTitlesData() {
         Stage stage = this.stage;
         if (stage.getUserData() instanceof TitleBasicView) {

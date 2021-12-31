@@ -10,9 +10,6 @@ import org.but.feec.csfd.data.PersonRepository;
 
 import java.util.List;
 
-/**
- * Class representing business logic on top of the Persons
- */
 public class PersonService {
 
     private PersonRepository personRepository;

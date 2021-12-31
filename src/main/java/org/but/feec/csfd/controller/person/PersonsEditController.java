@@ -72,9 +72,6 @@ public class PersonsEditController {
         logger.info("PersonsEditController initialized");
     }
 
-    /**
-     * Load passed data from Persons controller. Check this tutorial explaining how to pass the data between controllers: https://dev.to/devtony101/javafx-3-ways-of-passing-information-between-scenes-1bm8
-     */
     private void loadPersonsData() {
         Stage stage = this.stage;
         if (stage.getUserData() instanceof PersonBasicView) {

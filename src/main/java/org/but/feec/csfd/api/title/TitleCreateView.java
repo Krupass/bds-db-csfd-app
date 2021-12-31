@@ -1,7 +1,5 @@
 package org.but.feec.csfd.api.title;
 
-import java.util.Arrays;
-
 public class TitleCreateView {
 
     private String name;
