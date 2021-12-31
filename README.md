@@ -8,3 +8,4 @@
 ##### (5) `java -jar target/bds-csfd-1.0.0.jar`
 #### Generate project and external libraries licenses
 ##### (1) in root folder `mvn project-info-reports:dependencies`
+##### (2) result located in target/site
