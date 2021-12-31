@@ -1,6 +1,7 @@
 package org.but.feec.csfd.data;
 
 import org.but.feec.csfd.api.person.*;
+import org.but.feec.csfd.api.title.TitleBasicView;
 import org.but.feec.csfd.config.DataSourceConfig;
 import org.but.feec.csfd.exception.DataAccessException;
 
@@ -173,6 +174,83 @@ public class PersonRepository {
             } catch (SQLException e) {
                 throw new DataAccessException("Creating person failed operation on the database failed.");
             }
+    }
+
+    public List<PersonBasicView> getPersonFindView(String find, String choice) {
+        try (Connection connection = DataSourceConfig.getConnection()){
+            PreparedStatement preparedStatement;
+            if(choice == "id"){
+                preparedStatement = connection.prepareStatement(
+                        "SELECT p.id_person, first_name, surname, date_of_birth, city, p.id_address" +
+                                " FROM person p" +
+                                " LEFT JOIN address a ON p.id_address = a.id_address" +
+                                " WHERE id_person = ?" +
+                                " ORDER BY p.id_person");
+
+                preparedStatement.setLong(1, Long.parseLong(find));
+            }
+            else if(choice == "given name"){
+                preparedStatement = connection.prepareStatement(
+                        "SELECT p.id_person, first_name, surname, date_of_birth, city, p.id_address" +
+                                " FROM person p" +
+                                " LEFT JOIN address a ON p.id_address = a.id_address" +
+                                " WHERE first_name" +
+                                " LIKE ?" +
+                                " ORDER BY p.id_person");
+
+                preparedStatement.setString(1, "%" + find + "%");
+            }
+            else if(choice == "family name"){
+                preparedStatement = connection.prepareStatement(
+                        "SELECT p.id_person, first_name, surname, date_of_birth, city, p.id_address" +
+                                " FROM person p" +
+                                " LEFT JOIN address a ON p.id_address = a.id_address" +
+                                " WHERE surname" +
+                                " LIKE ?" +
+                                " ORDER BY p.id_person");
+
+                preparedStatement.setString(1, "%" + find + "%");
+            }
+            else if(choice == "birthday"){
+                preparedStatement = connection.prepareStatement(
+                        "SELECT p.id_person, first_name, surname, date_of_birth, city, p.id_address" +
+                                " FROM person p" +
+                                " LEFT JOIN address a ON p.id_address = a.id_address" +
+                                " WHERE EXTRACT(YEAR FROM date_of_birth) = ?" +
+                                " ORDER BY p.id_person");
+
+                preparedStatement.setInt(1, Integer.parseInt(find));
+            }
+            else if(choice == "city"){
+                preparedStatement = connection.prepareStatement(
+                        "SELECT p.id_person, first_name, surname, date_of_birth, city, p.id_address" +
+                                " FROM person p" +
+                                " LEFT JOIN address a ON p.id_address = a.id_address" +
+                                " WHERE city" +
+                                " LIKE ?" +
+                                " ORDER BY p.id_person");
+
+                preparedStatement.setString(1, "%" + find + "%");
+            }
+            else{
+                preparedStatement = connection.prepareStatement(
+                        "SELECT p.id_person, first_name, surname, date_of_birth, city, p.id_address" +
+                                " FROM person p" +
+                                " LEFT JOIN address a ON p.id_address = a.id_address" +
+                                " ORDER BY p.id_person");
+
+            }
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<PersonBasicView> personBasicViews = new ArrayList<>();
+            while (resultSet.next()) {
+                personBasicViews.add(mapToPersonBasicView(resultSet));
+            }
+            return personBasicViews;
+
+        } catch (SQLException e) {
+            throw new DataAccessException("Find person by ID with addresses failed.", e);
+        }
     }
 
     private PersonBasicView mapToPersonBasicView(ResultSet rs) throws SQLException {

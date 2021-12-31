@@ -328,7 +328,7 @@ public class UserRepository {
             return userBasicViews;
 
         } catch (SQLException e) {
-            throw new DataAccessException("Find title by ID with addresses failed.", e);
+            throw new DataAccessException("Find user by ID with addresses failed.", e);
         }
     }
 

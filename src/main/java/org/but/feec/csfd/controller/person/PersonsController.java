@@ -16,9 +16,12 @@ import javafx.stage.Stage;
 import org.but.feec.csfd.App;
 import org.but.feec.csfd.api.person.PersonBasicView;
 import org.but.feec.csfd.api.person.PersonDetailView;
+import org.but.feec.csfd.api.title.TitleBasicView;
 import org.but.feec.csfd.data.PersonRepository;
 import org.but.feec.csfd.exception.ExceptionHandler;
 import org.but.feec.csfd.service.PersonService;
+import org.controlsfx.validation.ValidationSupport;
+import org.controlsfx.validation.Validator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,11 +50,15 @@ public class PersonsController {
     private TableColumn<PersonBasicView, String> personsCity;
     @FXML
     private TableView<PersonBasicView> systemPersonsTableView;
-//    @FXML
-//    public MenuItem exitMenuItem;
+    @FXML
+    private TextField FindTextField;
+    @FXML
+    private ChoiceBox<String> choiceBox;
 
+    private String[] columns = {"id", "given name", "family name", "birthday", "city"};
     private PersonService personService;
     private PersonRepository personRepository;
+    private ValidationSupport validation;
 
     public PersonsController() {
     }
@@ -60,13 +67,17 @@ public class PersonsController {
     private void initialize() {
         personRepository = new PersonRepository();
         personService = new PersonService(personRepository);
-//        GlyphsDude.setIcon(exitMenuItem, FontAwesomeIcon.CLOSE, "1em");
+        validation = new ValidationSupport();
 
         personsId.setCellValueFactory(new PropertyValueFactory<PersonBasicView, Long>("id"));
         personsGivenName.setCellValueFactory(new PropertyValueFactory<PersonBasicView, String>("givenName"));
         personsFamilyName.setCellValueFactory(new PropertyValueFactory<PersonBasicView, String>("familyName"));
         personsBirthday.setCellValueFactory(new PropertyValueFactory<PersonBasicView, String>("birthday"));
         personsCity.setCellValueFactory(new PropertyValueFactory<PersonBasicView, String>("city"));
+
+        validation.registerValidator(FindTextField, Validator.createEmptyValidator("The value must not be empty."));
+
+        findButton.disableProperty().bind(validation.invalidProperty());
 
 
         ObservableList<PersonBasicView> observablePersonsList = initializePersonsData();
@@ -75,9 +86,14 @@ public class PersonsController {
         systemPersonsTableView.getSortOrder().add(personsId);
 
         initializeTableViewSelection();
+        initializeChoiceBox();
         loadIcons();
 
         logger.info("PersonsController initialized");
+    }
+
+    private void initializeChoiceBox(){
+        choiceBox.getItems().addAll(columns);
     }
 
     private void initializeTableViewSelection() {
@@ -170,6 +186,11 @@ public class PersonsController {
         return FXCollections.observableArrayList(persons);
     }
 
+    private ObservableList<PersonBasicView> initializePersonsFindData(String find, String choice) {
+        List<PersonBasicView> persons = personService.getPersonsFindView(find, choice);
+        return FXCollections.observableArrayList(persons);
+    }
+
     private void loadIcons() {
         Image vutLogoImage = new Image(App.class.getResourceAsStream("logo/vut-logo-eng.png"));
         ImageView vutLogo = new ImageView(vutLogoImage);
@@ -205,14 +226,21 @@ public class PersonsController {
         systemPersonsTableView.sort();
     }
 
-    public void handleChoiceBox(ActionEvent actionEvent) throws IOException{
-
-
-    }
-
     public void handleFindButton(ActionEvent actionEvent) throws IOException{
+        String find = FindTextField.getText();
+
+        PersonBasicView personBasicView = new PersonBasicView();
+        personBasicView.setFind(find);
+        personBasicView.setChoice(choiceBox.getValue());
+
+        String choice = personBasicView.getChoice();
+        String value = personBasicView.getFind();
 
 
+        ObservableList<PersonBasicView> observablePersonsList = initializePersonsFindData(value, choice);
+        systemPersonsTableView.setItems(observablePersonsList);
+        systemPersonsTableView.refresh();
+        systemPersonsTableView.sort();
     }
 
     public void handleUsersButton(ActionEvent actionEvent) throws IOException{

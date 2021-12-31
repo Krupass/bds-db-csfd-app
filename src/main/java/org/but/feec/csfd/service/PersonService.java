@@ -5,6 +5,7 @@ import org.but.feec.csfd.api.person.PersonCreateView;
 import org.but.feec.csfd.api.person.PersonDetailView;
 import org.but.feec.csfd.api.person.PersonEditView;
 import org.but.feec.csfd.api.person.PersonDeleteView;
+import org.but.feec.csfd.api.title.TitleBasicView;
 import org.but.feec.csfd.data.PersonRepository;
 
 import java.util.List;
@@ -38,6 +39,10 @@ public class PersonService {
 
     public void deletePerson(PersonDeleteView personDeleteView) {
         personRepository.deletePerson(personDeleteView);
+    }
+
+    public List<PersonBasicView> getPersonsFindView(String find, String choice) {
+        return personRepository.getPersonFindView(find, choice);
     }
 
 }
