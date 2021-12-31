@@ -1,6 +1,7 @@
 package org.but.feec.csfd.data;
 
 //import org.but.feec.csfd.api.*;
+import org.but.feec.csfd.api.title.TitleBasicView;
 import org.but.feec.csfd.api.user.*;
 import org.but.feec.csfd.config.DataSourceConfig;
 import org.but.feec.csfd.exception.DataAccessException;
@@ -242,12 +243,95 @@ public class UserRepository {
         }
     }
 
+    public List<UserBasicView> getUserFindView(String find, String choice) {
+        try (Connection connection = DataSourceConfig.getConnection()){
+            PreparedStatement preparedStatement;
+            if(choice == "id"){
+                preparedStatement = connection.prepareStatement(
+                        "SELECT id_user, email, first_name, surname, nick, city, u.id_address" +
+                                " FROM public.user u" +
+                                " LEFT JOIN address a ON u.id_address = a.id_address" +
+                                " WHERE id_user = ?" +
+                                " ORDER BY u.id_user");
 
-    /**
-     * <p>
-     * Note: In practice reflection or other mapping frameworks can be used (e.g., MapStruct)
-     * </p>
-     */
+                preparedStatement.setLong(1, Long.parseLong(find));
+            }
+            else if(choice == "given name"){
+                preparedStatement = connection.prepareStatement(
+                        "SELECT id_user, email, first_name, surname, nick, city, u.id_address" +
+                                " FROM public.user u" +
+                                " LEFT JOIN address a ON u.id_address = a.id_address" +
+                                " WHERE first_name" +
+                                " LIKE ?" +
+                                " ORDER BY u.id_user");
+
+                preparedStatement.setString(1, "%" + find + "%");
+            }
+            else if(choice == "family name"){
+                preparedStatement = connection.prepareStatement(
+                        "SELECT id_user, email, first_name, surname, nick, city, u.id_address" +
+                                " FROM public.user u" +
+                                " LEFT JOIN address a ON u.id_address = a.id_address" +
+                                " WHERE surname" +
+                                " LIKE ?" +
+                                " ORDER BY u.id_user");
+
+                preparedStatement.setString(1, "%" + find + "%");
+            }
+            else if(choice == "nickname"){
+                preparedStatement = connection.prepareStatement(
+                        "SELECT id_user, email, first_name, surname, nick, city, u.id_address" +
+                                " FROM public.user u" +
+                                " LEFT JOIN address a ON u.id_address = a.id_address" +
+                                " WHERE nick" +
+                                " LIKE ?" +
+                                " ORDER BY u.id_user");
+
+                preparedStatement.setString(1, "%" + find + "%");
+            }
+            else if(choice == "email"){
+                preparedStatement = connection.prepareStatement(
+                        "SELECT id_user, email, first_name, surname, nick, city, u.id_address" +
+                                " FROM public.user u" +
+                                " LEFT JOIN address a ON u.id_address = a.id_address" +
+                                " WHERE email" +
+                                " LIKE ?" +
+                                " ORDER BY u.id_user");
+
+                preparedStatement.setString(1, "%" + find + "%");
+            }
+            else if(choice == "city"){
+                preparedStatement = connection.prepareStatement(
+                        "SELECT id_user, email, first_name, surname, nick, city, u.id_address" +
+                                " FROM public.user u" +
+                                " LEFT JOIN address a ON u.id_address = a.id_address" +
+                                " WHERE city" +
+                                " LIKE ?" +
+                                " ORDER BY u.id_user");
+
+                preparedStatement.setString(1, "%" + find + "%");
+            }
+            else{
+                preparedStatement = connection.prepareStatement(
+                        "SELECT id_user, email, first_name, surname, nick, city, u.id_address" +
+                                " FROM public.user u" +
+                                " LEFT JOIN address a ON u.id_address = a.id_address" +
+                                " ORDER BY u.id_user");
+
+            }
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<UserBasicView> userBasicViews = new ArrayList<>();
+            while (resultSet.next()) {
+                userBasicViews.add(mapToUserBasicView(resultSet));
+            }
+            return userBasicViews;
+
+        } catch (SQLException e) {
+            throw new DataAccessException("Find title by ID with addresses failed.", e);
+        }
+    }
+
     private UserAuthView mapToUserAuth(ResultSet rs) throws SQLException {
         UserAuthView user = new UserAuthView();
         user.setNickname(rs.getString("nick"));

@@ -20,7 +20,6 @@
                 <RowConstraints vgrow="ALWAYS" />
                 <RowConstraints vgrow="ALWAYS" />
                 <RowConstraints vgrow="ALWAYS" />
-                <RowConstraints vgrow="ALWAYS" />
             <RowConstraints vgrow="ALWAYS" />
             <RowConstraints vgrow="ALWAYS" />
             <RowConstraints vgrow="ALWAYS" />
@@ -42,22 +41,22 @@
                         <Insets left="5.0" />
                     </padding>
                 </Label>
-                <Label text="year" GridPane.rowIndex="5">
-                    <padding>
-                        <Insets left="5.0" />
-                    </padding>
-                </Label>
-                <Label text="lenght" GridPane.rowIndex="6">
-                    <padding>
-                        <Insets left="5.0" />
-                    </padding>
-                </Label>
-            <Label text="id_country" GridPane.rowIndex="4">
+            <Label text="id_country" GridPane.rowIndex="3">
                <padding>
                   <Insets left="5.0" />
                </padding>
             </Label>
-            <Label text="description" GridPane.rowIndex="7">
+                <Label text="year" GridPane.rowIndex="4">
+                    <padding>
+                        <Insets left="5.0" />
+                    </padding>
+                </Label>
+                <Label text="lenght" GridPane.rowIndex="5">
+                    <padding>
+                        <Insets left="5.0" />
+                    </padding>
+                </Label>
+            <Label text="description" GridPane.rowIndex="6">
                <padding>
                   <Insets left="5.0" />
                </padding>
@@ -65,16 +64,10 @@
                 <TextField fx:id="idTextField" GridPane.columnIndex="1" />
                 <TextField fx:id="titleTextField" promptText="type titles new title" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 <TextField fx:id="typeTextField" promptText="type titles new id_type" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <TextField fx:id="yearTextField" promptText="type titles new year in format YYYY-MM-DD" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                <TextField fx:id="lenghtTextField" promptText="type titles new lenght" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <TextField fx:id="countryTextField" promptText="type titles new id_country" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <TextField fx:id="descriptionTextField" promptText="type titles new description" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-            <Label text="id_genre" GridPane.rowIndex="3">
-               <padding>
-                  <Insets left="5.0" />
-               </padding>
-            </Label>
-            <TextField fx:id="genreTextField" promptText="type titles new id_genre" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="countryTextField" promptText="type titles new id_country" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <TextField fx:id="yearTextField" promptText="type titles new year in format YYYY-MM-DD" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <TextField fx:id="lenghtTextField" promptText="type titles new lenght" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <TextField fx:id="descriptionTextField" promptText="type titles new description" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             </children>
         </GridPane>
         <Button fx:id="editTitleButton" layoutX="500.0" layoutY="500.0" mnemonicParsing="false" onAction="#handleEditTitleButton" text="edit title" />

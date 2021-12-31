@@ -1,6 +1,7 @@
 package org.but.feec.csfd.service;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
+import org.but.feec.csfd.api.title.TitleBasicView;
 import org.but.feec.csfd.data.UserRepository;
 import org.but.feec.csfd.api.user.UserBasicView;
 import org.but.feec.csfd.api.user.UserCreateView;
@@ -47,4 +48,7 @@ public class UserService {
         return BCrypt.withDefaults().hashToChar(12, password);
     }
 
+    public List<UserBasicView> getUsersFindView(String find, String choice) {
+        return userRepository.getUserFindView(find, choice);
+    }
 }

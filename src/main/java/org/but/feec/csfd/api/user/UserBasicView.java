@@ -13,6 +13,8 @@ public class UserBasicView {
     private StringProperty city = new SimpleStringProperty();
     private StringProperty email = new SimpleStringProperty();
     private StringProperty address = new SimpleStringProperty();
+    private String find;
+    private String choice;
 
     public Long getId() {
         return idProperty().get();
@@ -68,6 +70,22 @@ public class UserBasicView {
 
     public void setAddress(String address){
         this.addressProperty().set(address);
+    }
+
+    public String getFind(){
+        return find;
+    }
+
+    public void setFind(String find){
+        this.find = find;
+    }
+
+    public String getChoice(){
+        return choice;
+    }
+
+    public void setChoice(String choice){
+        this.choice = choice;
     }
 
     public LongProperty idProperty() {
