@@ -16,8 +16,8 @@ public class PersonRepository {
         try (Connection connection = DataSourceConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
                      "SELECT id_person, first_name, surname, date_of_birth, city, street_name, house_number" +
-                             " FROM person p" +
-                             " LEFT JOIN address a ON p.id_address = a.id_address" +
+                             " FROM csfd_app.person p" +
+                             " LEFT JOIN csfd_app.address a ON p.id_address = a.id_address" +
                              " WHERE p.id_person = ? ORDER BY p.id_person")
         ) {
             preparedStatement.setLong(1, personId);
@@ -41,8 +41,8 @@ public class PersonRepository {
         try (Connection connection = DataSourceConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
                      "SELECT p.id_person, first_name, surname, date_of_birth, city, p.id_address" +
-                             " FROM person p" +
-                             " LEFT JOIN address a ON p.id_address = a.id_address ORDER BY p.id_person");
+                             " FROM csfd_app.person p" +
+                             " LEFT JOIN csfd_app.address a ON p.id_address = a.id_address ORDER BY p.id_person");
              ResultSet resultSet = preparedStatement.executeQuery();) {
             List<PersonBasicView> personBasicViews = new ArrayList<>();
             while (resultSet.next()) {
@@ -56,7 +56,7 @@ public class PersonRepository {
 
     public void createPerson(PersonCreateView personCreateView) {
         if(personCreateView.getAddress() != null){
-            String insertPersonSQL = "INSERT INTO person (id_person, first_name, surname, date_of_birth, id_address) VALUES (DEFAULT,?,?,?,?)";
+            String insertPersonSQL = "INSERT INTO csfd_app.person (id_person, first_name, surname, date_of_birth, id_address) VALUES (DEFAULT,?,?,?,?)";
             try (Connection connection = DataSourceConfig.getConnection();
                  // would be beneficial if I will return the created entity back
                  PreparedStatement preparedStatement = connection.prepareStatement(insertPersonSQL, Statement.RETURN_GENERATED_KEYS)) {
@@ -76,7 +76,7 @@ public class PersonRepository {
             }
         }
         else{
-            String insertPersonSQL = "INSERT INTO person (id_person, first_name, surname, date_of_birth, id_address) VALUES (DEFAULT,?,?,?, NULL)";
+            String insertPersonSQL = "INSERT INTO csfd_app.person (id_person, first_name, surname, date_of_birth, id_address) VALUES (DEFAULT,?,?,?, NULL)";
             try (Connection connection = DataSourceConfig.getConnection();
                  // would be beneficial if I will return the created entity back
                  PreparedStatement preparedStatement = connection.prepareStatement(insertPersonSQL, Statement.RETURN_GENERATED_KEYS)) {
@@ -97,8 +97,8 @@ public class PersonRepository {
     }
 
     public void deletePerson(PersonDeleteView personsDeleteView){
-        String deletePersonSQL = "DELETE FROM person p WHERE p.id_person = ?";
-        String checkIfExists = "SELECT id_person FROM person p WHERE p.id_person = ? ORDER BY p.id_person";
+        String deletePersonSQL = "DELETE FROM csfd_app.person p WHERE p.id_person = ?";
+        String checkIfExists = "SELECT id_person FROM csfd_app.person p WHERE p.id_person = ? ORDER BY p.id_person";
         try (Connection connection = DataSourceConfig.getConnection();
              // would be beneficial if I will return the created entity back
              PreparedStatement preparedStatement = connection.prepareStatement(deletePersonSQL, Statement.RETURN_GENERATED_KEYS)) {
@@ -135,8 +135,8 @@ public class PersonRepository {
     }
 
     public void editPerson(PersonEditView personEditView) {
-            String insertPersonSQL = "UPDATE person SET first_name = ?, surname = ?, date_of_birth = ?, id_address = ? WHERE id_person = ?";
-            String checkIfExists = "SELECT id_person FROM person p WHERE p.id_person = ? ORDER BY p.id_person";
+            String insertPersonSQL = "UPDATE csfd_app.person SET first_name = ?, surname = ?, date_of_birth = ?, id_address = ? WHERE id_person = ?";
+            String checkIfExists = "SELECT id_person FROM csfd_app.person p WHERE p.id_person = ? ORDER BY p.id_person";
             try (Connection connection = DataSourceConfig.getConnection();
                  // would be beneficial if I will return the created entity back
                  PreparedStatement preparedStatement = connection.prepareStatement(insertPersonSQL, Statement.RETURN_GENERATED_KEYS)) {
@@ -182,8 +182,8 @@ public class PersonRepository {
             if(choice == "id"){
                 preparedStatement = connection.prepareStatement(
                         "SELECT p.id_person, first_name, surname, date_of_birth, city, p.id_address" +
-                                " FROM person p" +
-                                " LEFT JOIN address a ON p.id_address = a.id_address" +
+                                " FROM csfd_app.person p" +
+                                " LEFT JOIN csfd_app.address a ON p.id_address = a.id_address" +
                                 " WHERE id_person = ?" +
                                 " ORDER BY p.id_person");
 
@@ -192,8 +192,8 @@ public class PersonRepository {
             else if(choice == "given name"){
                 preparedStatement = connection.prepareStatement(
                         "SELECT p.id_person, first_name, surname, date_of_birth, city, p.id_address" +
-                                " FROM person p" +
-                                " LEFT JOIN address a ON p.id_address = a.id_address" +
+                                " FROM csfd_app.person p" +
+                                " LEFT JOIN csfd_app.address a ON p.id_address = a.id_address" +
                                 " WHERE first_name" +
                                 " LIKE ?" +
                                 " ORDER BY p.id_person");
@@ -203,8 +203,8 @@ public class PersonRepository {
             else if(choice == "family name"){
                 preparedStatement = connection.prepareStatement(
                         "SELECT p.id_person, first_name, surname, date_of_birth, city, p.id_address" +
-                                " FROM person p" +
-                                " LEFT JOIN address a ON p.id_address = a.id_address" +
+                                " FROM csfd_app.person p" +
+                                " LEFT JOIN csfd_app.address a ON p.id_address = a.id_address" +
                                 " WHERE surname" +
                                 " LIKE ?" +
                                 " ORDER BY p.id_person");
@@ -214,8 +214,8 @@ public class PersonRepository {
             else if(choice == "birthday"){
                 preparedStatement = connection.prepareStatement(
                         "SELECT p.id_person, first_name, surname, date_of_birth, city, p.id_address" +
-                                " FROM person p" +
-                                " LEFT JOIN address a ON p.id_address = a.id_address" +
+                                " FROM csfd_app.person p" +
+                                " LEFT JOIN csfd_app.address a ON p.id_address = a.id_address" +
                                 " WHERE EXTRACT(YEAR FROM date_of_birth) = ?" +
                                 " ORDER BY p.id_person");
 
@@ -224,8 +224,8 @@ public class PersonRepository {
             else if(choice == "city"){
                 preparedStatement = connection.prepareStatement(
                         "SELECT p.id_person, first_name, surname, date_of_birth, city, p.id_address" +
-                                " FROM person p" +
-                                " LEFT JOIN address a ON p.id_address = a.id_address" +
+                                " FROM csfd_app.person p" +
+                                " LEFT JOIN csfd_app.address a ON p.id_address = a.id_address" +
                                 " WHERE city" +
                                 " LIKE ?" +
                                 " ORDER BY p.id_person");
@@ -235,8 +235,8 @@ public class PersonRepository {
             else{
                 preparedStatement = connection.prepareStatement(
                         "SELECT p.id_person, first_name, surname, date_of_birth, city, p.id_address" +
-                                " FROM person p" +
-                                " LEFT JOIN address a ON p.id_address = a.id_address" +
+                                " FROM csfd_app.person p" +
+                                " LEFT JOIN csfd_app.address a ON p.id_address = a.id_address" +
                                 " ORDER BY p.id_person");
 
             }

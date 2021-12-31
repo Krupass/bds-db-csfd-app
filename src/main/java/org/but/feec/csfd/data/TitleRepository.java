@@ -14,11 +14,11 @@ public class TitleRepository {
         try (Connection connection = DataSourceConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
                      "SELECT t.id_title, name, p.type_name, n.genre_name, c.country_name, year, lenght, t.description" +
-                             " FROM titles t" +
-                             " LEFT JOIN country c ON t.id_country = c.id_country" +
-                             " LEFT JOIN type p ON t.id_type = p.id_type" +
-                             " LEFT JOIN genre g ON t.id_title = g.id_title" +
-                             " LEFT JOIN genre_name n ON g.id_genre_name = n.id_genre_name" +
+                             " FROM csfd_app.titles t" +
+                             " LEFT JOIN csfd_app.country c ON t.id_country = c.id_country" +
+                             " LEFT JOIN csfd_app.type p ON t.id_type = p.id_type" +
+                             " LEFT JOIN csfd_app.genre g ON t.id_title = g.id_title" +
+                             " LEFT JOIN csfd_app.genre_name n ON g.id_genre_name = n.id_genre_name" +
                              " WHERE t.id_title = ?" +
                              " ORDER BY t.id_title")
         ) {
@@ -43,9 +43,9 @@ public class TitleRepository {
         try (Connection connection = DataSourceConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
                      "SELECT t.id_title, name, p.type_name, year, lenght, c.country_name, t.description, t.id_type, t.id_country" +
-                             " FROM titles t" +
-                             " LEFT JOIN type p ON t.id_type = p.id_type" +
-                             " LEFT JOIN country c ON t.id_country = c.id_country ORDER BY t.id_title");
+                             " FROM csfd_app.titles t" +
+                             " LEFT JOIN csfd_app.type p ON t.id_type = p.id_type" +
+                             " LEFT JOIN csfd_app.country c ON t.id_country = c.id_country ORDER BY t.id_title");
              ResultSet resultSet = preparedStatement.executeQuery();) {
             List<TitleBasicView> titleBasicViews = new ArrayList<>();
             while (resultSet.next()) {
@@ -58,7 +58,7 @@ public class TitleRepository {
     }
 
     public void createTitle(TitleCreateView titleCreateView) {
-            String insertTitleSQL = "INSERT INTO titles (id_title, id_type, id_country, name, year, lenght, description) VALUES (DEFAULT,?,?,?,?,?,?)";
+            String insertTitleSQL = "INSERT INTO csfd_app.titles (id_title, id_type, id_country, name, year, lenght, description) VALUES (DEFAULT,?,?,?,?,?,?)";
             try (Connection connection = DataSourceConfig.getConnection();
                  // would be beneficial if I will return the created entity back
                  PreparedStatement preparedStatement = connection.prepareStatement(insertTitleSQL, Statement.RETURN_GENERATED_KEYS)) {
@@ -81,8 +81,8 @@ public class TitleRepository {
     }
 
     public void deleteTitle(TitleDeleteView titlesDeleteView){
-        String deleteTitleSQL = "DELETE FROM titles t WHERE t.id_title = ?";
-        String checkIfExists = "SELECT id_title FROM titles t WHERE t.id_title = ? ORDER BY t.id_title";
+        String deleteTitleSQL = "DELETE FROM csfd_app.titles t WHERE t.id_title = ?";
+        String checkIfExists = "SELECT id_title FROM csfd_app.titles t WHERE t.id_title = ? ORDER BY t.id_title";
         try (Connection connection = DataSourceConfig.getConnection();
              // would be beneficial if I will return the created entity back
              PreparedStatement preparedStatement = connection.prepareStatement(deleteTitleSQL, Statement.RETURN_GENERATED_KEYS)) {
@@ -119,8 +119,8 @@ public class TitleRepository {
     }
 
     public void editTitle(TitleEditView titleEditView) {
-            String insertTitleSQL = "UPDATE titles t SET name = ?, id_type = ?, year = ?, lenght = ?, id_country = ? WHERE t.id_title = ?";
-            String checkIfExists = "SELECT id_title FROM titles t WHERE t.id_title = ? ORDER BY t.id_title";
+            String insertTitleSQL = "UPDATE csfd_app.titles t SET name = ?, id_type = ?, year = ?, lenght = ?, id_country = ? WHERE t.id_title = ?";
+            String checkIfExists = "SELECT id_title FROM csfd_app.titles t WHERE t.id_title = ? ORDER BY t.id_title";
             try (Connection connection = DataSourceConfig.getConnection();
                  // would be beneficial if I will return the created entity back
                  PreparedStatement preparedStatement = connection.prepareStatement(insertTitleSQL, Statement.RETURN_GENERATED_KEYS)) {
@@ -167,9 +167,9 @@ public class TitleRepository {
             if(choice == "id"){
                 preparedStatement = connection.prepareStatement(
                         "SELECT t.id_title, name, p.type_name, year, lenght, c.country_name, t.description, t.id_type, t.id_country" +
-                                " FROM titles t" +
-                                " LEFT JOIN type p ON t.id_type = p.id_type" +
-                                " LEFT JOIN country c ON t.id_country = c.id_country" +
+                                " FROM csfd_app.titles t" +
+                                " LEFT JOIN csfd_app.type p ON t.id_type = p.id_type" +
+                                " LEFT JOIN csfd_app.country c ON t.id_country = c.id_country" +
                                 " WHERE t.id_title = ?" +
                                 " ORDER BY t.id_title");
 
@@ -178,9 +178,9 @@ public class TitleRepository {
             else if(choice == "title"){
                 preparedStatement = connection.prepareStatement(
                         "SELECT t.id_title, name, p.type_name, year, lenght, c.country_name, t.description, t.id_type, t.id_country" +
-                                " FROM titles t" +
-                                " LEFT JOIN type p ON t.id_type = p.id_type" +
-                                " LEFT JOIN country c ON t.id_country = c.id_country" +
+                                " FROM csfd_app.titles t" +
+                                " LEFT JOIN csfd_app.type p ON t.id_type = p.id_type" +
+                                " LEFT JOIN csfd_app.country c ON t.id_country = c.id_country" +
                                 " WHERE name" +
                                 " LIKE ?" +
                                 " ORDER BY t.id_title");
@@ -190,9 +190,9 @@ public class TitleRepository {
             else if(choice == "type"){
                 preparedStatement = connection.prepareStatement(
                         "SELECT t.id_title, name, p.type_name, year, lenght, c.country_name, t.description, t.id_type, t.id_country" +
-                                " FROM titles t" +
-                                " LEFT JOIN type p ON t.id_type = p.id_type" +
-                                " LEFT JOIN country c ON t.id_country = c.id_country" +
+                                " FROM csfd_app.titles t" +
+                                " LEFT JOIN csfd_app.type p ON t.id_type = p.id_type" +
+                                " LEFT JOIN csfd_app.country c ON t.id_country = c.id_country" +
                                 " WHERE p.type_name" +
                                 " LIKE ?" +
                                 " ORDER BY t.id_title");
@@ -202,9 +202,9 @@ public class TitleRepository {
             else if(choice == "year"){
                 preparedStatement = connection.prepareStatement(
                         "SELECT t.id_title, name, p.type_name, year, lenght, c.country_name, t.description, t.id_type, t.id_country" +
-                                " FROM titles t" +
-                                " LEFT JOIN type p ON t.id_type = p.id_type" +
-                                " LEFT JOIN country c ON t.id_country = c.id_country" +
+                                " FROM csfd_app.titles t" +
+                                " LEFT JOIN csfd_app.type p ON t.id_type = p.id_type" +
+                                " LEFT JOIN csfd_app.country c ON t.id_country = c.id_country" +
                                 " WHERE EXTRACT(YEAR FROM year) = ?" +
                                 " ORDER BY t.id_title");
 
@@ -213,9 +213,9 @@ public class TitleRepository {
             else if(choice == "lenght"){
                 preparedStatement = connection.prepareStatement(
                         "SELECT t.id_title, name, p.type_name, year, lenght, c.country_name, t.description, t.id_type, t.id_country" +
-                                " FROM titles t" +
-                                " LEFT JOIN type p ON t.id_type = p.id_type" +
-                                " LEFT JOIN country c ON t.id_country = c.id_country" +
+                                " FROM csfd_app.titles t" +
+                                " LEFT JOIN csfd_app.type p ON t.id_type = p.id_type" +
+                                " LEFT JOIN csfd_app.country c ON t.id_country = c.id_country" +
                                 " WHERE lenght = ?" +
                                 " ORDER BY t.id_title");
 
@@ -224,9 +224,9 @@ public class TitleRepository {
             else if(choice == "country"){
                 preparedStatement = connection.prepareStatement(
                         "SELECT t.id_title, name, p.type_name, year, lenght, c.country_name, t.description, t.id_type, t.id_country" +
-                                " FROM titles t" +
-                                " LEFT JOIN type p ON t.id_type = p.id_type" +
-                                " LEFT JOIN country c ON t.id_country = c.id_country" +
+                                " FROM csfd_app.titles t" +
+                                " LEFT JOIN csfd_app.type p ON t.id_type = p.id_type" +
+                                " LEFT JOIN csfd_app.country c ON t.id_country = c.id_country" +
                                 " WHERE c.country_name" +
                                 " LIKE ?" +
                                 " ORDER BY t.id_title");
@@ -236,9 +236,9 @@ public class TitleRepository {
             else{
                 preparedStatement = connection.prepareStatement(
                         "SELECT t.id_title, name, p.type_name, year, lenght, c.country_name, t.description, t.id_type, t.id_country" +
-                                " FROM titles t" +
-                                " LEFT JOIN type p ON t.id_type = p.id_type" +
-                                " LEFT JOIN country c ON t.id_country = c.id_country" +
+                                " FROM csfd_app.titles t" +
+                                " LEFT JOIN csfd_app.type p ON t.id_type = p.id_type" +
+                                " LEFT JOIN csfd_app.country c ON t.id_country = c.id_country" +
                                 " ORDER BY t.id_title");
 
             }

@@ -13,7 +13,7 @@ import java.util.List;
 public class DummyRepository {
 
     public List<DummyBasicView> getDummyBasicView() {
-        String selectQuerySQL = "SELECT string FROM dummy_table ORDER BY string;";
+        String selectQuerySQL = "SELECT string FROM public.dummy_table ORDER BY string;";
         try (Connection connection = DataSourceConfig.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(selectQuerySQL);) {
@@ -29,7 +29,7 @@ public class DummyRepository {
 
     public void createString(DummyBasicView dummyBasicView) {
         String string = dummyBasicView.getString();
-        String insertQuerySQL = "INSERT INTO dummy_table (string) VALUES('" + string + "');";
+        String insertQuerySQL = "INSERT INTO public.dummy_table (string) VALUES('" + string + "');";
 
         try(Connection connection = DataSourceConfig.getConnection()){
             Statement statement = connection.createStatement();
@@ -42,8 +42,8 @@ public class DummyRepository {
 
     public void addNdelString(DummyBasicView dummyBasicView) {
         String string = dummyBasicView.getString();
-        String insertQuerySQL = "INSERT INTO dummy_table (string) VALUES('" + string + "');";
-        String deleteQuerySQL = "DELETE FROM dummy_table" +
+        String insertQuerySQL = "INSERT INTO public.dummy_table (string) VALUES('" + string + "');";
+        String deleteQuerySQL = "DELETE FROM public.dummy_table" +
                 " WHERE string IN (" +
                 " SELECT string" +
                 " FROM dummy_table" +
@@ -72,7 +72,7 @@ public class DummyRepository {
 
     public List<DummyBasicView> getDummyFindView(String find) {
         String selectSQL = "SELECT string" +
-                " FROM dummy_table" +
+                " FROM public.dummy_table" +
                 " WHERE string" +
                 " LIKE '%" + find + "%';";
 

@@ -16,7 +16,7 @@ public class UserRepository {
         try (Connection connection = DataSourceConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
                      "SELECT nick, password" +
-                             " FROM public.user u" +
+                             " FROM csfd_app.user u" +
                              " WHERE u.nick = ? ORDER BY u.id_user")
         ) {
             preparedStatement.setString(1, nickname);
@@ -35,8 +35,8 @@ public class UserRepository {
         try (Connection connection = DataSourceConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
                      "SELECT id_user, first_name, surname, nick, email, city, street_name, house_number, user_created" +
-                             " FROM public.user u" +
-                             " LEFT JOIN address a ON u.id_address = a.id_address" +
+                             " FROM csfd_app.user u" +
+                             " LEFT JOIN csfd_app.address a ON u.id_address = a.id_address" +
                              " WHERE u.id_user = ? ORDER BY u.id_user")
         ) {
             preparedStatement.setLong(1, userId);
@@ -60,8 +60,8 @@ public class UserRepository {
         try (Connection connection = DataSourceConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
                      "SELECT id_user, email, first_name, surname, nick, city, u.id_address" +
-                             " FROM public.user u" +
-                             " LEFT JOIN address a ON u.id_address = a.id_address ORDER BY u.id_user");
+                             " FROM csfd_app.user u" +
+                             " LEFT JOIN csfd_app.address a ON u.id_address = a.id_address ORDER BY u.id_user");
              ResultSet resultSet = preparedStatement.executeQuery();) {
             List<UserBasicView> userBasicViews = new ArrayList<>();
             while (resultSet.next()) {
@@ -75,7 +75,7 @@ public class UserRepository {
 
     public void createUser(UserCreateView userCreateView) {
         if(userCreateView.getAddress() != null){
-            String insertUserSQL = "INSERT INTO public.user (id_user, first_name, surname, nick, email, password, user_created, id_address) VALUES (DEFAULT,?,?,?,?,?, CURRENT_TIMESTAMP, ?)";
+            String insertUserSQL = "INSERT INTO csfd_app.user (id_user, first_name, surname, nick, email, password, user_created, id_address) VALUES (DEFAULT,?,?,?,?,?, CURRENT_TIMESTAMP, ?)";
             try (Connection connection = DataSourceConfig.getConnection();
                  // would be beneficial if I will return the created entity back
                  PreparedStatement preparedStatement = connection.prepareStatement(insertUserSQL, Statement.RETURN_GENERATED_KEYS)) {
@@ -97,7 +97,7 @@ public class UserRepository {
             }
         }
         else{
-            String insertUserSQL = "INSERT INTO public.user (id_user, first_name, surname, nick, email, password, user_created, id_address) VALUES (DEFAULT,?,?,?,?,?, CURRENT_TIMESTAMP, NULL)";
+            String insertUserSQL = "INSERT INTO csfd_app.user (id_user, first_name, surname, nick, email, password, user_created, id_address) VALUES (DEFAULT,?,?,?,?,?, CURRENT_TIMESTAMP, NULL)";
             try (Connection connection = DataSourceConfig.getConnection();
                  // would be beneficial if I will return the created entity back
                  PreparedStatement preparedStatement = connection.prepareStatement(insertUserSQL, Statement.RETURN_GENERATED_KEYS)) {
@@ -120,8 +120,8 @@ public class UserRepository {
     }
 
     public void deleteUser(UserDeleteView usersDeleteView){
-        String deleteUserSQL = "DELETE FROM public.user u WHERE u.id_user = ?";
-        String checkIfExists = "SELECT email FROM public.user u WHERE u.id_user = ? ORDER BY u.id_user";
+        String deleteUserSQL = "DELETE FROM csfd_app.user u WHERE u.id_user = ?";
+        String checkIfExists = "SELECT email FROM csfd_app.user u WHERE u.id_user = ? ORDER BY u.id_user";
         try (Connection connection = DataSourceConfig.getConnection();
              // would be beneficial if I will return the created entity back
              PreparedStatement preparedStatement = connection.prepareStatement(deleteUserSQL, Statement.RETURN_GENERATED_KEYS)) {
@@ -159,8 +159,8 @@ public class UserRepository {
 
     public void editUser(UserEditView userEditView) {
         if(userEditView.getAddress() != null){
-            String insertUserSQL = "UPDATE public.user u SET email = ?, first_name = ?, nick = ?, surname = ?, id_address = ? WHERE u.id_user = ?";
-            String checkIfExists = "SELECT email FROM public.user u WHERE u.id_user = ? ORDER BY u.id_user";
+            String insertUserSQL = "UPDATE csfd_app.user u SET email = ?, first_name = ?, nick = ?, surname = ?, id_address = ? WHERE u.id_user = ?";
+            String checkIfExists = "SELECT email FROM csfd_app.user u WHERE u.id_user = ? ORDER BY u.id_user";
             try (Connection connection = DataSourceConfig.getConnection();
                  // would be beneficial if I will return the created entity back
                  PreparedStatement preparedStatement = connection.prepareStatement(insertUserSQL, Statement.RETURN_GENERATED_KEYS)) {
@@ -201,8 +201,8 @@ public class UserRepository {
             }
         }
         else{
-            String insertUserSQL = "UPDATE public.user u SET email = ?, first_name = ?, nick = ?, surname = ?, id_address = NULL WHERE u.id_user = ?";
-            String checkIfExists = "SELECT email FROM public.user u WHERE u.id_user = ? ORDER BY u.id_user";
+            String insertUserSQL = "UPDATE csfd_app.user u SET email = ?, first_name = ?, nick = ?, surname = ?, id_address = NULL WHERE u.id_user = ?";
+            String checkIfExists = "SELECT email FROM csfd_app.user u WHERE u.id_user = ? ORDER BY u.id_user";
             try (Connection connection = DataSourceConfig.getConnection();
                  // would be beneficial if I will return the created entity back
                  PreparedStatement preparedStatement = connection.prepareStatement(insertUserSQL, Statement.RETURN_GENERATED_KEYS)) {
@@ -249,8 +249,8 @@ public class UserRepository {
             if(choice == "id"){
                 preparedStatement = connection.prepareStatement(
                         "SELECT id_user, email, first_name, surname, nick, city, u.id_address" +
-                                " FROM public.user u" +
-                                " LEFT JOIN address a ON u.id_address = a.id_address" +
+                                " FROM csfd_app.user u" +
+                                " LEFT JOIN csfd_app.address a ON u.id_address = a.id_address" +
                                 " WHERE id_user = ?" +
                                 " ORDER BY u.id_user");
 
@@ -259,8 +259,8 @@ public class UserRepository {
             else if(choice == "given name"){
                 preparedStatement = connection.prepareStatement(
                         "SELECT id_user, email, first_name, surname, nick, city, u.id_address" +
-                                " FROM public.user u" +
-                                " LEFT JOIN address a ON u.id_address = a.id_address" +
+                                " FROM csfd_app.user u" +
+                                " LEFT JOIN csfd_app.address a ON u.id_address = a.id_address" +
                                 " WHERE first_name" +
                                 " LIKE ?" +
                                 " ORDER BY u.id_user");
@@ -270,8 +270,8 @@ public class UserRepository {
             else if(choice == "family name"){
                 preparedStatement = connection.prepareStatement(
                         "SELECT id_user, email, first_name, surname, nick, city, u.id_address" +
-                                " FROM public.user u" +
-                                " LEFT JOIN address a ON u.id_address = a.id_address" +
+                                " FROM csfd_app.user u" +
+                                " LEFT JOIN csfd_app.address a ON u.id_address = a.id_address" +
                                 " WHERE surname" +
                                 " LIKE ?" +
                                 " ORDER BY u.id_user");
@@ -281,8 +281,8 @@ public class UserRepository {
             else if(choice == "nickname"){
                 preparedStatement = connection.prepareStatement(
                         "SELECT id_user, email, first_name, surname, nick, city, u.id_address" +
-                                " FROM public.user u" +
-                                " LEFT JOIN address a ON u.id_address = a.id_address" +
+                                " FROM csfd_app.user u" +
+                                " LEFT JOIN csfd_app.address a ON u.id_address = a.id_address" +
                                 " WHERE nick" +
                                 " LIKE ?" +
                                 " ORDER BY u.id_user");
@@ -292,8 +292,8 @@ public class UserRepository {
             else if(choice == "email"){
                 preparedStatement = connection.prepareStatement(
                         "SELECT id_user, email, first_name, surname, nick, city, u.id_address" +
-                                " FROM public.user u" +
-                                " LEFT JOIN address a ON u.id_address = a.id_address" +
+                                " FROM csfd_app.user u" +
+                                " LEFT JOIN csfd_app.address a ON u.id_address = a.id_address" +
                                 " WHERE email" +
                                 " LIKE ?" +
                                 " ORDER BY u.id_user");
@@ -303,8 +303,8 @@ public class UserRepository {
             else if(choice == "city"){
                 preparedStatement = connection.prepareStatement(
                         "SELECT id_user, email, first_name, surname, nick, city, u.id_address" +
-                                " FROM public.user u" +
-                                " LEFT JOIN address a ON u.id_address = a.id_address" +
+                                " FROM csfd_app.user u" +
+                                " LEFT JOIN csfd_app.address a ON u.id_address = a.id_address" +
                                 " WHERE city" +
                                 " LIKE ?" +
                                 " ORDER BY u.id_user");
@@ -314,8 +314,8 @@ public class UserRepository {
             else{
                 preparedStatement = connection.prepareStatement(
                         "SELECT id_user, email, first_name, surname, nick, city, u.id_address" +
-                                " FROM public.user u" +
-                                " LEFT JOIN address a ON u.id_address = a.id_address" +
+                                " FROM csfd_app.user u" +
+                                " LEFT JOIN csfd_app.address a ON u.id_address = a.id_address" +
                                 " ORDER BY u.id_user");
 
             }
