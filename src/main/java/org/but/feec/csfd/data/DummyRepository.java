@@ -36,7 +36,7 @@ public class DummyRepository {
             statement.executeUpdate(insertQuerySQL);
 
         }catch (SQLException e){
-            throw new DataAccessException("Strings create exception.", e);
+            throw new DataAccessException("Strings create exception. ", e);
         }
     }
 
