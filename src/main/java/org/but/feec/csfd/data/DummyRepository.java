@@ -1,6 +1,7 @@
 package org.but.feec.csfd.data;
 
 import org.but.feec.csfd.api.dummy.*;
+import org.but.feec.csfd.api.title.TitleBasicView;
 import org.but.feec.csfd.config.DataSourceConfig;
 import org.but.feec.csfd.exception.DataAccessException;
 import org.but.feec.csfd.exception.ExceptionHandler;
@@ -66,6 +67,27 @@ public class DummyRepository {
             }
         }catch (SQLException e){
             throw new DataAccessException("Add and delete connection failed.", e);
+        }
+    }
+
+    public List<DummyBasicView> getDummyFindView(String find) {
+        String selectSQL = "SELECT string" +
+                " FROM dummy_table" +
+                " WHERE string" +
+                " LIKE '%" + find + "%';";
+
+        try (Connection connection = DataSourceConfig.getConnection()){
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(selectSQL);
+
+            List<DummyBasicView> dummyBasicViews = new ArrayList<>();
+            while (resultSet.next()) {
+                dummyBasicViews.add(mapToDummyBasicView(resultSet));
+            }
+            return dummyBasicViews;
+
+        } catch (SQLException e) {
+            throw new DataAccessException("Find dummy by ID with addresses failed.", e);
         }
     }
 

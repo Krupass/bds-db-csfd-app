@@ -1,6 +1,7 @@
 package org.but.feec.csfd.service;
 
 import org.but.feec.csfd.api.dummy.*;
+import org.but.feec.csfd.api.title.TitleBasicView;
 import org.but.feec.csfd.data.DummyRepository;
 
 import java.util.List;
@@ -23,6 +24,10 @@ public class DummyService {
 
     public void addNdelString(DummyBasicView dummyBasicView) {
         dummyRepository.addNdelString(dummyBasicView);
+    }
+
+    public List<DummyBasicView> getDummyFindView(String find) {
+        return dummyRepository.getDummyFindView(find);
     }
 
 }

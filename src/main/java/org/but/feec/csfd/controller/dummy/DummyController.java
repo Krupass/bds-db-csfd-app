@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.but.feec.csfd.App;
 import org.but.feec.csfd.api.dummy.DummyBasicView;
+import org.but.feec.csfd.api.title.TitleBasicView;
 import org.but.feec.csfd.data.DummyRepository;
 import org.but.feec.csfd.exception.ExceptionHandler;
 import org.but.feec.csfd.service.DummyService;
@@ -42,21 +43,31 @@ public class DummyController {
     @FXML
     public Button refreshButton;
     @FXML
+    public Button findButton;
+    @FXML
     private TextField stringTextField;
     @FXML
     private TableColumn<DummyBasicView, String> stringContent;
     @FXML
     private TableView<DummyBasicView> systemDummyTableView;
+    @FXML
+    private TextField FindTextField;
 
     private DummyService dummyService;
     private DummyRepository dummyRepository;
+    private ValidationSupport validation;
 
     @FXML
     private void initialize() {
         dummyRepository = new DummyRepository();
         dummyService = new DummyService(dummyRepository);
+        validation = new ValidationSupport();
 
         stringContent.setCellValueFactory(new PropertyValueFactory<DummyBasicView, String>("string"));
+
+        validation.registerValidator(FindTextField, Validator.createEmptyValidator("The value must not be empty."));
+
+        findButton.disableProperty().bind(validation.invalidProperty());
 
 
         ObservableList<DummyBasicView> observableDummyList = initializeDummyData();
@@ -71,6 +82,11 @@ public class DummyController {
 
     private ObservableList<DummyBasicView> initializeDummyData() {
         List<DummyBasicView> dummy = dummyService.getDummyBasicView();
+        return FXCollections.observableArrayList(dummy);
+    }
+
+    private ObservableList<DummyBasicView> initializeDummyFindData(String find) {
+        List<DummyBasicView> dummy = dummyService.getDummyFindView(find);
         return FXCollections.observableArrayList(dummy);
     }
 
@@ -168,6 +184,21 @@ public class DummyController {
         systemDummyTableView.setItems(observableDummyList);
         systemDummyTableView.refresh();
         systemDummyTableView.sort();
+    }
+
+    public void handleFindButton(ActionEvent actionEvent) throws IOException{
+        String find = FindTextField.getText();
+
+        DummyBasicView dummyBasicView = new DummyBasicView();
+        dummyBasicView.setFind(find);
+
+        String value = dummyBasicView.getFind();
+
+        ObservableList<DummyBasicView> observableDummyList = initializeDummyFindData(value);
+        systemDummyTableView.setItems(observableDummyList);
+        systemDummyTableView.refresh();
+        systemDummyTableView.sort();
+
     }
 
     public void handlePersonsButton(ActionEvent actionEvent) throws IOException{

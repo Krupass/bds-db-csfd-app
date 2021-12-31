@@ -59,6 +59,8 @@
                         <Button fx:id="addNdelButton" layoutX="798.0" layoutY="85.0" mnemonicParsing="false" onAction="#handleAddAndDeleteButton" prefHeight="25.0" prefWidth="140.0" text="Add and delete first" />
                         <Button fx:id="titlesButton" layoutX="630.0" layoutY="491.0" mnemonicParsing="false" onAction="#handleTitlesButton" prefHeight="25.0" prefWidth="145.0" text="&lt;&lt; Titles table" />
                         <Button fx:id="personsButton" layoutX="784.0" layoutY="491.0" mnemonicParsing="false" onAction="#handlePersonsButton" prefHeight="25.0" prefWidth="145.0" text="Persons table &gt;&gt;" />
+                        <TextField fx:id="FindTextField" layoutX="173.0" layoutY="48.0" prefHeight="25.0" prefWidth="477.0" promptText="enter string to find" />
+                        <Button fx:id="findButton" layoutX="657.0" layoutY="48.0" mnemonicParsing="false" onAction="#handleFindButton" text="Find" />
               </children>
             </AnchorPane>
           </content>
