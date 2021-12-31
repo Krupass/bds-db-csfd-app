@@ -1,4 +1,4 @@
-# bds-db-csfd-app
+# How to run app:
 ## On Windows
 ##### (1) open git bash
 ##### (2) git copy https://github.com/Krupass/bds-db-csfd-app.git
