@@ -233,19 +233,12 @@ public class TitlesController {
         systemTitlesTableView.sort();
     }
 
-    public void handleChoiceBox(ActionEvent actionEvent) throws IOException{
-
-
-    }
-
     public void handleFindButton(ActionEvent actionEvent) throws IOException{
         String find = FindTextField.getText();
 
         TitleBasicView titleBasicView = new TitleBasicView();
         titleBasicView.setFind(find);
         titleBasicView.setChoice(choiceBox.getValue());
-
-        titleService.findTitle(titleBasicView);
 
         String choice = titleBasicView.getChoice();
         String value = titleBasicView.getFind();

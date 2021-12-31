@@ -38,10 +38,6 @@ public class TitleService {
         titleRepository.deleteTitle(titleDeleteView);
     }
 
-    public void findTitle(TitleBasicView titleBasicView) {
-        titleRepository.findTitle(titleBasicView);
-    }
-
     public List<TitleBasicView> getTitlesFindView(String find, String choice) {
         return titleRepository.getTitleFindView(find, choice);
     }

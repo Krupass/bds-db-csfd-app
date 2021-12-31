@@ -36,11 +36,11 @@ public class TitlesEditController {
     @FXML
     private TextField typeTextField;
     @FXML
+    private TextField countryTextField;
+    @FXML
     private TextField yearTextField;
     @FXML
     private TextField lenghtTextField;
-    @FXML
-    private TextField countryTextField;
     @FXML
     private TextField descriptionTextField;
 
@@ -87,9 +87,9 @@ public class TitlesEditController {
             idTextField.setText(String.valueOf(titleBasicView.getId()));
             titleTextField.setText(titleBasicView.getTitle());
             typeTextField.setText(String.valueOf(titleBasicView.getTypeId()));
+            countryTextField.setText(String.valueOf(titleBasicView.getCountryId()));
             yearTextField.setText(titleBasicView.getYear());
             lenghtTextField.setText(String.valueOf(titleBasicView.getLenght()));
-            countryTextField.setText(String.valueOf(titleBasicView.getCountryId()));
             descriptionTextField.setText(titleBasicView.getDescription());
         }
     }

@@ -18,7 +18,7 @@ public class TitleRepository {
                              " LEFT JOIN country c ON t.id_country = c.id_country" +
                              " LEFT JOIN type p ON t.id_type = p.id_type" +
                              " LEFT JOIN genre g ON t.id_title = g.id_title" +
-                             " JOIN genre_name n ON g.id_genre_name = n.id_genre_name" +
+                             " LEFT JOIN genre_name n ON g.id_genre_name = n.id_genre_name" +
                              " WHERE t.id_title = ?" +
                              " ORDER BY t.id_title")
         ) {
@@ -164,8 +164,6 @@ public class TitleRepository {
     public List<TitleBasicView> getTitleFindView(String find, String choice) {
         try (Connection connection = DataSourceConfig.getConnection()){
             PreparedStatement preparedStatement;
-            PreparedStatement createColumnStatement = connection.prepareStatement("ALTER TABLE titles ADD year year");
-            PreparedStatement deleteColumnStatement = connection.prepareStatement("");
             if(choice == "id"){
                 preparedStatement = connection.prepareStatement(
                         "SELECT t.id_title, name, p.type_name, year, lenght, c.country_name, t.description, t.id_type, t.id_country" +
@@ -254,37 +252,6 @@ public class TitleRepository {
 
         } catch (SQLException e) {
             throw new DataAccessException("Find title by ID with addresses failed.", e);
-        }
-    }
-
-    public void findTitle(TitleBasicView titleBasicView) {
-        String findTitleSQL = "UPDATE titles t SET name = ?, id_type = ?, year = ?, lenght = ?, id_country = ? WHERE t.id_title = ?";
-        try (Connection connection = DataSourceConfig.getConnection();
-             // would be beneficial if I will return the created entity back
-             PreparedStatement preparedStatement = connection.prepareStatement(findTitleSQL, Statement.RETURN_GENERATED_KEYS)) {
-            // set prepared statement variables
-            preparedStatement.setString(1, titleBasicView.getTitle());
-
-            try {
-                // TODO set connection autocommit to false
-                connection.setAutoCommit(false);
-
-                int affectedRows = preparedStatement.executeUpdate();
-
-                if (affectedRows == 0) {
-                    throw new DataAccessException("Creating title failed, no rows affected.");
-                }
-                // TODO commit the transaction (both queries were performed)
-                connection.commit();
-            } catch (SQLException e) {
-                // TODO rollback the transaction if something wrong occurs
-                connection.rollback();
-            } finally {
-                // TODO set connection autocommit back to true
-                connection.setAutoCommit(true);
-            }
-        } catch (SQLException e) {
-            throw new DataAccessException("Creating title failed operation on the database failed.");
         }
     }
 
