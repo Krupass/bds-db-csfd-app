@@ -33,7 +33,9 @@ public class UserRepository {
     public UserDetailView findUserDetailedView(Long userId) {
         try (Connection connection = DataSourceConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
-                     "SELECT id_user, first_name, surname, nick, email, city, street_name, house_number, user_created" +
+                     "SELECT id_user, pgp_sym_decrypt(first_name, 'SuperTajneH3slo2') AS first_name," +
+                             " pgp_sym_decrypt(surname, 'SuperTajneH3slo2') AS surname, nick," +
+                             " pgp_sym_decrypt(email, 'SuperTajneH3slo2') AS email, city, street_name, house_number, user_created" +
                              " FROM csfd_app.user u" +
                              " LEFT JOIN csfd_app.address a ON u.id_address = a.id_address" +
                              " WHERE u.id_user = ? ORDER BY u.id_user")
@@ -53,7 +55,9 @@ public class UserRepository {
     public List<UserBasicView> getUsersBasicView() {
         try (Connection connection = DataSourceConfig.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
-                     "SELECT id_user, email, first_name, surname, nick, city, u.id_address" +
+                     "SELECT id_user, pgp_sym_decrypt(email, 'SuperTajneH3slo2') AS email," +
+                             " pgp_sym_decrypt(first_name, 'SuperTajneH3slo2') AS first_name," +
+                             " pgp_sym_decrypt(surname, 'SuperTajneH3slo2') AS surname, nick, city, u.id_address" +
                              " FROM csfd_app.user u" +
                              " LEFT JOIN csfd_app.address a ON u.id_address = a.id_address ORDER BY u.id_user");
              ResultSet resultSet = preparedStatement.executeQuery();) {
@@ -69,7 +73,7 @@ public class UserRepository {
 
     public void createUser(UserCreateView userCreateView) {
         if(userCreateView.getAddress() != null){
-            String insertUserSQL = "INSERT INTO csfd_app.user (id_user, first_name, surname, nick, email, password, user_created, id_address) VALUES (DEFAULT,?,?,?,?,?, CURRENT_TIMESTAMP, ?)";
+            String insertUserSQL = "INSERT INTO csfd_app.user (id_user, first_name, surname, nick, email, password, user_created, id_address) VALUES (DEFAULT,pgp_sym_encrypt(?,'SuperTajneH3slo2'),pgp_sym_encrypt(?,'SuperTajneH3slo2'),?,pgp_sym_encrypt(?,'SuperTajneH3slo2'),?, CURRENT_TIMESTAMP, ?)";
             try (Connection connection = DataSourceConfig.getConnection();
                  // would be beneficial if I will return the created entity back
                  PreparedStatement preparedStatement = connection.prepareStatement(insertUserSQL, Statement.RETURN_GENERATED_KEYS)) {
@@ -91,7 +95,7 @@ public class UserRepository {
             }
         }
         else{
-            String insertUserSQL = "INSERT INTO csfd_app.user (id_user, first_name, surname, nick, email, password, user_created, id_address) VALUES (DEFAULT,?,?,?,?,?, CURRENT_TIMESTAMP, NULL)";
+            String insertUserSQL = "INSERT INTO csfd_app.user (id_user, first_name, surname, nick, email, password, user_created, id_address) VALUES (DEFAULT,pgp_sym_encrypt(?,'SuperTajneH3slo2'),pgp_sym_encrypt(?,'SuperTajneH3slo2'),?,pgp_sym_encrypt(?,'SuperTajneH3slo2'),?, CURRENT_TIMESTAMP, NULL)";
             try (Connection connection = DataSourceConfig.getConnection();
                  // would be beneficial if I will return the created entity back
                  PreparedStatement preparedStatement = connection.prepareStatement(insertUserSQL, Statement.RETURN_GENERATED_KEYS)) {
@@ -149,7 +153,7 @@ public class UserRepository {
 
     public void editUser(UserEditView userEditView) {
         if(userEditView.getAddress() != null){
-            String insertUserSQL = "UPDATE csfd_app.user u SET email = ?, first_name = ?, nick = ?, surname = ?, id_address = ? WHERE u.id_user = ?";
+            String insertUserSQL = "UPDATE csfd_app.user u SET email = pgp_sym_encrypt(?,'SuperTajneH3slo2'), first_name = pgp_sym_encrypt(?,'SuperTajneH3slo2'), nick = ?, surname = pgp_sym_encrypt(?,'SuperTajneH3slo2'), id_address = ? WHERE u.id_user = ?";
             String checkIfExists = "SELECT email FROM csfd_app.user u WHERE u.id_user = ? ORDER BY u.id_user";
             try (Connection connection = DataSourceConfig.getConnection();
                  // would be beneficial if I will return the created entity back
@@ -187,7 +191,7 @@ public class UserRepository {
             }
         }
         else{
-            String insertUserSQL = "UPDATE csfd_app.user u SET email = ?, first_name = ?, nick = ?, surname = ?, id_address = NULL WHERE u.id_user = ?";
+            String insertUserSQL = "UPDATE csfd_app.user u SET email = pgp_sym_encrypt(?,'SuperTajneH3slo2'), first_name = pgp_sym_encrypt(?,'SuperTajneH3slo2'), nick = ?, surname = pgp_sym_encrypt(?,'SuperTajneH3slo2'), id_address = NULL WHERE u.id_user = ?";
             String checkIfExists = "SELECT email FROM csfd_app.user u WHERE u.id_user = ? ORDER BY u.id_user";
             try (Connection connection = DataSourceConfig.getConnection();
                  // would be beneficial if I will return the created entity back
@@ -230,7 +234,9 @@ public class UserRepository {
             PreparedStatement preparedStatement;
             if(choice == "id"){
                 preparedStatement = connection.prepareStatement(
-                        "SELECT id_user, email, first_name, surname, nick, city, u.id_address" +
+                        "SELECT id_user, pgp_sym_decrypt(email,'SuperTajneH3slo2') AS email," +
+                                " pgp_sym_decrypt(first_name,'SuperTajneH3slo2') AS first_name," +
+                                " pgp_sym_decrypt(surname,'SuperTajneH3slo2') AS surname, nick, city, u.id_address" +
                                 " FROM csfd_app.user u" +
                                 " LEFT JOIN csfd_app.address a ON u.id_address = a.id_address" +
                                 " WHERE id_user = ?" +
@@ -240,10 +246,12 @@ public class UserRepository {
             }
             else if(choice == "given name"){
                 preparedStatement = connection.prepareStatement(
-                        "SELECT id_user, email, first_name, surname, nick, city, u.id_address" +
+                        "SELECT id_user, pgp_sym_decrypt(email,'SuperTajneH3slo2') AS email," +
+                                " pgp_sym_decrypt(first_name,'SuperTajneH3slo2') AS first_name," +
+                                " pgp_sym_decrypt(surname,'SuperTajneH3slo2') AS surname, nick, city, u.id_address" +
                                 " FROM csfd_app.user u" +
                                 " LEFT JOIN csfd_app.address a ON u.id_address = a.id_address" +
-                                " WHERE first_name" +
+                                " WHERE pgp_sym_decrypt(first_name,'SuperTajneH3slo2')" +
                                 " LIKE ?" +
                                 " ORDER BY u.id_user");
 
@@ -251,10 +259,12 @@ public class UserRepository {
             }
             else if(choice == "family name"){
                 preparedStatement = connection.prepareStatement(
-                        "SELECT id_user, email, first_name, surname, nick, city, u.id_address" +
+                        "SELECT id_user, pgp_sym_decrypt(email,'SuperTajneH3slo2') AS email,"+
+                                " pgp_sym_decrypt(first_name,'SuperTajneH3slo2') AS first_name," +
+                                " pgp_sym_decrypt(surname,'SuperTajneH3slo2') AS surname, nick, city, u.id_address" +
                                 " FROM csfd_app.user u" +
                                 " LEFT JOIN csfd_app.address a ON u.id_address = a.id_address" +
-                                " WHERE surname" +
+                                " WHERE pgp_sym_decrypt(surname,'SuperTajneH3slo2')" +
                                 " LIKE ?" +
                                 " ORDER BY u.id_user");
 
@@ -262,7 +272,9 @@ public class UserRepository {
             }
             else if(choice == "nickname"){
                 preparedStatement = connection.prepareStatement(
-                        "SELECT id_user, email, first_name, surname, nick, city, u.id_address" +
+                        "SELECT id_user, pgp_sym_decrypt(email,'SuperTajneH3slo2') AS email," +
+                                " pgp_sym_decrypt(first_name,'SuperTajneH3slo2') AS first_name," +
+                                " pgp_sym_decrypt(surname,'SuperTajneH3slo2') AS surname, nick, city, u.id_address" +
                                 " FROM csfd_app.user u" +
                                 " LEFT JOIN csfd_app.address a ON u.id_address = a.id_address" +
                                 " WHERE nick" +
@@ -273,10 +285,12 @@ public class UserRepository {
             }
             else if(choice == "email"){
                 preparedStatement = connection.prepareStatement(
-                        "SELECT id_user, email, first_name, surname, nick, city, u.id_address" +
+                        "SELECT id_user, pgp_sym_decrypt(email,'SuperTajneH3slo2') AS email," +
+                                " pgp_sym_decrypt(first_name,'SuperTajneH3slo2') AS first_name," +
+                                " pgp_sym_decrypt(surname,'SuperTajneH3slo2') AS surname, nick, city, u.id_address" +
                                 " FROM csfd_app.user u" +
                                 " LEFT JOIN csfd_app.address a ON u.id_address = a.id_address" +
-                                " WHERE email" +
+                                " WHERE pgp_sym_decrypt(email,'SuperTajneH3slo2')" +
                                 " LIKE ?" +
                                 " ORDER BY u.id_user");
 
@@ -284,7 +298,9 @@ public class UserRepository {
             }
             else if(choice == "city"){
                 preparedStatement = connection.prepareStatement(
-                        "SELECT id_user, email, first_name, surname, nick, city, u.id_address" +
+                        "SELECT id_user, pgp_sym_decrypt(email,'SuperTajneH3slo2') AS email," +
+                                " pgp_sym_decrypt(first_name,'SuperTajneH3slo2') AS first_name," +
+                                " pgp_sym_decrypt(surname,'SuperTajneH3slo2') AS surname, nick, city, u.id_address" +
                                 " FROM csfd_app.user u" +
                                 " LEFT JOIN csfd_app.address a ON u.id_address = a.id_address" +
                                 " WHERE city" +
@@ -295,7 +311,9 @@ public class UserRepository {
             }
             else{
                 preparedStatement = connection.prepareStatement(
-                        "SELECT id_user, email, first_name, surname, nick, city, u.id_address" +
+                        "SELECT id_user, pgp_sym_decrypt(email,'SuperTajneH3slo2') AS email," +
+                                " pgp_sym_decrypt(first_name,'SuperTajneH3slo2') AS first_name," +
+                                " pgp_sym_decrypt(surname,'SuperTajneH3slo2') AS surname, nick, city, u.id_address" +
                                 " FROM csfd_app.user u" +
                                 " LEFT JOIN csfd_app.address a ON u.id_address = a.id_address" +
                                 " ORDER BY u.id_user");
